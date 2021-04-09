@@ -1,0 +1,20 @@
+{
+  "name": "animini",
+  "version": "0.0.1",
+  "description": "small animation lib",
+  "keywords": [],
+  "main": "dist/animini.cjs.js",
+  "module": "dist/animini.esm.js",
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js",
+      "./spring.js"
+    ]
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "memoize-one": "^5.1.1"
+  }
+}

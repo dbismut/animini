@@ -1,0 +1,32 @@
+{
+  "name": "animini-perf",
+  "main": "src/index.jsx",
+  "version": "1.0.0",
+  "dependencies": {
+    "animini": "*",
+    "@react-spring/web": "^9.1.0",
+    "framer-motion": "^4.1.3",
+    "leva": "0.9.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "tinycolor2": "^1.4.2",
+    "react-scripts": "4.0.3"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ],
+  "devDependencies": {
+    "@types/react": "^17.0.2",
+    "@types/react-dom": "^17.0.1",
+    "typescript": "^4.1.5"
+  }
+}

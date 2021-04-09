@@ -1,0 +1,92 @@
+{
+  "name": "@animini/root",
+  "version": "0.0.1",
+  "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*",
+    "demo"
+  ],
+  "preconstruct": {
+    "packages": [
+      "packages/*"
+    ]
+  },
+  "scripts": {
+    "postinstall": "husky install && patch-package && preconstruct dev",
+    "build": "preconstruct build",
+    "watch": "preconstruct watch",
+    "dev": "preconstruct dev",
+    "validate": "preconstruct validate",
+    "lint": "pretty-quick --staged",
+    "release": "yarn build && yarn changeset publish",
+    "tsc": "tsc --noEmit",
+    "size": "yarn size-limit",
+    "demo:dev": "yarn workspace demo dev"
+  },
+  "size-limit": [
+    {
+      "name": "core",
+      "limit": "1.5 KB",
+      "path": "packages/animini/dist/animini.*.prod.js"
+    },
+    {
+      "name": "spring",
+      "limit": "700 B",
+      "path": "packages/animini/spring/dist/animini-spring.*.prod.js"
+    }
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dbismut/animini.git"
+  },
+  "bugs": "https://github.com/dbismut/animini/issues",
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.13.14",
+    "@babel/preset-env": "^7.13.12",
+    "@babel/preset-react": "^7.13.13",
+    "@babel/preset-typescript": "^7.13.0",
+    "@changesets/cli": "^2.15.0",
+    "@preconstruct/cli": "^2.0.6",
+    "@radix-ui/react-icons": "^1.0.2",
+    "@size-limit/preset-small-lib": "^4.10.2",
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@types/tinycolor2": "^1.4.2",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "all-contributors-cli": "^6.20.0",
+    "babel-eslint": "^10.1.0",
+    "concurrently": "^6.0.1",
+    "eslint": "^7.23.0",
+    "eslint-config-react-app": "^6.0.0",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-flowtype": "^5.6.0",
+    "eslint-plugin-import": "^2.22.1",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-react": "^7.23.1",
+    "eslint-plugin-react-hooks": "^4.2.0",
+    "husky": "^6.0.0",
+    "patch-package": "^6.4.7",
+    "postinstall-postinstall": "^2.1.0",
+    "prettier": "^2.2.1",
+    "pretty-quick": "^3.1.0",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "size-limit": "^4.10.2",
+    "start-server-and-test": "^1.12.1",
+    "tsd": "^0.14.0"
+  },
+  "prettier": {
+    "semi": false,
+    "trailingComma": "es5",
+    "singleQuote": true,
+    "jsxBracketSameLine": true,
+    "tabWidth": 2,
+    "printWidth": 120
+  }
+}

@@ -1,0 +1,4 @@
+{
+  "packages": ["packages/*"],
+  "sandboxes": ["/demo/src/sandboxes/drag", "/demo/src/sandboxes/perf"]
+}

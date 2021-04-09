@@ -1,0 +1,4 @@
+{
+  "main": "dist/animini-spring.cjs.js",
+  "module": "dist/animini-spring.esm.js"
+}
