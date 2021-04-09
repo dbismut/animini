@@ -2,9 +2,8 @@ import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { AnimatedValue } from './AnimatedValue'
 import { raf } from './raf'
 import { getStyleValue, setStyle } from './style'
-import { lerp } from './lerp'
 
-export function useAnimini(fn = lerp) {
+export function useAnimini(fn) {
   const el = useRef(null)
   const rawValues = useRef({})
   const computedStyle = useRef(null)
@@ -53,7 +52,7 @@ export function useAnimini(fn = lerp) {
   useEffect(() => {
     computedStyle.current = window.getComputedStyle(el.current)
     return () => raf.stop(update)
-  }, [])
+  }, [update])
 
   return [el, { get, start }]
 }

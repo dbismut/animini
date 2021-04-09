@@ -1,4 +1,9 @@
 import { raf } from './raf'
+import { lerp } from './maths'
+
+function lerpFn() {
+  return lerp(this.value, this.target, this.config.factor || 1)
+}
 
 export function AnimatedValue(value, fn) {
   this.value = this.target = this.previousValue = value
@@ -10,7 +15,7 @@ export function AnimatedValue(value, fn) {
   this.setFn(fn)
 }
 
-AnimatedValue.prototype.setFn = function (fn) {
+AnimatedValue.prototype.setFn = function (fn = lerpFn) {
   if (typeof fn === 'function') {
     this.fn = fn
     this.onStart = undefined
