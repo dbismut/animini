@@ -6,12 +6,12 @@ import { lerp } from './lerp'
 
 export function useAnimini(fn = lerp) {
   const el = useRef(null)
-  const rawStyle = useRef({})
+  const rawValues = useRef({})
   const computedStyle = useRef(null)
 
   const animations = useMemo(() => new Map(), [])
 
-  const get = useCallback(() => rawStyle.current, [])
+  const get = useCallback(() => rawValues.current, [])
 
   const rafId = useRef()
 
@@ -25,10 +25,10 @@ export function useAnimini(fn = lerp) {
     let idle = 1
     animations.forEach((animated, key) => {
       animated.update()
-      rawStyle.current[key] = animated.value
+      rawValues.current[key] = animated.value
       idle &= animated.idle
     })
-    setStyle(rawStyle.current, el.current)
+    setStyle(rawValues.current, el.current)
     if (idle) raf.stop(update)
   }, [animations])
 
