@@ -1,5 +1,5 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
-import { AnimatedValue } from './AnimatedValue'
+import { Animated } from './Animated'
 import { raf } from './raf'
 import { getStyleValue, setStyle } from './style'
 
@@ -37,7 +37,7 @@ export function useAnimini(fn) {
       for (let key in to) {
         if (!animations.has(key)) {
           const initialValue = getStyleValue(computedStyle.current, key)
-          const animated = new AnimatedValue(initialValue, fn)
+          const animated = new Animated(initialValue, fn)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
