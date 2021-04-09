@@ -1,3 +1,5 @@
+// https://github.com/mattdesl/lerp
+
 export function lerp() {
   const t = this.config.factor ?? 0
   const v0 = this.value
