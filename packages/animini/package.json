@@ -12,6 +12,12 @@
       "./spring.js"
     ]
   },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/animini.git",
+    "directory": "packages/animini"
+  },
+  "bugs": "https://github.com/animini/issues",
   "peerDependencies": {
     "react": ">=16.8.0"
   },
