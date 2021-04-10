@@ -14,6 +14,7 @@ export default function App() {
     factor: { value: 0.05, min: 0, max: 1, optional: true, render: (get) => !get('method') },
     config: levaSpring({ render: (get) => get('method') }),
     'set width': button(() => api.start({ width: 300 }, { tension: 120 })),
+    'set color': button(() => api.start({ backgroundColor: '#000' })),
   })
 
   const [ref, api] = useAnimini(method)
@@ -21,10 +22,18 @@ export default function App() {
 
   useDrag(
     ({ active, movement: [x, y] }) => {
-      api.start({ scale: active ? 1.2 : 1, x: active ? x : 0, y: active ? y : 0 }, (k) => ({
-        ..._config,
-        immediate: k !== 'scale' && active && stickToDrag,
-      }))
+      api.start(
+        {
+          scale: active ? 1.2 : 1,
+          x: active ? x : 0,
+          y: active ? y : 0,
+          backgroundColor: active ? '#5698cf' : '#ec625c',
+        },
+        (k) => ({
+          ..._config,
+          immediate: k !== 'scale' && active && stickToDrag,
+        })
+      )
     },
     { domTarget: ref }
   )

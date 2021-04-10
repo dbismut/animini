@@ -12,7 +12,7 @@ export function Animated(value, fn) {
   this.length = Array.isArray(value) ? value.length : 1
   this.value = value
   this._movingChildren = 0
-  this.children = map(value, (v, i) => new AnimatedValue(v, fn, this, i))
+  this.children = map(value, (_v, i) => new AnimatedValue(this, i))
 
   this.setFn(fn)
 

@@ -1,7 +1,6 @@
 import { getset } from './utils'
 
-export function AnimatedValue(value, fn, parent, index) {
-  this.value = this.target = this.previousValue = value
+export function AnimatedValue(parent, index) {
   this.distance = this.velocity = 0
   this.idle = true
   this.parent = parent
@@ -18,6 +17,7 @@ export function AnimatedValue(value, fn, parent, index) {
 }
 
 AnimatedValue.prototype.start = function (config) {
+  this.previousValue = this.value
   this.idle = this.target === this.value
   this.config = config
   this.startVelocity = this.velocity

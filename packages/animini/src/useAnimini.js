@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './Animated'
 import { raf } from './raf'
-import { getStyleValue, setStyle } from './style'
+import { getInitialValue, parseValue, setStyle } from './style'
 
 export function useAnimini(fn) {
   const el = useRef(null)
@@ -36,12 +36,12 @@ export function useAnimini(fn) {
       let idle = 1
       for (let key in to) {
         if (!animations.has(key)) {
-          const initialValue = getStyleValue(computedStyle.current, key)
+          const initialValue = getInitialValue(computedStyle.current, key)
           const animated = new Animated(initialValue, fn)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
-        animated.start(to[key], typeof config === 'function' ? config(key) : config)
+        animated.start(parseValue(to, key), typeof config === 'function' ? config(key) : config)
         idle &= animated.idle
       }
       if (!idle) rafId.current = raf.start(update)
