@@ -5,6 +5,7 @@
   "keywords": [],
   "main": "dist/animini.cjs.js",
   "module": "dist/animini.esm.js",
+  "sideEffects": false,
   "preconstruct": {
     "entrypoints": [
       "./index.js",
