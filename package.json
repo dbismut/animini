@@ -27,7 +27,7 @@
   "size-limit": [
     {
       "name": "core",
-      "limit": "1.5 KB",
+      "limit": "2 KB",
       "path": "packages/animini/dist/animini.*.prod.js"
     },
     {
