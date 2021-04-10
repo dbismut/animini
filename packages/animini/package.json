@@ -1,6 +1,6 @@
 {
   "name": "animini",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "small animation lib",
   "keywords": [],
   "main": "dist/animini.cjs.js",
