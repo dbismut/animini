@@ -13,7 +13,7 @@ export default function App() {
     method: { value: spring, options: { lerp: undefined, spring } },
     factor: { value: 0.05, min: 0, max: 1, optional: true, render: (get) => !get('method') },
     config: levaSpring({ render: (get) => get('method') }),
-    'set width': button(() => api.start({ width: 300 })),
+    'set width': button(() => api.start({ width: 300 }, { tension: 120 })),
   })
 
   const [ref, api] = useAnimini(method)

@@ -7,12 +7,13 @@ function getSpringConfig(k, c, m, v0) {
   return { k, c, m, zeta, w0, w1, v0 }
 }
 
-const memoFn = memoizeOne(getSpringConfig)
-
 export const spring = {
+  memo() {
+    return memoizeOne(getSpringConfig)
+  },
   onStart() {
     const { tension = 170, friction = 26, mass = 1, velocity } = this.config
-    this._config = memoFn(tension, friction, mass, velocity)
+    this._config = this.memo(tension, friction, mass, velocity)
   },
 
   update() {

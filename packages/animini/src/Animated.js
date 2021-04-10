@@ -26,6 +26,7 @@ Animated.prototype.setFn = function (fn = lerpFn) {
   } else {
     this.fn = fn.update
     if (fn.onStart) this.onStart = fn.onStart
+    if (fn.memo) this.memo = fn.memo()
   }
 }
 
@@ -33,6 +34,7 @@ Animated.prototype.start = function (target, config = {}) {
   this.time.elapsed = 0
   this.target = target
   this._movingChildren = 0
+  this.config = config
 
   if (!this.config.immediate) {
     this.onStart && this.onStart()
