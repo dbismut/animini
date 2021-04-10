@@ -1,5 +1,5 @@
 {
   "packages": ["packages/*"],
-  "sandboxes": ["/demo/src/sandboxes/drag", "/demo/src/sandboxes/perf"],
+  "sandboxes": ["/demo/src/sandboxes/animini-drag", "/demo/src/sandboxes/animini-perf"],
   "node": "14"
 }
