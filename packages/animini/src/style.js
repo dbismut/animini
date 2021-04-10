@@ -1,20 +1,41 @@
+import { color } from './adapters'
 const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
+
+const ADAPTERS = { color, backgroundColor: color }
 
 export function setStyle(rawStyle, el) {
   const { x, y, scale, ...rest } = rawStyle
   for (let key in rest) {
-    el.style[key] = rawStyle[key] + 'px'
+    const adapter = ADAPTERS[key]
+    if (adapter) {
+      // console.log(rawStyle[key], adapter.format(rawStyle[key]))
+      el.style[key] = adapter.format(rawStyle[key])
+    } else {
+      el.style[key] = rawStyle[key] + 'px'
+    }
   }
   if (x === undefined && y === undefined && scale === undefined) return
   if (!x && !y && scale === 1) el.style.removeProperty('transform')
   el.style.transform = `matrix(${scale || 1}, 0, 0, ${scale || 1}, ${x || 0}, ${y || 0})`
 }
 
-export function getStyleValue(style, key) {
+export function getInitialValue(style, key) {
   if (TRANSFORM_KEYS[key]) {
     return getTranslateValues(style)[key]
   }
+  const adapter = ADAPTERS[key]
+  if (adapter) {
+    return adapter.parse(style[key])
+  }
   return parseFloat(style[key])
+}
+
+export function parseValue(style, key) {
+  const adapter = ADAPTERS[key]
+  if (adapter) {
+    return adapter.parse(style[key])
+  }
+  return style[key]
 }
 
 function getTranslateValues(style) {

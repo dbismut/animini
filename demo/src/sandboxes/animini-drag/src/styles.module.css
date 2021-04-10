@@ -1,6 +1,6 @@
 .drag {
   height: 80px;
   width: 80px;
-  background-color: hotpink;
+  background-color: #ec625c;
   touch-action: none;
 }

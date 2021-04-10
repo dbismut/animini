@@ -1,8 +1,10 @@
+type Time = { start: number; elapsed: number; delta: number; _elapsed: number }
+
 export const raf = {
   rafId: 0,
   running: false,
   queue: new Set<Function>(),
-  time: { start: 0, elapsed: 0, delta: 0 },
+  time: {} as Time,
   frame() {
     if (!this.running) return
     this.updateTime()
@@ -11,7 +13,7 @@ export const raf = {
   },
   run() {
     if (!this.running) {
-      this.time = { start: performance.now(), elapsed: 0, delta: 0 }
+      this.time = { start: this.now(), elapsed: 0, delta: 0, _elapsed: 0 }
       this.rafId = window.requestAnimationFrame(this.frame.bind(this))
       this.running = true
     }
@@ -29,10 +31,14 @@ export const raf = {
     window.cancelAnimationFrame(this.rafId)
     this.running = false
   },
+  now() {
+    return typeof performance != 'undefined' ? performance.now() : Date.now()
+  },
   updateTime() {
-    const ts = performance.now()
-    const t = ts - this.time.start
-    this.time.delta = Math.min(64, t - this.time.elapsed)
+    const ts = this.now()
+    const _elapsed = ts - this.time.start
+    this.time.delta = Math.min(64, _elapsed - this.time._elapsed)
+    this.time._elapsed = _elapsed
     this.time.elapsed += this.time.delta
   },
 }

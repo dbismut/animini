@@ -18,8 +18,18 @@ const styles = Array(COUNT)
     backgroundColor: tinycolor.random().toHexString(),
   }))
 
-const stillPositions = Array(COUNT).fill({ x: 0, y: 0 })
-const movePositions = stillPositions.map(() => ({ x: Math.random() * 500 - 250, y: Math.random() * 500 - 250 }))
+const stillStyles = Array(COUNT).fill({
+  x: 0,
+  y: 0,
+  scale: 1,
+  backgroundColor: tinycolor.random().toHexString(),
+})
+const moveStyles = stillStyles.map(() => ({
+  x: Math.random() * 500 - 250,
+  y: Math.random() * 500 - 250,
+  scale: 1 + Math.random(),
+  backgroundColor: tinycolor.random().toHexString(),
+}))
 
 export default function Perf() {
   const [move, setMove] = useState(false)
@@ -34,7 +44,7 @@ export default function Perf() {
     }),
   })
 
-  const positions = move ? movePositions : stillPositions
+  const motionStyles = move ? moveStyles : stillStyles
 
   return (
     <div className="flex fill center">
@@ -49,7 +59,7 @@ export default function Perf() {
         {clicked && 'CLICKED'}
       </b>
       {styles.slice(0, count).map((style, i) => (
-        <Box key={i} x={positions[i].x} y={positions[i].y} style={style} />
+        <Box key={i} {...motionStyles[i]} style={style} />
       ))}
     </div>
   )

@@ -1,0 +1,5 @@
+---
+'animini': patch
+---
+
+feat: interpolation.

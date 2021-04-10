@@ -7,6 +7,6 @@ const spring = {
   stiffness: 170,
 }
 
-export default function Box({ x, y, style }) {
-  return <motion.div transition={spring} animate={{ x, y }} style={style} />
+export default function Box({ x, y, backgroundColor, scale, style }) {
+  return <motion.div transition={spring} animate={{ x, y, backgroundColor, scale }} style={style} />
 }
