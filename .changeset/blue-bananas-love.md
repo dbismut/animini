@@ -2,4 +2,4 @@
 'animini': patch
 ---
 
-feat: interpolation and perf.
+feat: interpolation and performance.
