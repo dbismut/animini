@@ -8,15 +8,16 @@ export function setStyle(rawStyle, el) {
   for (let key in rest) {
     const adapter = ADAPTERS[key]
     if (adapter) {
-      // console.log(rawStyle[key], adapter.format(rawStyle[key]))
       el.style[key] = adapter.format(rawStyle[key])
     } else {
       el.style[key] = rawStyle[key] + 'px'
     }
   }
   if (x === undefined && y === undefined && scale === undefined) return
-  if (!x && !y && scale === 1) el.style.removeProperty('transform')
-  el.style.transform = `matrix(${scale || 1}, 0, 0, ${scale || 1}, ${x || 0}, ${y || 0})`
+  if (!x && !y && (scale === void 0 || scale === 1)) el.style.removeProperty('transform')
+  el.style.transform = `matrix(${scale !== void 0 ? scale : 1}, 0, 0, ${scale !== void 0 ? scale : 1}, ${x || 0}, ${
+    y || 0
+  })`
 }
 
 export function getInitialValue(style, key) {

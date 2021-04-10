@@ -3,7 +3,7 @@ import { raf } from './raf'
 import { each, map, getset, lerp } from './utils'
 
 function lerpFn() {
-  return lerp(this.value, this.target, this.config.factor || 1)
+  return lerp(this.value, this.target, this.config.factor || 0.05)
 }
 
 export function Animated(value, fn) {
