@@ -1,10 +1,10 @@
 import memoizeOne from 'memoize-one'
 
-function getSpringConfig(k, c, m) {
+function getSpringConfig(k, c, m, v0) {
   const zeta = c / (2 * Math.sqrt(k * m))
   const w0 = Math.sqrt(k / m) * 0.001
   const w1 = w0 * Math.sqrt(1.0 - zeta * zeta)
-  return { k, c, m, zeta, w0, w1 }
+  return { k, c, m, zeta, w0, w1, v0 }
 }
 
 const memoFn = memoizeOne(getSpringConfig)
@@ -12,15 +12,12 @@ const memoFn = memoizeOne(getSpringConfig)
 export const spring = {
   onStart() {
     const { tension = 170, friction = 26, mass = 1, velocity } = this.config
-    const config = memoFn(tension, friction, mass)
-
-    const v0 = velocity ?? this.velocity ?? 0
-    this.springConfig = { ...config, v0 }
+    this._config = memoFn(tension, friction, mass, velocity)
   },
 
   update() {
     const t = this.time.elapsed
-    const { zeta, w1, w0, v0 } = this.springConfig
+    const { zeta, w1, w0, v0 = this.startVelocity ?? 0 } = this.parent._config
     const { target: to, distance: x0 } = this
 
     let value

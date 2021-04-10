@@ -1,3 +1,4 @@
+import { AnimatedValue } from './AnimatedValue'
 import { raf } from './raf'
 import { each, map, getset, lerp } from './utils'
 
@@ -13,6 +14,8 @@ export function Animated(value, fn) {
   this._idle = 0
   this.children = map(value, (v, i) => new AnimatedValue(v, fn, this, i))
 
+  this.setFn(fn)
+
   getset(
     this,
     'idle',
@@ -21,39 +24,7 @@ export function Animated(value, fn) {
   )
 }
 
-Animated.prototype.start = function (target, config = {}) {
-  this.time.elapsed = 0
-  this.target = target
-  this._idle = this.length
-
-  each(this.children, (child) => child.start(config))
-}
-
-Animated.prototype.update = function () {
-  this.time.elapsed += raf.time.delta
-  this.time.delta = raf.time.delta
-
-  each(this.children, (child) => child.update())
-}
-
-function AnimatedValue(value, fn, parent, index) {
-  this.value = this.target = this.previousValue = value
-  this.distance = this.velocity = 0
-  this.idle = true
-  this.parent = parent
-  this.setFn(fn)
-
-  getset(this, 'time', () => parent.time)
-  getset(this, 'target', () => (~index ? parent.target[index] : parent.target))
-  getset(
-    this,
-    'value',
-    () => (~index ? parent.value[index] : parent.value),
-    (value) => (~index ? (parent.value[index] = value) : (parent.value = value))
-  )
-}
-
-AnimatedValue.prototype.setFn = function (fn = lerpFn) {
+Animated.prototype.setFn = function (fn = lerpFn) {
   if (typeof fn === 'function') {
     this.fn = fn
     this.onStart = undefined
@@ -63,38 +34,20 @@ AnimatedValue.prototype.setFn = function (fn = lerpFn) {
   }
 }
 
-AnimatedValue.prototype.start = function (config) {
-  this.idle = this.target === this.value
-  this.parent.idle = this.idle
-  this.config = config
+Animated.prototype.start = function (target, config = {}) {
+  this.time.elapsed = 0
+  this.target = target
+  this._idle = this.length
 
-  if (this.config.immediate) {
-    this.value = this.target
-  } else if (!this.idle) {
-    this.distance = this.target - this.value
-    this.precision = Math.min(1, Math.abs(this.distance) * 0.0001)
+  if (!this.config.immediate) {
     this.onStart && this.onStart()
   }
+  each(this.children, (child) => child.start(config))
 }
 
-AnimatedValue.prototype.update = function () {
-  if (this.value === this.target) {
-    this.idle = true
-    this.parent.idle = true
-    return
-  }
+Animated.prototype.update = function () {
+  this.time.elapsed += raf.time.delta
+  this.time.delta = raf.time.delta
 
-  this.previousValue = this.value
-  this.value = this.fn()
-  this.velocity = (this.value - this.previousValue) / this.time.delta
-
-  const isMoving = Math.abs(this.velocity) > this.precision
-  const isTravelling = Math.abs(this.target - this.value) > this.precision
-
-  this.idle = !isMoving && !isTravelling
-
-  if (this.idle) {
-    this.value = this.target
-    this.parent.idle = true
-  }
+  each(this.children, (child) => child.update())
 }
