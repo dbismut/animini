@@ -11,17 +11,12 @@ export function Animated(value, fn) {
   this.time = {}
   this.length = Array.isArray(value) ? value.length : 1
   this.value = value
-  this._idle = 0
+  this._movingChildren = 0
   this.children = map(value, (v, i) => new AnimatedValue(v, fn, this, i))
 
   this.setFn(fn)
 
-  getset(
-    this,
-    'idle',
-    () => !this._idle,
-    (flag) => (this._idle += flag ? -1 : 1)
-  )
+  getset(this, 'idle', () => this._movingChildren <= 0)
 }
 
 Animated.prototype.setFn = function (fn = lerpFn) {
@@ -37,17 +32,25 @@ Animated.prototype.setFn = function (fn = lerpFn) {
 Animated.prototype.start = function (target, config = {}) {
   this.time.elapsed = 0
   this.target = target
-  this._idle = this.length
+  this._movingChildren = 0
 
   if (!this.config.immediate) {
     this.onStart && this.onStart()
   }
-  each(this.children, (child) => child.start(config))
+  each(this.children, (child) => {
+    child.start(config)
+    if (!child.idle) this._movingChildren++
+  })
 }
 
 Animated.prototype.update = function () {
   this.time.elapsed += raf.time.delta
   this.time.delta = raf.time.delta
 
-  each(this.children, (child) => child.update())
+  each(this.children, (child) => {
+    if (!child.idle) {
+      child.update()
+      if (child.idle) this._movingChildren--
+    }
+  })
 }

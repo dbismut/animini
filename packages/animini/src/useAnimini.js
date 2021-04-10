@@ -21,7 +21,7 @@ export function useAnimini(fn) {
   const update = useCallback(() => {
     if (!el.current) return
 
-    let idle = 1
+    let idle = true
     animations.forEach((animated, key) => {
       animated.update()
       rawValues.current[key] = animated.value

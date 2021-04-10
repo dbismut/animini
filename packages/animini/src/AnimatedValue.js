@@ -19,7 +19,6 @@ export function AnimatedValue(value, fn, parent, index) {
 
 AnimatedValue.prototype.start = function (config) {
   this.idle = this.target === this.value
-  this.parent.idle = this.idle
   this.config = config
   this.startVelocity = this.velocity
 
@@ -32,14 +31,15 @@ AnimatedValue.prototype.start = function (config) {
 }
 
 AnimatedValue.prototype.update = function () {
+  if (this.idle) return
   if (this.value === this.target) {
     this.idle = true
-    this.parent.idle = true
     return
   }
 
   this.previousValue = this.value
   this.value = this.fn()
+
   this.velocity = (this.value - this.previousValue) / this.time.delta
 
   const isMoving = Math.abs(this.velocity) > this.precision
@@ -47,8 +47,5 @@ AnimatedValue.prototype.update = function () {
 
   this.idle = !isMoving && !isTravelling
 
-  if (this.idle) {
-    this.value = this.target
-    this.parent.idle = true
-  }
+  if (this.idle) this.value = this.target
 }
