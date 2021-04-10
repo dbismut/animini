@@ -1,4 +1,5 @@
 {
   "packages": ["packages/*"],
-  "sandboxes": ["/demo/src/sandboxes/drag", "/demo/src/sandboxes/perf"]
+  "sandboxes": ["/demo/src/sandboxes/drag", "/demo/src/sandboxes/perf"],
+  "node": "15"
 }
