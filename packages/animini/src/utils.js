@@ -13,7 +13,7 @@ export function equal(v0, v1) {
 
 export function each(array, iterator) {
   if (Array.isArray(array)) {
-    for (let i = array.length; i > 0; i--) iterator(array[i], i)
+    for (let i = 0; i < array.length; i++) iterator(array[i], i)
   } else {
     iterator(array, -1)
   }
