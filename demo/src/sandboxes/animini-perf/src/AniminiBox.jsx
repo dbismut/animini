@@ -7,7 +7,7 @@ export default function Box({ x, y, backgroundColor, scale, style }) {
 
   useEffect(() => {
     api.start({ x, y, backgroundColor, scale })
-  }, [x, y, backgroundColor, api])
+  }, [x, y, backgroundColor, scale, api])
 
   return <div ref={ref} style={style} />
 }
