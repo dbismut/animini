@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react'
-import { useAnimini } from 'animini'
-import { spring } from 'animini/spring'
+import { useAnimini, spring } from '@animini/dom'
 
 export default function Box({ x, y, backgroundColor, scale, style }) {
   const [ref, api] = useAnimini(spring)

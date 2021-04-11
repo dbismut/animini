@@ -1,25 +1,26 @@
-import { getset } from './utils'
+import { getset } from '../utils'
 
 export function AnimatedValue(parent, index) {
   this.distance = this.velocity = 0
   this.idle = true
   this.parent = parent
+  const hasKey = index !== -1
 
   getset(this, 'fn', () => parent.fn)
+  getset(this, 'config', () => parent.config)
   getset(this, 'time', () => parent.time)
   getset(this, 'target', () => (~index ? parent.target[index] : parent.target))
   getset(
     this,
     'value',
-    () => (~index ? parent.value[index] : parent.value),
-    (value) => (~index ? (parent.value[index] = value) : (parent.value = value))
+    () => (hasKey ? parent._value[index] : parent._value),
+    (value) => (hasKey ? (parent._value[index] = value) : (parent._value = value))
   )
 }
 
-AnimatedValue.prototype.start = function (config) {
+AnimatedValue.prototype.start = function () {
   this.previousValue = this.value
   this.idle = this.target === this.value
-  this.config = config
   this.startVelocity = this.velocity
 
   if (this.config.immediate) {

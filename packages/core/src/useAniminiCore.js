@@ -1,18 +1,13 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
-import { Animated } from './Animated'
+import { Animated } from './animated/Animated'
 import { raf } from './raf'
-import { getInitialValue, parseValue, setStyle } from './style'
 
-export function useAnimini(fn) {
+export function useAniminiCore(target, targetPayload, fn) {
+  const rafId = useRef()
+
   const el = useRef(null)
   const rawValues = useRef({})
-  const computedStyle = useRef(null)
-
   const animations = useMemo(() => new Map(), [])
-
-  const get = useCallback(() => rawValues.current, [])
-
-  const rafId = useRef()
 
   useEffect(() => {
     animations.forEach((animated) => animated.setFn(fn))
@@ -27,32 +22,34 @@ export function useAnimini(fn) {
       rawValues.current[key] = animated.value
       idle &= animated.idle
     })
-    setStyle(rawValues.current, el.current)
+    target.setValues?.(rawValues.current, el.current, targetPayload)
     if (idle) raf.stop(update)
-  }, [animations])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target, animations])
 
   const start = useCallback(
     (to, config) => {
-      let idle = 1
+      let idle = true
       for (let key in to) {
         if (!animations.has(key)) {
-          const initialValue = getInitialValue(computedStyle.current, key)
-          const animated = new Animated(initialValue, fn)
+          const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, targetPayload)
+          const animated = new Animated(value, fn, adapter)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
-        animated.start(parseValue(to, key), typeof config === 'function' ? config(key) : config)
+        animated.start(to[key], typeof config === 'function' ? config(key) : config)
         idle &= animated.idle
       }
       if (!idle) rafId.current = raf.start(update)
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [update, fn, animations]
   )
 
   useEffect(() => {
-    computedStyle.current = window.getComputedStyle(el.current)
     return () => raf.stop(update)
   }, [update])
 
+  const get = useCallback(() => rawValues.current, [])
   return [el, { get, start }]
 }

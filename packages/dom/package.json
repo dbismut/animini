@@ -1,0 +1,24 @@
+{
+  "name": "@animini/dom",
+  "version": "0.0.1",
+  "description": "small animation lib",
+  "keywords": [],
+  "main": "dist/animini-dom.cjs.js",
+  "module": "dist/animini-dom.esm.js",
+  "sideEffects": false,
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/animini.git",
+    "directory": "packages/dom"
+  },
+  "bugs": "https://github.com/animini/issues",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "@animini/core": "^0.0.1"
+  },
+  "devDependencies": {
+    "three": "^0.127.0"
+  }
+}

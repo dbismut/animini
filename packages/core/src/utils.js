@@ -19,11 +19,14 @@ export function each(array, iterator) {
   }
 }
 
-export function map(array, iterator) {
-  if (Array.isArray(array)) {
-    return array.map(iterator)
+export function map(obj, iterator) {
+  if (typeof obj === 'object') {
+    if (Array.isArray(obj)) {
+      return obj.map(iterator)
+    }
+    return Object.entries(obj).map(([key, value]) => iterator(value, key))
   }
-  return iterator(array, -1)
+  return iterator(obj, -1)
 }
 
 export function getset(self, key, getter, setter) {
