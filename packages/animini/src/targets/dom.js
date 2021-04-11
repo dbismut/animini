@@ -1,9 +1,9 @@
-import { color } from './adapters'
+import { color } from '../adapters'
 const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
 
 const ADAPTERS = { color, backgroundColor: color }
 
-export function setStyle(rawStyle, el) {
+export function setValues(rawStyle, el) {
   const { x, y, scale, ...rest } = rawStyle
   for (let key in rest) {
     const adapter = ADAPTERS[key]

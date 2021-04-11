@@ -1,12 +1,11 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './Animated'
 import { raf } from './raf'
-import { getInitialValue, parseValue, setValues } from './targets/dom'
+import { getInitialValue, parseValue, setValues } from './targets/three'
 
-export function useAnimini(fn) {
+export function useAnimini2(fn) {
   const el = useRef(null)
   const rawValues = useRef({})
-  const computedStyle = useRef(null)
 
   const animations = useMemo(() => new Map(), [])
 
@@ -36,12 +35,12 @@ export function useAnimini(fn) {
       let idle = 1
       for (let key in to) {
         if (!animations.has(key)) {
-          const initialValue = getInitialValue(computedStyle.current, key)
+          const initialValue = getInitialValue(el.current, key)
           const animated = new Animated(initialValue, fn)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
-        animated.start(parseValue(to, key), typeof config === 'function' ? config(key) : config)
+        animated.start(parseValue(to, key, el.current), typeof config === 'function' ? config(key) : config)
         idle &= animated.idle
       }
       if (!idle) rafId.current = raf.start(update)
@@ -50,7 +49,6 @@ export function useAnimini(fn) {
   )
 
   useEffect(() => {
-    computedStyle.current = window.getComputedStyle(el.current)
     return () => raf.stop(update)
   }, [update])
 

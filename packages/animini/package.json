@@ -23,5 +23,8 @@
   },
   "dependencies": {
     "memoize-one": "^5.1.1"
+  },
+  "devDependencies": {
+    "three": "^0.127.0"
   }
 }

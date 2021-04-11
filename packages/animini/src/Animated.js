@@ -6,14 +6,17 @@ function lerpFn() {
   return lerp(this.value, this.target, this.config.factor || 0.05)
 }
 
+function getLength(v) {
+  return typeof v === 'object' ? (Array.isArray(v) ? v.length : Object.keys(v).length) : 1
+}
+
 export function Animated(value, fn) {
   this.config = {}
   this.time = {}
-  this.length = Array.isArray(value) ? value.length : 1
+  this.length = getLength(value)
   this.value = value
   this._movingChildren = 0
   this.children = map(value, (_v, i) => new AnimatedValue(this, i))
-
   this.setFn(fn)
 
   getset(this, 'idle', () => this._movingChildren <= 0)

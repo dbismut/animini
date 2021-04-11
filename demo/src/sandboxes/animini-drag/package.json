@@ -5,7 +5,7 @@
   "dependencies": {
     "@leva-ui/plugin-spring": "0.9.3",
     "animini": "*",
-    "leva": "0.9.3",
+    "leva": "^0.9.4",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
