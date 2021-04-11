@@ -38,9 +38,13 @@ export default function Perf() {
     count: { value: 1000, min: 100, max: 4000 },
     Model: { options: { AniminiBox, SpringBox, MotionBox } },
     Shuffle: button(() => {
+      const ts = performance.now()
       setClicked(true)
       setMove((m) => !m)
-      window.requestIdleCallback(() => setClicked(false))
+      window.requestIdleCallback(() => {
+        setClicked(false)
+        console.log('TIME:', performance.now() - ts)
+      })
     }),
   })
 
