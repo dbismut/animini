@@ -1,7 +1,7 @@
 import React from 'react'
 import { useAnimini } from '@animini/three'
 import { useControls, button } from 'leva'
-import { Canvas } from 'react-three-fiber'
+import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'
 
 import * as THREE from 'three'

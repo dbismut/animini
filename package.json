@@ -41,7 +41,7 @@
       "path": "packages/three/dist/*.prod.js",
       "ignore": [
         "three",
-        "react-three-fiber"
+        "@react-three/fiber"
       ]
     }
   ],

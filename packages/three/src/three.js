@@ -1,7 +1,8 @@
-import { invalidate, addEffect } from 'react-three-fiber'
+import { invalidate, addEffect } from '@react-three/fiber'
 import { FrameLoop } from '@animini/core'
 import { Color } from 'three'
 import { color } from './adapters'
+
 const ADAPTERS = new Map([[Color, color]])
 
 export function getInitialValue(element, key) {
