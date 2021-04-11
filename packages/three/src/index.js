@@ -1,0 +1,1 @@
+export { useAnimini } from './useAniminiThree'

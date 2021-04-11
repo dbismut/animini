@@ -3,7 +3,7 @@
   "main": "src/index.jsx",
   "version": "1.0.0",
   "dependencies": {
-    "animini": "*",
+    "@animini/dom": "*",
     "@react-spring/web": "^9.1.0",
     "framer-motion": "^4.1.3",
     "leva": "^0.9.4",

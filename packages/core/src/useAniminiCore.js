@@ -1,17 +1,13 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
-import { Animated } from './Animated'
+import { Animated } from './animated/Animated'
 import { raf } from './raf'
-import { getInitialValue, parseValue, setValues } from './targets/three'
 
-export function useAnimini2(fn) {
+export function useAniminiCore(target, targetPayload, fn) {
+  const rafId = useRef()
+
   const el = useRef(null)
   const rawValues = useRef({})
-
   const animations = useMemo(() => new Map(), [])
-
-  const get = useCallback(() => rawValues.current, [])
-
-  const rafId = useRef()
 
   useEffect(() => {
     animations.forEach((animated) => animated.setFn(fn))
@@ -26,25 +22,27 @@ export function useAnimini2(fn) {
       rawValues.current[key] = animated.value
       idle &= animated.idle
     })
-    setValues(rawValues.current, el.current)
+    target.setValues(rawValues.current, el.current, targetPayload)
     if (idle) raf.stop(update)
-  }, [animations])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [target, animations])
 
   const start = useCallback(
     (to, config) => {
-      let idle = 1
+      let idle = true
       for (let key in to) {
         if (!animations.has(key)) {
-          const initialValue = getInitialValue(el.current, key)
-          const animated = new Animated(initialValue, fn)
+          const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, targetPayload)
+          const animated = new Animated(value, fn, adapter)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
-        animated.start(parseValue(to, key, el.current), typeof config === 'function' ? config(key) : config)
+        animated.start(to[key], typeof config === 'function' ? config(key) : config)
         idle &= animated.idle
       }
       if (!idle) rafId.current = raf.start(update)
     },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     [update, fn, animations]
   )
 
@@ -52,5 +50,6 @@ export function useAnimini2(fn) {
     return () => raf.stop(update)
   }, [update])
 
+  const get = useCallback(() => rawValues.current, [])
   return [el, { get, start }]
 }

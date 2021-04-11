@@ -1,0 +1,27 @@
+{
+  "name": "@animini/core",
+  "version": "0.0.1",
+  "description": "small animation lib",
+  "keywords": [],
+  "main": "dist/animini-core.cjs.js",
+  "module": "dist/animini-core.esm.js",
+  "sideEffects": false,
+  "preconstruct": {
+    "entrypoints": [
+      "./index.js",
+      "./algorithms/index.js"
+    ]
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/animini.git",
+    "directory": "packages/core"
+  },
+  "bugs": "https://github.com/animini/issues",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "memoize-one": "^5.1.1"
+  }
+}

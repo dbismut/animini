@@ -1,28 +1,23 @@
 {
-  "name": "animini",
-  "version": "0.0.2",
+  "name": "@animini/three",
+  "version": "0.0.1",
   "description": "small animation lib",
   "keywords": [],
-  "main": "dist/animini.cjs.js",
-  "module": "dist/animini.esm.js",
+  "main": "dist/animini-three.cjs.js",
+  "module": "dist/animini-three.esm.js",
   "sideEffects": false,
-  "preconstruct": {
-    "entrypoints": [
-      "./index.js",
-      "./spring.js"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/animini.git",
-    "directory": "packages/animini"
+    "directory": "packages/three"
   },
   "bugs": "https://github.com/animini/issues",
   "peerDependencies": {
-    "react": ">=16.8.0"
+    "react": ">=16.8.0",
+    "three": ">=0.127.0"
   },
   "dependencies": {
-    "memoize-one": "^5.1.1"
+    "@animini/core": "^0.0.1"
   },
   "devDependencies": {
     "three": "^0.127.0"

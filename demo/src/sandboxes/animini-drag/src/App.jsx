@@ -2,8 +2,7 @@ import React from 'react'
 import { useDrag } from 'react-use-gesture'
 import { useControls, button } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
-import { useAnimini } from 'animini'
-import { spring } from 'animini/spring'
+import { useAnimini, spring } from '@animini/dom'
 
 import styles from './styles.module.css'
 

@@ -28,12 +28,7 @@
     {
       "name": "core",
       "limit": "2 KB",
-      "path": "packages/animini/dist/animini.*.prod.js"
-    },
-    {
-      "name": "spring",
-      "limit": "700 B",
-      "path": "packages/animini/spring/dist/animini-spring.*.prod.js"
+      "path": "packages/core/dist/animini.*.prod.js"
     }
   ],
   "repository": {

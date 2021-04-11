@@ -1,17 +1,15 @@
-import { color } from '../adapters'
-const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
+import { color } from './adapters'
 
+const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
 const ADAPTERS = { color, backgroundColor: color }
 
 export function setValues(rawStyle, el) {
   const { x, y, scale, ...rest } = rawStyle
   for (let key in rest) {
     const adapter = ADAPTERS[key]
-    if (adapter) {
-      el.style[key] = adapter.format(rawStyle[key])
-    } else {
-      el.style[key] = rawStyle[key] + 'px'
-    }
+    const value = rest[key]
+    if (adapter) el.style[key] = value
+    else el.style[key] = value + 'px'
   }
   if (x === undefined && y === undefined && scale === undefined) return
   if (!x && !y && (scale === void 0 || scale === 1)) el.style.removeProperty('transform')
@@ -20,23 +18,16 @@ export function setValues(rawStyle, el) {
   })`
 }
 
-export function getInitialValue(style, key) {
+export function getInitialValueAndAdapter(_element, key, styleRef) {
+  let value
+  const adapter = ADAPTERS[key]
   if (TRANSFORM_KEYS[key]) {
-    return getTranslateValues(style)[key]
+    value = getTranslateValues(styleRef.current)[key]
+  } else {
+    value = styleRef.current[key]
+    value = adapter ? value : parseFloat(value)
   }
-  const adapter = ADAPTERS[key]
-  if (adapter) {
-    return adapter.parse(style[key])
-  }
-  return parseFloat(style[key])
-}
-
-export function parseValue(style, key) {
-  const adapter = ADAPTERS[key]
-  if (adapter) {
-    return adapter.parse(style[key])
-  }
-  return style[key]
+  return [value, adapter]
 }
 
 function getTranslateValues(style) {

@@ -1,0 +1,4 @@
+{
+  "main": "dist/animini-core-algorithms.cjs.js",
+  "module": "dist/animini-core-algorithms.esm.js"
+}

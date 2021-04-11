@@ -1,5 +1,5 @@
 import { Color } from 'three'
-import { color } from '../adapters'
+import { color } from '../core/src/adapters'
 
 const ADAPTERS = new Map([[Color, color]])
 
