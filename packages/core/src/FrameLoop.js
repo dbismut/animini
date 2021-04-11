@@ -47,7 +47,7 @@ FrameLoop.prototype.stopAll = function () {
 FrameLoop.prototype.updateTime = function () {
   const ts = now()
   const _elapsed = ts - this.time.start
-  this.time.delta = Math.min(64, _elapsed - this.time._elapsed)
+  this.time.delta = ~~Math.min(64, _elapsed - this.time._elapsed)
   this.time._elapsed = _elapsed
   this.time.elapsed += this.time.delta
 }
