@@ -14,10 +14,10 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/animini.git",
+    "url": "https://github.com/dbismut/animini.git",
     "directory": "packages/core"
   },
-  "bugs": "https://github.com/animini/issues",
+  "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
     "react": ">=16.8.0"
   },

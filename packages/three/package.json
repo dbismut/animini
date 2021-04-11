@@ -1,17 +1,17 @@
 {
   "name": "@animini/three",
   "version": "0.0.1",
-  "description": "small animation lib",
+  "description": "animini target for three",
   "keywords": [],
   "main": "dist/animini-three.cjs.js",
   "module": "dist/animini-three.esm.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
-    "url": "https://github.com/animini.git",
+    "url": "https://github.com/dbismut/animini.git",
     "directory": "packages/three"
   },
-  "bugs": "https://github.com/animini/issues",
+  "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
     "react": ">=16.8.0",
     "three": ">=0.127.0"
