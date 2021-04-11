@@ -40,7 +40,8 @@
       "limit": "2.5 KB",
       "path": "packages/three/dist/*.prod.js",
       "ignore": [
-        "three"
+        "three",
+        "react-three-fiber"
       ]
     }
   ],

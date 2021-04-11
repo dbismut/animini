@@ -1,5 +1,4 @@
 import { AnimatedValue } from './AnimatedValue'
-import { raf } from '../raf'
 import { each, map, getset, lerp } from '../utils'
 
 function lerpFn() {
@@ -10,9 +9,10 @@ function getLength(v) {
   return typeof v === 'object' ? (Array.isArray(v) ? v.length : Object.keys(v).length) : 1
 }
 
-export function Animated(initialValue, fn, adapter) {
+export function Animated(initialValue, fn, adapter, loop) {
   this.config = {}
   this.time = {}
+  this.loop = loop
 
   this._movingChildren = 0
   this.adapter = adapter
@@ -59,8 +59,8 @@ Animated.prototype.start = function (target, config = {}) {
 }
 
 Animated.prototype.update = function () {
-  this.time.elapsed += raf.time.delta
-  this.time.delta = raf.time.delta
+  this.time.elapsed += this.loop.time.delta
+  this.time.delta = this.loop.time.delta
 
   each(this.children, (child) => {
     if (!child.idle) {
