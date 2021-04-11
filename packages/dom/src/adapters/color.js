@@ -16,4 +16,4 @@ export function format(c) {
   return `rgba(${~~c[0]}, ${~~c[1]}, ${~~c[2]}, ${~~c[3]})`
 }
 
-export const color = { parse, format }
+export const color = { parse, parseInitial: parse, format }

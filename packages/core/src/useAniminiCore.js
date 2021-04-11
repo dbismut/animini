@@ -2,7 +2,7 @@ import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
 
-export function useAniminiCore(target, targetPayload, fn) {
+export function useAniminiCore(target, elementPayload, fn) {
   const loop = target.loop || GlobalLoop
   const rafId = useRef()
 
@@ -21,9 +21,10 @@ export function useAniminiCore(target, targetPayload, fn) {
     animations.forEach((animated, key) => {
       animated.update()
       rawValues.current[key] = animated.value
+      animated.onUpdate?.(el.current, key)
       idle &= animated.idle
     })
-    target.setValues?.(rawValues.current, el.current, targetPayload)
+    target.setValues?.(rawValues.current, el.current, elementPayload)
     if (idle) loop.stop(update)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, animations])
@@ -33,7 +34,7 @@ export function useAniminiCore(target, targetPayload, fn) {
       let idle = true
       for (let key in to) {
         if (!animations.has(key)) {
-          const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, targetPayload)
+          const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, elementPayload)
           const animated = new Animated(value, fn, adapter, loop)
           animations.set(key, animated)
         }
