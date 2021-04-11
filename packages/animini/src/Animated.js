@@ -15,11 +15,13 @@ export function Animated(value, fn) {
   this.time = {}
   this.length = getLength(value)
   this.value = value
+  this._value = value
   this._movingChildren = 0
-  this.children = map(value, (_v, i) => new AnimatedValue(this, i))
+  this.children = map(this._value, (_v, i) => new AnimatedValue(this, i))
   this.setFn(fn)
 
   getset(this, 'idle', () => this._movingChildren <= 0)
+  getset(this, 'value', () => this._value)
 }
 
 Animated.prototype.setFn = function (fn = lerpFn) {
@@ -43,7 +45,7 @@ Animated.prototype.start = function (target, config = {}) {
     this.onStart && this.onStart()
   }
   each(this.children, (child) => {
-    child.start(config)
+    child.start()
     if (!child.idle) this._movingChildren++
   })
 }
