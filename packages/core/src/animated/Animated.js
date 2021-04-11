@@ -10,16 +10,17 @@ function getLength(v) {
   return typeof v === 'object' ? (Array.isArray(v) ? v.length : Object.keys(v).length) : 1
 }
 
-export function Animated(value, fn, adapter) {
+export function Animated(initialValue, fn, adapter) {
   this.config = {}
   this.time = {}
-  this.length = getLength(value)
 
   this._movingChildren = 0
   this.adapter = adapter
   this.setFn(fn)
 
-  this._value = this.parse(value)
+  this._value = initialValue
+  this.length = getLength(initialValue)
+
   this.children = map(this._value, (_v, i) => new AnimatedValue(this, i))
 
   getset(this, 'idle', () => this._movingChildren <= 0)

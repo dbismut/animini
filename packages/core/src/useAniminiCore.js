@@ -22,7 +22,7 @@ export function useAniminiCore(target, targetPayload, fn) {
       rawValues.current[key] = animated.value
       idle &= animated.idle
     })
-    target.setValues(rawValues.current, el.current, targetPayload)
+    target.setValues?.(rawValues.current, el.current, targetPayload)
     if (idle) raf.stop(update)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, animations])

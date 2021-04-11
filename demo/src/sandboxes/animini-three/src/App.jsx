@@ -1,5 +1,5 @@
 import React from 'react'
-import { useAnimini2 } from 'animini'
+import { useAnimini } from '@animini/three'
 import { useControls, button } from 'leva'
 import { Canvas } from 'react-three-fiber'
 import { OrbitControls } from '@react-three/drei'
@@ -9,10 +9,10 @@ import * as THREE from 'three'
 const torusknot = new THREE.TorusKnotBufferGeometry(3, 0.8, 256, 16)
 
 const Mesh = () => {
-  const [mat, apiMat] = useAnimini2()
-  const [ref, api] = useAnimini2()
+  const [mat, apiMat] = useAnimini()
+  const [ref, api] = useAnimini()
   useControls({
-    changeColor: button(() => apiMat.start({ color: { r: 0, g: 1, b: 0 } })),
+    changeColor: button(() => apiMat.start({ color: '#f00' })),
     changeScale: button(() => api.start({ scale: { x: 2, y: 1, z: 2 } })),
   })
   return (

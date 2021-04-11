@@ -5,12 +5,12 @@ import styles from './styles.module.css'
 
 import Drag from './sandboxes/animini-drag/src/App'
 import Perf from './sandboxes/animini-perf/src/App'
-// import Three from './sandboxes/animini-three/src/App'
+import Three from './sandboxes/animini-three/src/App'
 
 const links = {
   'animini-drag': Drag,
   'animini-perf': Perf,
-  // 'animini-three': Three,
+  'animini-three': Three,
 }
 
 const Example = ({ link }) => {

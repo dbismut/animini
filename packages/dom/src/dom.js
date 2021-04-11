@@ -25,7 +25,7 @@ export function getInitialValueAndAdapter(_element, key, styleRef) {
     value = getTranslateValues(styleRef.current)[key]
   } else {
     value = styleRef.current[key]
-    value = adapter ? value : parseFloat(value)
+    value = adapter ? adapter.parse(value) : parseFloat(value)
   }
   return [value, adapter]
 }
