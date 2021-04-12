@@ -1,5 +1,4 @@
 import { AnimatedValue } from './AnimatedValue'
-import { raf } from '../raf'
 import { each, map, getset, lerp } from '../utils'
 
 function lerpFn() {
@@ -10,16 +9,18 @@ function getLength(v) {
   return typeof v === 'object' ? (Array.isArray(v) ? v.length : Object.keys(v).length) : 1
 }
 
-export function Animated(initialValue, fn, adapter) {
+export function Animated(value, fn, adapter, loop) {
   this.config = {}
   this.time = {}
+  this.loop = loop
 
   this._movingChildren = 0
-  this.adapter = adapter
+  this.parse = adapter?.parse
+  this.onUpdate = adapter?.onUpdate
   this.setFn(fn)
 
-  this._value = initialValue
-  this.length = getLength(initialValue)
+  this._value = adapter?.parseInitial ? adapter.parseInitial(value) : value
+  this.length = getLength(this._value)
 
   this.children = map(this._value, (_v, i) => new AnimatedValue(this, i))
 
@@ -38,14 +39,9 @@ Animated.prototype.setFn = function (fn = lerpFn) {
   }
 }
 
-Animated.prototype.parse = function (value) {
-  if (this.adapter?.parse) return this.adapter.parse(value)
-  return value
-}
-
 Animated.prototype.start = function (target, config = {}) {
   this.time.elapsed = 0
-  this.target = this.parse(target)
+  this.target = this.parse ? this.parse(target) : target
   this._movingChildren = 0
   this.config = config
 
@@ -59,8 +55,8 @@ Animated.prototype.start = function (target, config = {}) {
 }
 
 Animated.prototype.update = function () {
-  this.time.elapsed += raf.time.delta
-  this.time.delta = raf.time.delta
+  this.time.elapsed += this.loop.time.delta
+  this.time.delta = this.loop.time.delta
 
   each(this.children, (child) => {
     if (!child.idle) {

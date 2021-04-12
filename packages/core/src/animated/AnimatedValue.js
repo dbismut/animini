@@ -27,7 +27,7 @@ AnimatedValue.prototype.start = function () {
     this.value = this.target
   } else if (!this.idle) {
     this.distance = this.target - this.value
-    this.precision = Math.min(1, Math.abs(this.distance) * 0.0001)
+    this.precision = Math.min(1, Math.abs(this.distance) * 0.001)
   }
 }
 

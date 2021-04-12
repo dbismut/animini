@@ -4,6 +4,7 @@ import tinycolor from 'tinycolor2'
 import AniminiBox from './AniminiBox'
 import SpringBox from './SpringBox'
 import MotionBox from './MotionBox'
+import AnimeBox from './AnimeBox'
 
 const COUNT = 4000
 
@@ -36,7 +37,7 @@ export default function Perf() {
   const [clicked, setClicked] = useState(false)
   const { count, Model: Box } = useControls({
     count: { value: 1000, min: 100, max: 4000 },
-    Model: { options: { AniminiBox, SpringBox, MotionBox } },
+    Model: { options: { AniminiBox, AnimeBox, SpringBox, MotionBox } },
     Shuffle: button(() => {
       const ts = performance.now()
       setClicked(true)

@@ -1,8 +1,9 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './animated/Animated'
-import { raf } from './raf'
+import { GlobalLoop } from './FrameLoop'
 
-export function useAniminiCore(target, targetPayload, fn) {
+export function useAniminiCore(target, elementPayload, fn) {
+  const loop = target.loop || GlobalLoop
   const rafId = useRef()
 
   const el = useRef(null)
@@ -20,10 +21,11 @@ export function useAniminiCore(target, targetPayload, fn) {
     animations.forEach((animated, key) => {
       animated.update()
       rawValues.current[key] = animated.value
+      animated.onUpdate?.(el.current, key)
       idle &= animated.idle
     })
-    target.setValues?.(rawValues.current, el.current, targetPayload)
-    if (idle) raf.stop(update)
+    target.setValues?.(rawValues.current, el.current, elementPayload)
+    if (idle) loop.stop(update)
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [target, animations])
 
@@ -32,22 +34,23 @@ export function useAniminiCore(target, targetPayload, fn) {
       let idle = true
       for (let key in to) {
         if (!animations.has(key)) {
-          const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, targetPayload)
-          const animated = new Animated(value, fn, adapter)
+          const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, elementPayload)
+          const animated = new Animated(value, fn, adapter, loop)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
         animated.start(to[key], typeof config === 'function' ? config(key) : config)
         idle &= animated.idle
       }
-      if (!idle) rafId.current = raf.start(update)
+      if (!idle) rafId.current = loop.start(update)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [update, fn, animations]
   )
 
   useEffect(() => {
-    return () => raf.stop(update)
+    return () => loop.stop(update)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
   const get = useCallback(() => rawValues.current, [])
