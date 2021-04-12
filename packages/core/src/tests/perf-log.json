@@ -1,0 +1,80 @@
+{
+  "cpu": {
+    "manufacturer": "Apple",
+    "brand": "M1",
+    "vendor": "Apple",
+    "family": "458787763",
+    "model": "",
+    "stepping": "2",
+    "revision": "",
+    "voltage": "",
+    "speed": 2.4,
+    "speedMin": 2.4,
+    "speedMax": 2.4,
+    "governor": "",
+    "cores": 8,
+    "physicalCores": 8,
+    "processors": 1,
+    "socket": "SOC",
+    "flags": "",
+    "virtualization": false,
+    "cache": {
+      "l1d": 131072,
+      "l1i": 65536,
+      "l2": 4194304,
+      "l3": null
+    },
+    "efficiencyCores": 4,
+    "performanceCores": 4
+  },
+  "results": {
+    "lerp int (10 itr.)": {
+      "time": 130.2,
+      "timePerRun": 0.013,
+      "iterations": 100000,
+      "iterationsPerRun": 10
+    },
+    "spring int (10 itr.)": {
+      "time": 164.6,
+      "timePerRun": 0.016,
+      "iterations": 100000,
+      "iterationsPerRun": 10
+    },
+    "spring array (10 itr.)": {
+      "time": 419.8,
+      "timePerRun": 0.042,
+      "iterations": 100000,
+      "iterationsPerRun": 10
+    },
+    "spring color (10 itr.)": {
+      "time": 468.2,
+      "timePerRun": 0.047,
+      "iterations": 100000,
+      "iterationsPerRun": 10
+    },
+    "lerp int": {
+      "time": 1317,
+      "timePerRun": 0.132,
+      "iterations": 1350000,
+      "iterationsPerRun": 135
+    },
+    "spring int": {
+      "time": 561,
+      "timePerRun": 0.056,
+      "iterations": 440000,
+      "iterationsPerRun": 44
+    },
+    "spring array": {
+      "time": 1532.8,
+      "timePerRun": 0.153,
+      "iterations": 440000,
+      "iterationsPerRun": 44
+    },
+    "spring color": {
+      "time": 1555.4,
+      "timePerRun": 0.156,
+      "iterations": 440000,
+      "iterationsPerRun": 44
+    }
+  }
+}

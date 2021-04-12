@@ -1,12 +1,17 @@
+import fs from 'fs-extra'
+import path from 'path'
+import { Table } from 'console-table-printer'
+import si from 'systeminformation'
 import { Animated } from '../animated/Animated'
 import { spring } from '../algorithms'
 import { color } from '../../../dom/src/adapters'
-
 function round(number, dec = 3) {
   return Number(number.toFixed(dec))
 }
 
 let results = {}
+let previousResults = {}
+const perfPath = path.resolve(__dirname, 'perf-log.json')
 
 beforeAll(() => {
   results = {}
@@ -57,6 +62,27 @@ bench('spring int', 600, 10000, () => animatedBench(spring))
 bench('spring array', 1800, 10000, () => animatedBench(spring, { from: [0, 0, 0], to: [100, 200, 300] }))
 bench('spring color', 1800, 10000, () => animatedBench(spring, { from: '#ff0000', to: '#000eac', adapter: color }))
 
-afterAll(() => {
-  console.table(results)
+afterAll(async () => {
+  const cpu = await si.cpu()
+  const p = new Table()
+
+  if (fs.existsSync(perfPath)) {
+    previousResults = fs.readJSONSync(perfPath).results
+  }
+
+  Object.entries(results).forEach(([key, value]) => {
+    const previous = previousResults[key]
+    let vs = 'n/a'
+    let comp = 0
+    if (previous) {
+      const ratio = value.time / previous.time
+      comp = ratio - 1
+      let suffix = comp < 0 ? '% faster' : '% slower'
+      vs = round(comp * 100, 2) + suffix
+    }
+    p.addRow({ test: key, ...value, vs }, { color: comp > 0.1 ? 'red' : comp < -0.1 ? 'green' : undefined })
+  })
+
+  p.printTable()
+  fs.writeJSONSync(perfPath, { cpu, results }, { spaces: '  ' })
 })
