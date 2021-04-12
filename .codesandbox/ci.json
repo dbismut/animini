@@ -3,7 +3,8 @@
   "sandboxes": [
     "/demo/src/sandboxes/animini-drag",
     "/demo/src/sandboxes/animini-perf",
-    "/demo/src/sandboxes/animini-three"
+    "/demo/src/sandboxes/animini-three",
+    "/demo/src/sandboxes/animini-three-perf"
   ],
   "node": "14"
 }
