@@ -9,7 +9,8 @@
   ],
   "preconstruct": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "!packages/perf"
     ]
   },
   "scripts": {
@@ -23,7 +24,7 @@
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
     "demo:dev": "yarn workspace demo dev",
-    "test:perf": "jest perf.test.js"
+    "test:perf": "jest ./packages/perf/tests/*.js"
   },
   "size-limit": [
     {
@@ -98,5 +99,10 @@
     "jsxBracketSameLine": true,
     "tabWidth": 2,
     "printWidth": 120
+  },
+  "jest": {
+    "transformIgnorePatterns": [
+      "node_modules/(?!(@animini/core-latest)/)"
+    ]
   }
 }

@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@animini/core-latest@npm:@animini/core@^0.0.2":
+  version "0.0.2"
+  resolved "https://registry.yarnpkg.com/@animini/core/-/core-0.0.2.tgz#cd1b142d3286544f25e7185a10d8a079046199a2"
+  integrity sha512-j0PLqCruCwN/4vS4l7RdsrYIUeab4eObUrDsAgGZbMadbv3O2Yf3xWusHUjP+SLDHoX8UD8ow20+5zP3N280TQ==
+  dependencies:
+    memoize-one "^5.1.1"
+
 "@babel/code-frame@7.12.11":
   version "7.12.11"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.12.11.tgz#f4ad435aa263db935b8f10f2c552d23fb716a63f"
@@ -1715,9 +1722,9 @@
     "@react-spring/types" "^9.1.0"
 
 "@react-three/drei@^4.1.4":
-  version "4.1.4"
-  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-4.1.4.tgz#696162e6ec959786ff698d03102938475f3c00a8"
-  integrity sha512-QprZjXxwavrVNC9V9Wi+1WXtqrcS0sFj2aixPdvnnrSHXGJx3ah0+GJ5gZoWk2r2c0FAuD7bJY6b95gZGtYYiA==
+  version "4.1.5"
+  resolved "https://registry.yarnpkg.com/@react-three/drei/-/drei-4.1.5.tgz#e237730972e5ceca0ee9f4c81de7805b30d35ef5"
+  integrity sha512-Zw582mKM6y/idOSuy2VTH8xcSBplKCd+IqFcyKfWmqeLa+xjjPeVh6Ov4mhwxeMidGijGJwzMxsHwvWsI2NKyg==
   dependencies:
     "@babel/runtime" "^7.11.2"
     "@react-spring/web" "^9.0.0-rc.3"
@@ -1728,16 +1735,16 @@
     lodash.pick "^4.4.0"
     react-merge-refs "^1.0.0"
     stats.js "^0.17.0"
-    three-stdlib "^1.1.4"
+    three-stdlib "^1.2.3"
     troika-three-text "^0.38.1"
     use-asset "^1.0.4"
     utility-types "^3.10.0"
     zustand "^3.0.3"
 
 "@react-three/fiber@^6.0.10":
-  version "6.0.10"
-  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-6.0.10.tgz#aa714035f1c85a1e33c10f9eb7176bd02d339a8d"
-  integrity sha512-/7Q2gv/Ht40rB8vZYxVkp61TP+Jp/5TVdv56jiTOH2XrAj4w+p5Cm1HwRsE9mWv8H2wCMAmxXnY7LUK6COE2Eg==
+  version "6.0.12"
+  resolved "https://registry.yarnpkg.com/@react-three/fiber/-/fiber-6.0.12.tgz#21f5a95e1bf65f3f40cd876c07139d8dcb5c1bf4"
+  integrity sha512-Zd9l2CTrzGvkqt7ZAu1/jlqEBqL0jPveAJStOCKDg5vv+anWX7zLHIj9EpunEz06gsPMtAxo61itd4+89EkwYw==
   dependencies:
     "@babel/runtime" "^7.13.10"
     react-merge-refs "^1.1.0"
@@ -2340,12 +2347,7 @@ acorn@^7.1.1, acorn@^7.4.0:
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-7.4.1.tgz#feaed255973d2e77555b83dbc08851a6c63520fa"
   integrity sha512-nQyp0o1/mNdbTO1PO6kHkwSrmgZ0MT/jCCpNiwbUjGoRN4dlBhqJtoQuCnEOKzgTVwg0ZWiCoQy6SxMebQVh8A==
 
-acorn@^8.0.4:
-  version "8.1.0"
-  resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.1.0.tgz#52311fd7037ae119cbb134309e901aa46295b3fe"
-  integrity sha512-LWCF/Wn0nfHOmJ9rzQApGnxnvgfROzGilS8936rqN/lfcYkY9MYZzdMqN+2NJ4SlTc+m5HiSa+kNfDtI64dwUA==
-
-acorn@^8.1.0:
+acorn@^8.0.4, acorn@^8.1.0:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-8.1.1.tgz#fb0026885b9ac9f48bac1e185e4af472971149ff"
   integrity sha512-xYiIVjNuqtKXMxlRMDc6mZUhXehod4a3gbZ1qRlM7icK4EbxUFNLhWoPblCvFtB2Y9CIqHP3CF/rdxLItaQv8g==
@@ -2996,15 +2998,15 @@ browserify-zlib@^0.2.0:
     pako "~1.0.5"
 
 browserslist@^4.0.0, browserslist@^4.14.5, browserslist@^4.16.3:
-  version "4.16.3"
-  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.3.tgz#340aa46940d7db878748567c5dea24a48ddf3717"
-  integrity sha512-vIyhWmIkULaq04Gt93txdh+j02yX/JzlyhLYbV3YQCn/zvES3JnY7TifHHvvr1w5hTDluNKMkV05cs4vy8Q7sw==
+  version "4.16.4"
+  resolved "https://registry.yarnpkg.com/browserslist/-/browserslist-4.16.4.tgz#7ebf913487f40caf4637b892b268069951c35d58"
+  integrity sha512-d7rCxYV8I9kj41RH8UKYnvDYCRENUlHRgyXy/Rhr/1BaeLGfiCptEdFE8MIrvGfWbBFNjVYx76SQWvNX1j+/cQ==
   dependencies:
-    caniuse-lite "^1.0.30001181"
-    colorette "^1.2.1"
-    electron-to-chromium "^1.3.649"
+    caniuse-lite "^1.0.30001208"
+    colorette "^1.2.2"
+    electron-to-chromium "^1.3.712"
     escalade "^3.1.1"
-    node-releases "^1.1.70"
+    node-releases "^1.1.71"
 
 bser@2.1.1:
   version "2.1.1"
@@ -3170,7 +3172,7 @@ caniuse-api@^3.0.0:
     lodash.memoize "^4.1.2"
     lodash.uniq "^4.5.0"
 
-caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001181:
+caniuse-lite@^1.0.0, caniuse-lite@^1.0.30001208:
   version "1.0.30001208"
   resolved "https://registry.yarnpkg.com/caniuse-lite/-/caniuse-lite-1.0.30001208.tgz#a999014a35cebd4f98c405930a057a0d75352eb9"
   integrity sha512-OE5UE4+nBOro8Dyvv0lfx+SRtfVIOM9uhKqFmJeUbGriqhhStgp1A0OyBpgy3OUF8AhYCT+PVwPC1gMl2ZcQMA==
@@ -3421,7 +3423,7 @@ color@^3.0.0:
     color-convert "^1.9.1"
     color-string "^1.5.4"
 
-colorette@^1.2.1, colorette@^1.2.2:
+colorette@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/colorette/-/colorette-1.2.2.tgz#cbcc79d5e99caea2dbf10eb3a26fd8b3e6acfa94"
   integrity sha512-MKGMzyfeuutC/ZJ1cba9NqcNpfeqMUcYmyF1ZFY6/Cn7CNSAKx6a+s48sqLqyAiZuaP2TcqMhoo+dlwFnVxT9w==
@@ -4127,7 +4129,7 @@ ecc-jsbn@~0.1.1:
     jsbn "~0.1.0"
     safer-buffer "^2.1.0"
 
-electron-to-chromium@^1.3.649:
+electron-to-chromium@^1.3.712:
   version "1.3.712"
   resolved "https://registry.yarnpkg.com/electron-to-chromium/-/electron-to-chromium-1.3.712.tgz#ae467ffe5f95961c6d41ceefe858fc36eb53b38f"
   integrity sha512-3kRVibBeCM4vsgoHHGKHmPocLqtFAGTrebXxxtgKs87hNUzXrX2NuS3jnBys7IozCnw7viQlozxKkmty2KNfrw==
@@ -7168,7 +7170,7 @@ node-notifier@^8.0.0:
     uuid "^8.3.0"
     which "^2.0.2"
 
-node-releases@^1.1.70:
+node-releases@^1.1.71:
   version "1.1.71"
   resolved "https://registry.yarnpkg.com/node-releases/-/node-releases-1.1.71.tgz#cb1334b179896b1c89ecfdd4b725fb7bbdfc7dbb"
   integrity sha512-zR6HoT6LrLCRBwukmrVbHv0EpEQjksO6GmFcZQQuCAy139BEsoVKPYnf3jongYW83fAa1torLGYwxxky/p28sg==
@@ -9603,10 +9605,10 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha1-f17oI66AUgfACvLfSoTsP8+lcLQ=
 
-three-stdlib@^1.1.4:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-1.2.2.tgz#1bab8bd648d92d2d7759639f42864fc16876f46c"
-  integrity sha512-fcr84rofXVSeEqf27zBGEju6ih/lcvRRFSTjbHvDfAYKUd0r7tFLwQOUJxW6K7Y/M3pBQMRS9RWllADWuYIJGg==
+three-stdlib@^1.2.3:
+  version "1.2.3"
+  resolved "https://registry.yarnpkg.com/three-stdlib/-/three-stdlib-1.2.3.tgz#58013a82e27e409b2592a97e35da8a1a39af67f0"
+  integrity sha512-wvQpSXIxzKo36KP1HikZE01kbUf0WOgkfj2e0eRWJPsfEnDmU0cHcqQirsZ80d4rrZyC2C6dFI9A7zWjwWBZoQ==
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@webgpu/glslang" "^0.0.15"
