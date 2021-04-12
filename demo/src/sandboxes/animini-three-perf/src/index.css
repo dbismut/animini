@@ -1,7 +1,13 @@
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: system-ui;
   min-height: 100vh;
-  background: linear-gradient(140deg, rgb(165, 142, 251), rgb(233, 191, 248));
   margin: 0;
 }
 
@@ -11,9 +17,15 @@ body {
   box-sizing: border-box;
 }
 
-pre {
-  max-width: 720px;
-  margin: 20px;
-  padding: 20px;
-  border: 10px solid black;
+.flex {
+  display: flex;
+  align-items: center;
+}
+
+.flex.fill {
+  height: 100%;
+}
+
+.flex.center {
+  justify-content: center;
 }
