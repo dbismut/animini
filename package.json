@@ -5,12 +5,12 @@
   "private": true,
   "workspaces": [
     "packages/*",
-    "demo"
+    "demo",
+    "perf"
   ],
   "preconstruct": {
     "packages": [
-      "packages/*",
-      "!packages/perf"
+      "packages/*"
     ]
   },
   "scripts": {
@@ -24,7 +24,7 @@
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
     "demo:dev": "yarn workspace demo dev",
-    "test:perf": "jest ./packages/perf/tests/*.js"
+    "test:perf": "jest ./perf/tests/*.js"
   },
   "size-limit": [
     {

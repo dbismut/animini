@@ -3,11 +3,11 @@ import path from 'path'
 import { Table } from 'console-table-printer'
 import si from 'systeminformation'
 
-import { Animated } from '../../core/src/animated/Animated'
-import { spring } from '../../core/src/algorithms'
-import { color } from '../../dom/src/adapters'
+import { Animated } from '../../packages/core/src/animated/Animated'
+import { spring } from '../../packages/core/src/algorithms'
+import { color } from '../../packages/dom/src/adapters'
 
-import { Animated as AnimatedLatest } from '../../../node_modules/@animini/core-latest/src/animated/Animated'
+import { Animated as AnimatedLatest } from '@animini/core-latest/src/animated/Animated'
 
 let sourceResults = {}
 let latestResults = {}
