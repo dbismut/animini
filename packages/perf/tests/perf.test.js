@@ -30,15 +30,9 @@ beforeAll(() => {
   latestResults = {}
 })
 
-function formatResults(obj) {
-  obj.timePerItr = round(obj.time / obj.iterations)
-  obj.time = round(obj.time, 1)
-  obj.iterations = kFormat(obj.iterations, 1)
-}
-
 function run(label, cb, runs = 100) {
-  const source = { time: 0, iterations: 0 }
-  const latest = { time: 0, iterations: 0 }
+  const source = { time: 0, iterations: 0, runs }
+  const latest = { time: 0, iterations: 0, runs }
 
   for (let i = 0; i < runs; i++) {
     const useSourceFirst = Math.random() < 0.5
@@ -52,8 +46,11 @@ function run(label, cb, runs = 100) {
     })
   }
 
-  formatResults(source)
-  formatResults(latest)
+  source.timePerItr = source.time / source.iterations
+  latest.timePerItr = latest.time / latest.iterations
+
+  const ratio = source.timePerItr / latest.timePerItr
+  source.vs = ratio - 1
 
   Object.assign(sourceResults, { [label]: source })
   Object.assign(latestResults, { [label]: latest })
@@ -100,23 +97,25 @@ bench('spring color', 1800, 5000, (useSource) =>
   animatedBench(useSource, spring, { from: '#ff0000', to: '#000eac', adapter: color })
 )
 
+function formatResults(results) {
+  const r = {}
+  r['runs'] = kFormat(results.runs)
+  r['iterations'] = kFormat(results.iterations)
+  r['time (ms)'] = round(results.time, 1)
+  r['t/itr (ns)'] = round((results.time / results.iterations) * 1000)
+  r['vs latest'] = round(results.vs * 100, 2) + (results.vs < 0 ? '% faster' : '% slower')
+  return r
+}
+
 afterAll(async () => {
   const perfPath = path.resolve(__dirname, `logs/perf-${new Date().toISOString()}.log.json`)
   const cpu = await si.cpu()
   const p = new Table()
 
-  Object.entries(sourceResults).forEach(([key, value]) => {
-    const latest = latestResults[key]
-    let comp = 0
-    const ratio = value.time / latest.time
-    comp = ratio - 1
-    let suffix = comp < 0 ? '% faster' : '% slower'
-    const vs = round(comp * 100, 2) + suffix
+  Object.entries(sourceResults).forEach(([key, source]) => {
+    const results = formatResults(source)
 
-    p.addRow(
-      { test: key, ...value, 'vs latest': vs },
-      { color: comp > 0.1 ? 'red' : comp < -0.1 ? 'green' : undefined }
-    )
+    p.addRow({ test: key, ...results }, { color: source.vs > 0.1 ? 'red' : source.vs < -0.1 ? 'green' : undefined })
   })
 
   p.printTable()
