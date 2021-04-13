@@ -12,8 +12,8 @@ import { Animated as AnimatedLatest } from '../../../node_modules/@animini/core-
 let sourceResults = {}
 let latestResults = {}
 
-function getResults(useSource) {
-  return useSource ? sourceResults : latestResults
+function kFormat(num) {
+  return Math.abs(num) > 999 ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'K' : Math.sign(num) * Math.abs(num)
 }
 
 function getAnimated(useSource, ...args) {
@@ -30,23 +30,34 @@ beforeAll(() => {
   latestResults = {}
 })
 
+function formatResults(obj) {
+  obj.timePerItr = round(obj.time / obj.iterations)
+  obj.time = round(obj.time, 1)
+  obj.iterations = kFormat(obj.iterations, 1)
+}
+
 function run(label, cb, runs = 100) {
-  let timeSource
-  ;[false, true].forEach((useSource) => {
-    const start = performance.now()
-    let iterations = 0
-    for (let i = 0; i < runs; i++) {
-      iterations += cb(useSource)
-    }
-    const time = performance.now() - start
-    if (useSource) timeSource = time
-    const timePerRun = round(time / runs)
-    const iterationsPerRun = iterations / runs
-    Object.assign(getResults(useSource), {
-      [label]: { time: round(time, 1), timePerRun, iterations, iterationsPerRun },
+  const source = { time: 0, iterations: 0 }
+  const latest = { time: 0, iterations: 0 }
+
+  for (let i = 0; i < runs; i++) {
+    const useSourceFirst = Math.random() < 0.5
+    ;[useSourceFirst, !useSourceFirst].forEach((useSource) => {
+      const start = performance.now()
+      const iterations = cb(useSource)
+      const time = performance.now() - start
+      const obj = useSource ? source : latest
+      obj.iterations += iterations
+      obj.time += time
     })
-  })
-  return timeSource
+  }
+
+  formatResults(source)
+  formatResults(latest)
+
+  Object.assign(sourceResults, { [label]: source })
+  Object.assign(latestResults, { [label]: latest })
+  return source.time
 }
 
 function bench(label, limit, runs, cb) {
@@ -73,7 +84,6 @@ function animatedBench(
 }
 
 bench('lerp int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, undefined, { limit: 10 }))
-
 bench('spring int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, spring, { limit: 10 }))
 bench('spring array (10 itr.)', 600, 5000, (useSource) =>
   animatedBench(useSource, spring, { limit: 10, from: [0, 0, 0], to: [100, 200, 300] })
@@ -90,9 +100,8 @@ bench('spring color', 1800, 5000, (useSource) =>
   animatedBench(useSource, spring, { from: '#ff0000', to: '#000eac', adapter: color })
 )
 
-const perfPath = path.resolve(__dirname, `perf-${Date.now()}.log.json`)
-
 afterAll(async () => {
+  const perfPath = path.resolve(__dirname, `logs/perf-${new Date().toISOString()}.log.json`)
   const cpu = await si.cpu()
   const p = new Table()
 
@@ -111,5 +120,6 @@ afterAll(async () => {
   })
 
   p.printTable()
+  fs.ensureFileSync(perfPath)
   fs.writeJSONSync(perfPath, { cpu, results: sourceResults }, { spaces: '  ' })
 })
