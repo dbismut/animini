@@ -5,8 +5,10 @@
   "private": true,
   "dependencies": {
     "@animini/core-latest": "npm:@animini/core@latest",
+    "benchmark": "^2.1.4",
     "console-table-printer": "^2.8.2",
     "fs-extra": "^9.1.0",
+    "microtime": "^3.0.0",
     "systeminformation": "^5.6.12"
   }
 }
