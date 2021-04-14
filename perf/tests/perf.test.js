@@ -1,5 +1,10 @@
+/**
+ * @jest-environment node
+ */
+
 import fs from 'fs-extra'
 import path from 'path'
+import microtime from 'microtime'
 import { Table } from 'console-table-printer'
 import si from 'systeminformation'
 
@@ -37,9 +42,9 @@ function run(label, cb, runs = 100) {
   for (let i = 0; i < runs; i++) {
     const useSourceFirst = Math.random() < 0.5
     ;[useSourceFirst, !useSourceFirst].forEach((useSource) => {
-      const start = performance.now()
+      const start = microtime.now()
       const iterations = cb(useSource)
-      const time = performance.now() - start
+      const time = microtime.now() - start
       const obj = useSource ? source : latest
       obj.iterations += iterations
       obj.time += time
@@ -59,7 +64,7 @@ function run(label, cb, runs = 100) {
 
 function bench(label, limit, runs, cb) {
   it(`${label} should run faster than ${limit}ms`, () => {
-    expect(run(label, cb, runs)).toBeLessThan(limit)
+    expect(run(label, cb, runs)).toBeLessThan(limit * 1000)
   })
 }
 
@@ -79,6 +84,19 @@ function animatedBench(
   }
   return iterations
 }
+
+// const suite = new Benchmark.Suite()
+// suite
+//   .add('spring int (10 itr.) true', function () {
+//     animatedBench(true, undefined, { limit: 10 })
+//   })
+//   .add('spring int (10 itr.) false', function () {
+//     animatedBench(false, undefined, { limit: 10 })
+//   })
+//   .on('complete', function () {
+//     console.log('Fastest is ', this)
+//   })
+//   .run()
 
 bench('lerp int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, undefined, { limit: 10 }))
 bench('spring int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, spring, { limit: 10 }))
@@ -101,8 +119,8 @@ function formatResults(results) {
   const r = {}
   r['runs'] = kFormat(results.runs)
   r['iterations'] = kFormat(results.iterations)
-  r['time (ms)'] = round(results.time, 1)
-  r['t/itr (ns)'] = round((results.time / results.iterations) * 1000)
+  r['time (ms)'] = round(results.time / 1000, 1)
+  r['t/itr (ns)'] = round(results.time / results.iterations)
   r['vs latest'] = round(results.vs * 100, 2) + (results.vs < 0 ? '% faster' : '% slower')
   return r
 }
