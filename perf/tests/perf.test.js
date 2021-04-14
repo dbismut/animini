@@ -85,19 +85,6 @@ function animatedBench(
   return iterations
 }
 
-// const suite = new Benchmark.Suite()
-// suite
-//   .add('spring int (10 itr.) true', function () {
-//     animatedBench(true, undefined, { limit: 10 })
-//   })
-//   .add('spring int (10 itr.) false', function () {
-//     animatedBench(false, undefined, { limit: 10 })
-//   })
-//   .on('complete', function () {
-//     console.log('Fastest is ', this)
-//   })
-//   .run()
-
 bench('lerp int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, undefined, { limit: 10 }))
 bench('spring int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, spring, { limit: 10 }))
 bench('spring array (10 itr.)', 600, 5000, (useSource) =>

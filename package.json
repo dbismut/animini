@@ -24,7 +24,8 @@
     "tsc": "tsc --noEmit",
     "size": "yarn size-limit",
     "demo:dev": "yarn workspace demo dev",
-    "test:perf": "jest ./perf/tests/*.js"
+    "test:perf": "jest ./perf/tests/perf.*.js",
+    "test:bench": "jest ./perf/tests/bench.*.js"
   },
   "size-limit": [
     {
