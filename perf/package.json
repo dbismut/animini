@@ -4,6 +4,9 @@
   "keywords": [],
   "private": true,
   "dependencies": {
-    "@animini/core-latest": "npm:@animini/core@latest"
+    "@animini/core-latest": "npm:@animini/core@latest",
+    "console-table-printer": "^2.8.2",
+    "fs-extra": "^9.1.0",
+    "systeminformation": "^5.6.12"
   }
 }
