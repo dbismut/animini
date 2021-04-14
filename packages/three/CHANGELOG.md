@@ -1,5 +1,12 @@
 # @animini/three
 
+## 0.0.4
+
+### Patch Changes
+
+- Updated dependencies [748a414]
+  - @animini/core@0.0.4
+
 ## 0.0.3
 
 ### Patch Changes
