@@ -28,10 +28,3 @@ export function map(obj, iterator) {
   }
   return iterator(obj, -1)
 }
-
-export function getset(self, key, getter, setter) {
-  const obj = {}
-  if (getter) obj.get = getter
-  if (setter) obj.set = setter
-  if (getter) Object.defineProperty(self, key, obj)
-}
