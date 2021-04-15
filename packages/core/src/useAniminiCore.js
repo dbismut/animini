@@ -4,7 +4,6 @@ import { GlobalLoop } from './FrameLoop'
 
 export function useAniminiCore(target, elementPayload, fn) {
   const loop = target.loop || GlobalLoop
-  const rafId = useRef()
 
   const el = useRef(null)
   const rawValues = useRef({})
@@ -42,7 +41,7 @@ export function useAniminiCore(target, elementPayload, fn) {
         animated.start(to[key], typeof config === 'function' ? config(key) : config)
         idle &= animated.idle
       }
-      if (!idle) rafId.current = loop.start(update)
+      if (!idle) loop.start(update)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [update, fn, animations]
