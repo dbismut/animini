@@ -1,5 +1,6 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './animated/Animated'
+import { Motion } from './animated/Motion'
 import { GlobalLoop } from './FrameLoop'
 
 export function useAniminiCore(target, elementPayload, fn) {
@@ -8,21 +9,21 @@ export function useAniminiCore(target, elementPayload, fn) {
   const el = useRef(null)
   const rawValues = useRef({})
   const animations = useMemo(() => new Map(), [])
-
-  useEffect(() => {
-    animations.forEach((animated) => animated.setFn(fn))
-  }, [fn, animations])
+  const motions = useMemo(() => new Map(), [])
 
   const update = useCallback(() => {
     if (!el.current) return
 
     let idle = true
+    motions.forEach((motion) => {
+      motion.update()
+    })
     animations.forEach((animated, key) => {
-      animated.update()
       rawValues.current[key] = animated.value
       animated.onUpdate?.(el.current, key)
       idle &= animated.idle
     })
+
     target.setValues?.(rawValues.current, el.current, elementPayload)
     if (idle) loop.stop(update)
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -34,13 +35,23 @@ export function useAniminiCore(target, elementPayload, fn) {
       for (let key in to) {
         if (!animations.has(key)) {
           const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, elementPayload)
-          const animated = new Animated(value, fn, adapter, loop)
+          const animated = new Animated(value, adapter)
           animations.set(key, animated)
         }
         const animated = animations.get(key)
-        animated.start(to[key], typeof config === 'function' ? config(key) : config)
+        animated.to = to[key]
+
+        const _config = typeof config === 'function' ? config(key) : config
+        const configKey = JSON.stringify(_config)
+        if (!motions.has(configKey)) {
+          motions.set(configKey, new Motion(fn, _config, loop))
+        }
+        const motion = motions.get(configKey)
+        motion.attach(animated)
+        motion.start()
         idle &= animated.idle
       }
+      loop.start(update)
       if (!idle) loop.start(update)
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
