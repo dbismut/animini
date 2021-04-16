@@ -8,7 +8,7 @@
     "animejs": "^3.2.1",
     "framer-motion": "^4.1.3",
     "gsap": "^3.6.1",
-    "leva": "^0.9.4",
+    "leva": "*",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tinycolor2": "^1.4.2",

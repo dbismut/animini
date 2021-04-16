@@ -3,9 +3,9 @@
   "version": "1.0.0",
   "main": "src/index.jsx",
   "dependencies": {
-    "@leva-ui/plugin-spring": "0.9.3",
+    "@leva-ui/plugin-spring": "*",
     "@animini/dom": "*",
-    "leva": "^0.9.4",
+    "leva": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",

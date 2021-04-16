@@ -6,16 +6,16 @@ export function FrameLoop() {
   this.rafId = 0
   this.running = false
   this.queue = new Set()
-  this.time = {}
+  this.time = { start: 0, elapsed: 0, delta: 0, _elapsed: 0 }
 }
 
 FrameLoop.prototype.tick = function () {
+  if (!this.running) return
   this.update()
   this.rafId = window.requestAnimationFrame(this.tick.bind(this))
 }
 
 FrameLoop.prototype.update = function () {
-  if (!this.running) return
   this.updateTime()
   this.queue.forEach((cb) => cb())
 }
@@ -23,8 +23,8 @@ FrameLoop.prototype.update = function () {
 FrameLoop.prototype.run = function () {
   if (!this.running) {
     this.time = { start: now(), elapsed: 0, delta: 0, _elapsed: 0 }
-    this.tick()
     this.running = true
+    this.tick()
   }
 }
 

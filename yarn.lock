@@ -1369,12 +1369,12 @@
     "@types/yargs" "^15.0.0"
     chalk "^4.0.0"
 
-"@leva-ui/plugin-spring@0.9.3":
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/@leva-ui/plugin-spring/-/plugin-spring-0.9.3.tgz#9c0d81713dfbe93001d32dfb58a087644b0f6c15"
-  integrity sha512-MV/jy19DTj+YF98fzjnA75Ai8S2tny7iDgtQ29dOSTTamgkqcPwJCgPY94ScXqifPNS/3te4NITcrfm+lCo+gQ==
+"@leva-ui/plugin-spring@*":
+  version "0.9.7"
+  resolved "https://registry.yarnpkg.com/@leva-ui/plugin-spring/-/plugin-spring-0.9.7.tgz#074843bae0ee3e483a94de8df1d246ee999cb8f0"
+  integrity sha512-FDRB9gICMyiOft9ptAQxifGGHtDLffP9Jbj8CaEg7+YzKDhLVxawNuNxqJDs8Y+tMO6KOcG7T3PNApqKsKO6CQ==
   dependencies:
-    "@react-spring/web" "9.0.0"
+    "@react-spring/web" "9.1.1"
 
 "@manypkg/find-root@^1.1.0":
   version "1.1.0"
@@ -1671,7 +1671,7 @@
   dependencies:
     "@babel/runtime" "^7.13.10"
 
-"@react-spring/animated@^9.0.0", "@react-spring/animated@^9.1.0":
+"@react-spring/animated@^9.1.0":
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.1.0.tgz#23f44535850ecc14f6e3e8364f9d996419eb6139"
   integrity sha512-urJiaSYy+rXG38Zqxsr0S81vZwwufzUpQ4++Zy/ig6l3EudsTJuwrzdbFQgmznIeuG7A7m4fhCcljPWRZLx4pA==
@@ -1679,7 +1679,15 @@
     "@react-spring/shared" "^9.1.0"
     "@react-spring/types" "^9.1.0"
 
-"@react-spring/core@^9.0.0", "@react-spring/core@^9.1.0":
+"@react-spring/animated@~9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@react-spring/animated/-/animated-9.1.1.tgz#996db774bbc42fb37838580674c4ade4f2d99f20"
+  integrity sha512-u8Assg5uySwqyoeb1f7eBAUSl8sleJTewdfhVi1EtcM9ngU2Snhcp6snF8NGxvf4gZp5z7v+Dfx3KdB2V8NnXQ==
+  dependencies:
+    "@react-spring/shared" "~9.1.1"
+    "@react-spring/types" "~9.1.1"
+
+"@react-spring/core@^9.1.0":
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/@react-spring/core/-/core-9.1.0.tgz#5e6bf6f3bbe841ca8a5929d85c3e2ada93c1ac77"
   integrity sha512-Z50lNlAEOJMUlhT9hoKPzkuNbq8zOsGePztTI4qPr2rzaI2/wWOYeHn+LtgAHGAcOfwcOamWh9ySBTNtqefPNA==
@@ -1688,7 +1696,16 @@
     "@react-spring/shared" "^9.1.0"
     "@react-spring/types" "^9.1.0"
 
-"@react-spring/shared@^9.0.0", "@react-spring/shared@^9.1.0":
+"@react-spring/core@~9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@react-spring/core/-/core-9.1.1.tgz#0d109c9f921bf957dcb65340a4192061f28e5cb2"
+  integrity sha512-flHeLN56idxQ1YIpUYY1m3r2ZAM2xg7Zb/pHBFSCbnOKP7TtlhAAOfmrabERqaThmrqkFKiq9FjyF76d3OjE5g==
+  dependencies:
+    "@react-spring/animated" "~9.1.1"
+    "@react-spring/shared" "~9.1.1"
+    "@react-spring/types" "~9.1.1"
+
+"@react-spring/shared@^9.1.0":
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/@react-spring/shared/-/shared-9.1.0.tgz#8f5fa5b8c6f54767cf6a7f455bf7eb96053a5e4c"
   integrity sha512-lpCvinUajnCaI68hN/heWWB8P0WFyZacboHir1P8fu3d9vFOzHSUIJHJffqAZxR3faPK2hEX7xnfjIJA+bbI+Q==
@@ -1696,20 +1713,33 @@
     "@react-spring/types" "^9.1.0"
     rafz "^0.1.14"
 
-"@react-spring/types@^9.0.0", "@react-spring/types@^9.1.0":
+"@react-spring/shared@~9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@react-spring/shared/-/shared-9.1.1.tgz#9f7b1a4051a0c71e0167805e7d499071b2aabddc"
+  integrity sha512-GA9A9l5JxC50eDTDPu5IDUMhQ4MiBrXd3ZdlI6/wUCgAsZ1wPx77sxaccomxlUomRet0IUcXCEKcL1Flax7ZMQ==
+  dependencies:
+    "@react-spring/types" "~9.1.1"
+    rafz "^0.1.14"
+
+"@react-spring/types@^9.1.0":
   version "9.1.0"
   resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.1.0.tgz#9dff9b78ad3dd9bfbb21abf94df57d65de5ee1cb"
   integrity sha512-cPlkjzX3W/fotoztDJI+TzjMDVZ+xiD9sRbM2lEJShngoup3Yoezd1yKvvlbT2aIDxXNdqToja7BvL1H1gThZA==
 
-"@react-spring/web@9.0.0":
-  version "9.0.0"
-  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.0.0.tgz#c7fe40dbad755856fb344dc41e5822c56078b93c"
-  integrity sha512-A75WR7eYUS1p80KQcmVOakWwXCZ/+bnGd4FhKfAm8E4Kl//ZvPXVMuOuPP8hOsxy5sd7FZkbIULOCsRvXHFRQg==
+"@react-spring/types@~9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@react-spring/types/-/types-9.1.1.tgz#0e53317018b81c4716a776e65477c8b0ee62758e"
+  integrity sha512-GaesYowey+nmDw/yhZ5jErEH2UaDl4jxax8aQtW5h3OpNu/QS8swoEn/jxQgffLb0n6gjsER7QyIx/dmZIWlyw==
+
+"@react-spring/web@9.1.1":
+  version "9.1.1"
+  resolved "https://registry.yarnpkg.com/@react-spring/web/-/web-9.1.1.tgz#f7ff454631d0e495887ed4631672982e1e6fb500"
+  integrity sha512-py4c/Agqz9Unf+Apame29XYTLqHnKXSwJA6Q44jcNtHRFMuRjIpCyhS13C1ZI5PcJT0g9b8CvtMQFiShne8wNQ==
   dependencies:
-    "@react-spring/animated" "^9.0.0"
-    "@react-spring/core" "^9.0.0"
-    "@react-spring/shared" "^9.0.0"
-    "@react-spring/types" "^9.0.0"
+    "@react-spring/animated" "~9.1.1"
+    "@react-spring/core" "~9.1.1"
+    "@react-spring/shared" "~9.1.1"
+    "@react-spring/types" "~9.1.1"
 
 "@react-spring/web@^9.0.0-rc.3", "@react-spring/web@^9.1.0":
   version "9.1.0"
@@ -1864,17 +1894,17 @@
     webpack "^4.44.1"
     webpack-bundle-analyzer "^4.4.0"
 
-"@stitches/core@^0.1.5":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.5.tgz#07c46b5a47ce5dd979c6fe72ac2bb7b1a0575bbd"
-  integrity sha512-WNq91AWOvUR8Hly1nIRKSZA0YKnKGY0jKiHghkVTe8UdKj6uMalzblmV1Es4io4Jx6mjUxGdwqw30Lh3dXjJ4A==
+"@stitches/core@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@stitches/core/-/core-0.1.7.tgz#132d6e3bab1b3af44b6c67980d7e2d23b64703d0"
+  integrity sha512-OSo1qS0QlBJ/Uyc6h2luc8pzFR2qNK7ehWUtRDIegAhq5phvVw9B6oEc9E7HDf6ku8UEzCd/BVwXiUSjknMQDQ==
 
-"@stitches/react@^0.1.4":
-  version "0.1.5"
-  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.5.tgz#d60959131ed5529bbd516c92bffdc65ec545f21a"
-  integrity sha512-0G7oBmprxSgBwgmgnG3WB/OAm4rIh0E/G/3YTLdFAHVh7dnUMa/nvkUKL7oTxhUGhGi4eqx+yaQYm3wh2z0L3w==
+"@stitches/react@^0.1.7":
+  version "0.1.7"
+  resolved "https://registry.yarnpkg.com/@stitches/react/-/react-0.1.7.tgz#9e307b34a8b0c40d2c71907b686692ef881e9d37"
+  integrity sha512-oq+ll96qYrOmKeOGL+7fpIW9Gbxaw56kzdU7OcKWLwxaborOLHimmQELD0UXy9ZfMQ5EvgjbXPxussgUR8qrUg==
   dependencies:
-    "@stitches/core" "^0.1.5"
+    "@stitches/core" "^0.1.7"
 
 "@szmarczak/http-timer@^1.1.2":
   version "1.1.2"
@@ -6524,23 +6554,23 @@ latest-version@^5.0.0:
   dependencies:
     package-json "^6.3.0"
 
-leva@0.9.3:
-  version "0.9.3"
-  resolved "https://registry.yarnpkg.com/leva/-/leva-0.9.3.tgz#d222ce3ce6bd48a3da4e45f0b8f9752c927bdfe2"
-  integrity sha512-VQiiyjmpx3WyX6evfTS+rfYKD2nU4lpjqcfauDDiF0KkuFCyy7m7n+ZetF+HKz5YBF51uJIRyfWkBUqz/yOovQ==
+leva@*:
+  version "0.9.8"
+  resolved "https://registry.yarnpkg.com/leva/-/leva-0.9.8.tgz#708c43662435642d10fd53979fa3f26ca4ba7a5a"
+  integrity sha512-vL5mTcPXrkvsdLL1q1j+jkBGa85vTS6PE1wPdm2lDOSoYakCEs2JIv1L6gFQOG1qBjskQe4PkfOnNSL2NaDcOw==
   dependencies:
     "@radix-ui/react-portal" "^0.0.11"
     "@radix-ui/react-tooltip" "0.0.16"
-    "@stitches/react" "^0.1.4"
+    "@stitches/react" "^0.1.7"
     "@welldone-software/why-did-you-render" "^6.1.1"
     dequal "^2.0.2"
     merge-value "^1.0.0"
-    react-colorful "^5.1.1"
+    react-colorful "^5.1.2"
     react-dropzone "^11.3.2"
     react-use-gesture "^9.1.3"
     tinycolor2 "^1.4.2"
     v8n "^1.3.3"
-    zustand "^3.3.3"
+    zustand "^3.4.1"
 
 leven@^3.1.0:
   version "3.1.0"
@@ -8381,7 +8411,7 @@ rc@^1.2.8:
     minimist "^1.2.0"
     strip-json-comments "~2.0.1"
 
-react-colorful@^5.1.1:
+react-colorful@^5.1.2:
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/react-colorful/-/react-colorful-5.1.2.tgz#5cb1506b8f9104b88d02d34984a36c2d1e477e9e"
   integrity sha512-FRt9jz6xjiPqQ6bIAQ26kd0oJhHbGBwsA4BDz/F8FDCFuQJDiEl0wVUARNiqRyvQjwfKuhM42P/bMYI0l92hRw==
@@ -10511,7 +10541,7 @@ zstddec@^0.0.2:
   resolved "https://registry.yarnpkg.com/zstddec/-/zstddec-0.0.2.tgz#57e2f28dd1ff56b750e07d158a43f0611ad9eeb4"
   integrity sha512-DCo0oxvcvOTGP/f5FA6tz2Z6wF+FIcEApSTu0zV5sQgn9hoT5lZ9YRAKUraxt9oP7l4e8TnNdi8IZTCX6WCkwA==
 
-zustand@^3.0.3, zustand@^3.3.3:
+zustand@^3.0.3, zustand@^3.3.3, zustand@^3.4.1:
   version "3.4.1"
   resolved "https://registry.yarnpkg.com/zustand/-/zustand-3.4.1.tgz#ff1bc8480facda3a4329510b8164aa5b821be133"
   integrity sha512-Kb91vSjy5vwBQ/PQ1a5GE6naS3gCxCgpkujT9zqZSO85+gnvmzgqraMW3ao1I0jR4PwHBXtLTf26r9j7EXoUiQ==
