@@ -2,9 +2,9 @@ import { useRef, useEffect } from 'react'
 import { useAniminiCore } from '@animini/core'
 import * as target from './dom'
 
-export function useAnimini(fn) {
+export function useAnimini(motion) {
   const computedStyle = useRef(null)
-  const [el, api] = useAniminiCore(target, computedStyle, fn)
+  const [el, api] = useAniminiCore(motion, target, computedStyle)
 
   useEffect(() => {
     computedStyle.current = window.getComputedStyle(el.current)

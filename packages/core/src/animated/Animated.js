@@ -1,24 +1,15 @@
 import { AnimatedValue } from './AnimatedValue'
-import { each, map, lerp } from '../utils'
+import { getAvailableController } from './MotionController'
+import { each, map } from '../utils'
 
-function lerpFn() {
-  return lerp(this.value, this.target, this.config.factor || 0.05)
-}
-
-export function Animated(value, fn, adapter, loop) {
-  this.config = {}
-  this.time = {}
-  this.loop = loop
-  this.adapter = adapter
-  this.onUpdate = adapter?.onUpdate
-  this.parse = adapter?.parse
-
-  this._movingChildren = 0
-  this.setFn(fn)
-
+export function Animated(value, adapter, frameLoop) {
+  this._adapter = adapter
   this._value = adapter?.parseInitial ? adapter.parseInitial(value) : value
+  this._children = map(this._value, (_v, i) => new AnimatedValue(this, i))
+  this._movingChildren = 0
 
-  this.children = map(this._value, (_v, i) => new AnimatedValue(this, i))
+  this.onUpdate = adapter?.onUpdate
+  this._frameLoop = frameLoop
 }
 
 Animated.prototype = {
@@ -26,43 +17,36 @@ Animated.prototype = {
     return this._movingChildren <= 0
   },
   get value() {
-    return this.adapter?.format ? this.adapter.format(this._value) : this._value
+    return this._adapter?.format ? this._adapter.format(this._value) : this._value
   },
 }
 
-Animated.prototype.setFn = function (fn = lerpFn) {
-  if (typeof fn === 'function') {
-    this.fn = fn
-    this.onStart = undefined
-  } else {
-    this.fn = fn.update
-    if (fn.onStart) this.onStart = fn.onStart
-    if (fn.memo) this.memo = fn.memo()
-  }
-}
-
-Animated.prototype.start = function (target, config = {}) {
-  this.time.elapsed = 0
-  this.target = this.parse ? this.parse(target) : target
-  this._movingChildren = 0
+Animated.prototype.start = function (to, config) {
+  this.to = this._adapter?.parse ? this._adapter.parse(to) : to
   this.config = config
+  this._ctrl = undefined
 
-  if (!this.config.immediate) {
-    this.onStart && this.onStart()
-  }
-  each(this.children, (child) => {
+  this._movingChildren = 0
+  each(this._children, (child) => {
     child.start()
     if (!child.idle) this._movingChildren++
   })
 }
 
 Animated.prototype.update = function () {
-  this.time.elapsed += this.loop.time.delta
-  this.time.delta = this.loop.time.delta
+  if (this.idle) return
 
-  each(this.children, (child) => {
+  const immediate = this.config.immediate
+  if (!immediate) {
+    if (!this._ctrl) {
+      this._ctrl = getAvailableController(this.config, this._frameLoop)
+    }
+    this._ctrl.update()
+  }
+
+  each(this._children, (child) => {
     if (!child.idle) {
-      child.update()
+      child.update(immediate, this._ctrl?.getProgress, this._frameLoop.time.delta)
       if (child.idle) this._movingChildren--
     }
   })
