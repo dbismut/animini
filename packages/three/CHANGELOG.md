@@ -1,5 +1,13 @@
 # @animini/three
 
+## 0.0.5
+
+### Patch Changes
+
+- 098cac2: feat: one controller for all simultaneous values
+- Updated dependencies [098cac2]
+  - @animini/core@0.0.5
+
 ## 0.0.4
 
 ### Patch Changes
