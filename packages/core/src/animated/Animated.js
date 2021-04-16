@@ -33,10 +33,6 @@ Animated.prototype.start = function (to, config) {
   })
 }
 
-function immediateSolver() {
-  return 1
-}
-
 Animated.prototype.update = function () {
   if (this.idle) return
 
