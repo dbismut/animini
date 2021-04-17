@@ -1,9 +1,6 @@
 import { AnimatedValue } from './AnimatedValue'
-import { each, map, lerp } from '../utils'
-
-function lerpFn() {
-  return lerp(this.value, this.target, this.config.factor || 0.05)
-}
+import { each, map } from '../utils'
+import { lerp } from '../algorithms'
 
 export function Animated(value, fn, adapter, loop) {
   this.config = {}
@@ -30,15 +27,10 @@ Animated.prototype = {
   },
 }
 
-Animated.prototype.setFn = function (fn = lerpFn) {
-  if (typeof fn === 'function') {
-    this.fn = fn
-    this.onStart = undefined
-  } else {
-    this.fn = fn.update
-    if (fn.onStart) this.onStart = fn.onStart
-    if (fn.memo) this.memo = fn.memo()
-  }
+Animated.prototype.setFn = function (fn = lerp) {
+  this.fn = fn.update
+  if (fn.setup) this.setup = fn.setup
+  if (fn.memo) this.memo = fn.memo()
 }
 
 Animated.prototype.start = function (target, config = {}) {
@@ -48,7 +40,7 @@ Animated.prototype.start = function (target, config = {}) {
   this.config = config
 
   if (!this.config.immediate) {
-    this.onStart && this.onStart()
+    this.setup && this.setup()
   }
   each(this.children, (child) => {
     child.start()

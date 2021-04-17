@@ -21,7 +21,7 @@ export function useAniminiCore(target, elementPayload, fn) {
       animated.update()
       rawValues.current[key] = animated.value
       animated.onUpdate?.(el.current, key)
-      idle &= animated.idle
+      idle &&= animated.idle
     })
     target.setValues?.(rawValues.current, el.current, elementPayload)
     if (idle) loop.stop(update)

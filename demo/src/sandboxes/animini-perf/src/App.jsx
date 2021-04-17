@@ -42,7 +42,8 @@ export default function Perf() {
       const ts = performance.now()
       setClicked(true)
       setMove((m) => !m)
-      window.requestIdleCallback(() => {
+      const raf = window.requestIdleCallback || window.requestAnimationFrame
+      raf(() => {
         setClicked(false)
         console.log('TIME:', performance.now() - ts)
       })

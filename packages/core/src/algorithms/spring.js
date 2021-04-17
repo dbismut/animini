@@ -11,7 +11,7 @@ export const spring = {
   memo() {
     return memoizeOne(getSpringConfig)
   },
-  onStart() {
+  setup() {
     const { tension = 170, friction = 26, mass = 1, velocity } = this.config
     this._config = this.memo(tension, friction, mass, velocity)
   },
