@@ -1,3 +1,5 @@
+import { clamp } from '../utils'
+
 export function AnimatedValue(parent, index) {
   this.distance = this.velocity = 0
   this.idle = true
@@ -35,7 +37,7 @@ AnimatedValue.prototype.start = function () {
     this.value = this.target
   } else if (!this.idle) {
     this.distance = this.target - this.value
-    this.precision = Math.min(1, Math.abs(this.distance) * 0.001)
+    this.precision = clamp(Math.abs(this.distance), 0.001, 1)
   }
 }
 
