@@ -6,7 +6,7 @@ export function FrameLoop() {
   this.rafId = 0
   this.running = false
   this.queue = new Set()
-  this.time = { start: 0, elapsed: 0, delta: 0, _elapsed: 0 }
+  this.time = {}
 }
 
 FrameLoop.prototype.tick = function () {

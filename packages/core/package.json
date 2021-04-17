@@ -1,6 +1,6 @@
 {
   "name": "@animini/core",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "small animation lib",
   "keywords": [],
   "main": "dist/animini-core.cjs.js",

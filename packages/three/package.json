@@ -1,6 +1,6 @@
 {
   "name": "@animini/three",
-  "version": "0.0.5",
+  "version": "0.0.6",
   "description": "animini target for three",
   "keywords": [],
   "main": "dist/animini-three.cjs.js",
@@ -18,7 +18,7 @@
     "three": ">=0.127.0"
   },
   "dependencies": {
-    "@animini/core": "^0.0.5"
+    "@animini/core": "^0.0.6"
   },
   "devDependencies": {
     "@react-three/fiber": "^6.0.10",

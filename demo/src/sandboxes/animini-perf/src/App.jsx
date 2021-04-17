@@ -36,13 +36,14 @@ export default function Perf() {
   const [move, setMove] = useState(false)
   const [clicked, setClicked] = useState(false)
   const { count, Model: Box } = useControls({
-    count: { value: 1000, min: 1, max: 4000 },
+    count: { value: 1000, min: 100, max: 4000 },
     Model: { options: { AniminiBox, AnimeBox, SpringBox, MotionBox } },
     Shuffle: button(() => {
       const ts = performance.now()
       setClicked(true)
       setMove((m) => !m)
-      window.requestIdleCallback(() => {
+      const raf = window.requestIdleCallback || window.requestAnimationFrame
+      raf(() => {
         setClicked(false)
         console.log('TIME:', performance.now() - ts)
       })
