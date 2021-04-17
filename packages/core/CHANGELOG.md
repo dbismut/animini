@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.0.6
+
+### Patch Changes
+
+- 891dbf7: revert mechanics
+
 ## 0.0.5
 
 ### Patch Changes
