@@ -18,10 +18,10 @@ yarn add @animini/three
 
 ```js
 import { useDrag } from 'react-use-gesture'
-import { useAnimini, spring } from '@animini/dom'
+import { useAnimini } from '@animini/dom'
 
 export default function App() {
-  const [ref, api] = useAnimini(spring) // leave useAnimini() to use default Lerp
+  const [ref, api] = useAnimini('spring') // leave useAnimini() to use default Lerp
 
   useDrag(
     ({ active, movement: [x, y] }) => {

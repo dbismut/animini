@@ -6,7 +6,7 @@
     "@react-three/drei": "^4.1.4",
     "@react-three/fiber": "^6.0.10",
     "@animini/three": "*",
-    "leva": "^0.9.4",
+    "leva": "*",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.3",
