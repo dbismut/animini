@@ -1,15 +1,22 @@
-import { lerp, clamp } from '../utils'
-
 export function AnimatedValue(parent, index) {
-  this.x0 = this.v0 = this.velocity = 0
+  this.distance = this.velocity = 0
   this.idle = true
   this.parent = parent
   this.index = index
 }
 
 AnimatedValue.prototype = {
-  get to() {
-    return this.index !== -1 ? this.parent.to[this.index] : this.parent.to
+  get fn() {
+    return this.parent.fn
+  },
+  get config() {
+    return this.parent.config
+  },
+  get time() {
+    return this.parent.time
+  },
+  get target() {
+    return this.index !== -1 ? this.parent.target[this.index] : this.parent.target
   },
   get value() {
     return this.index !== -1 ? this.parent._value[this.index] : this.parent._value
@@ -20,39 +27,34 @@ AnimatedValue.prototype = {
 }
 
 AnimatedValue.prototype.start = function () {
-  this.previousValue = this.from = this.value
-  this.idle = this.to === this.value
+  this.previousValue = this.value
+  this.idle = this.target === this.value
+  this.startVelocity = this.velocity
 
-  if (!this.idle) {
-    this.v0 = this.velocity
-    this.x0 = this.to - this.from
-    this.precision = clamp(Math.abs(this.x0) * 0.001, 0.001, 1)
+  if (this.config.immediate) {
+    this.value = this.target
+  } else if (!this.idle) {
+    this.distance = this.target - this.value
+    this.precision = Math.min(1, Math.abs(this.distance) * 0.001)
   }
 }
 
-AnimatedValue.prototype.update = function (immediate, getProgress, dt) {
+AnimatedValue.prototype.update = function () {
   if (this.idle) return
-  if (immediate) this.value = this.to
-
-  if (this.value === this.to) {
+  if (this.value === this.target) {
     this.idle = true
-    this.velocity = 0
     return
   }
 
   this.previousValue = this.value
-  const progress = getProgress(this)
+  this.value = this.fn()
 
-  this.value = lerp(this.from, this.to, progress)
-  this.velocity = (this.value - this.previousValue) / dt
+  this.velocity = (this.value - this.previousValue) / this.time.delta
 
   const isMoving = Math.abs(this.velocity) > this.precision
-  const isTravelling = Math.abs(this.to - this.value) > this.precision
+  const isTravelling = Math.abs(this.target - this.value) > this.precision
 
   this.idle = !isMoving && !isTravelling
 
-  if (this.idle) {
-    this.value = this.to
-    this.velocity = 0
-  }
+  if (this.idle) this.value = this.target
 }
