@@ -2,10 +2,10 @@
 # yarn lockfile v1
 
 
-"@animini/core-latest@npm:@animini/core@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@animini/core/-/core-0.0.3.tgz#bad8f687a20e9bdb014b3c569e4cbe350ded8635"
-  integrity sha512-M1WEw7SaF7KKgiNu0t/RC/mwPI4XLEaR4e2L+2v75jiX465A7zAB9JSijAAueGWK+uAsd/xXp4hZOd/Seb4AoA==
+"@animini/core-latest@npm:@animini/core@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@animini/core/-/core-0.0.4.tgz#9e51a83616e06943c0b154c1857fa39a1c014846"
+  integrity sha512-UalWoHz5xcmZyASCyHJyZmTGnSBkpUPr3n53trA6hnVMjzGEgoMpwRdofwHOU8b0ZXPouFajdd1uYaX/X0Kifw==
   dependencies:
     memoize-one "^5.1.1"
 
