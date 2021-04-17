@@ -2,12 +2,19 @@
 # yarn lockfile v1
 
 
-"@animini/core-latest@npm:@animini/core@^0.0.4":
-  version "0.0.4"
-  resolved "https://registry.yarnpkg.com/@animini/core/-/core-0.0.4.tgz#9e51a83616e06943c0b154c1857fa39a1c014846"
-  integrity sha512-UalWoHz5xcmZyASCyHJyZmTGnSBkpUPr3n53trA6hnVMjzGEgoMpwRdofwHOU8b0ZXPouFajdd1uYaX/X0Kifw==
+"@animini/core-latest@npm:@animini/core@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@animini/core/-/core-0.0.6.tgz#88ba3cb6c00642a1badcb5096003b1695100cda3"
+  integrity sha512-NmJCRP0ScoOSCb/vDYcu+KeNMnVDpW/3pJBe5FFa0Up4Jg4LIB3VjNehxI0+8q420GWfgXcnqeeKexRjWx5s/A==
   dependencies:
     memoize-one "^5.1.1"
+
+"@animini/dom-latest@npm:@animini/dom@^0.0.6":
+  version "0.0.6"
+  resolved "https://registry.yarnpkg.com/@animini/dom/-/dom-0.0.6.tgz#9b74770ddcf1e604435f7943e503cb54f5e060e2"
+  integrity sha512-ZP0EAcG+iA+U90m1XPDrIDHq1wORtcq9SRoO0aMVCVUDOv1K1XqnVCU0bTZeO4amnAC+dOk1He7xdlCxzyNh4g==
+  dependencies:
+    "@animini/core" "^0.0.6"
 
 "@babel/code-frame@7.12.11":
   version "7.12.11"

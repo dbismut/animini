@@ -7,23 +7,10 @@ import path from 'path'
 import microtime from 'microtime'
 import { Table } from 'console-table-printer'
 import si from 'systeminformation'
-
-import { Animated } from '../../packages/core/src/animated/Animated'
-import { color } from '../../packages/dom/src/adapters'
-
-import { Animated as AnimatedLatest } from '@animini/core-latest/src/animated/Animated'
-import { spring } from '@animini/core-latest/src/algorithms'
+import { animatedBench, round, kFormat } from './utils'
 
 let sourceResults = {}
 let latestResults = {}
-
-function kFormat(num) {
-  return Math.abs(num) > 999 ? Math.sign(num) * (Math.abs(num) / 1000).toFixed(1) + 'K' : Math.sign(num) * Math.abs(num)
-}
-
-function round(number, dec = 3) {
-  return Number(number.toFixed(dec))
-}
 
 beforeAll(() => {
   sourceResults = {}
@@ -63,55 +50,13 @@ function bench(label, limit, runs, cb) {
   })
 }
 
-function animateLatest({ motion, limit, from, to, config, adapter }) {
-  const loop = { time: { elapsed: 0, delta: 16 } }
-  const _motion = motion === 'spring' ? spring : undefined
-  const animated = new AnimatedLatest(from, _motion, adapter, loop)
-  animated.start(to, config)
-  let iterations = 0
-  while (!animated.idle && iterations < limit) {
-    iterations++
-    loop.time.elapsed += loop.time.delta
-    animated.update()
-  }
-
-  // console.log('LATEST', animated.value)
-
-  return iterations
-}
-
-function animateSource({ motion = 'lerp', limit, from, to, config, adapter }) {
-  const loop = { time: { elapsed: 0, delta: 16 } }
-  const animated = new Animated(from, adapter, loop)
-  config.motion = motion
-  animated.start(to, config)
-  let iterations = 0
-  while (!animated.idle && iterations < limit) {
-    iterations++
-    loop.time.elapsed += loop.time.delta
-    animated.update()
-  }
-
-  // console.log('SOURCE', animated.value)
-
-  return iterations
-}
-
-function animatedBench(
-  useSource,
-  { motion, limit = Infinity, from = 0, to = 1 + Math.random() * 1000, config = {}, adapter } = {}
-) {
-  if (useSource) return animateSource({ motion, limit, from, to, config, adapter })
-  return animateLatest({ motion, limit, from, to, config, adapter })
-}
-
 bench('lerp int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, { limit: 10 }))
 bench('spring int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource, { motion: 'spring', limit: 10 }))
 bench('spring array (10 itr.)', 600, 5000, (useSource) =>
   animatedBench(useSource, { motion: 'spring', limit: 10, from: [0, 0, 0], to: [100, 200, 300] })
 )
 bench('spring color (10 itr.)', 600, 5000, (useSource) =>
-  animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: color })
+  animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
 )
 bench('lerp int', 1500, 5000, (useSource) => animatedBench(useSource, { to: 10 }))
 bench('spring int', 600, 5000, (useSource) => animatedBench(useSource, { motion: 'spring', to: 10 }))
@@ -119,7 +64,7 @@ bench('spring array', 1800, 5000, (useSource) =>
   animatedBench(useSource, { motion: 'spring', from: [0, 0, 0], to: [100, 200, 300] })
 )
 bench('spring color', 1800, 5000, (useSource) =>
-  animatedBench(useSource, { motion: 'spring', from: '#ff0000', to: '#000eac', adapter: color })
+  animatedBench(useSource, { motion: 'spring', from: '#ff0000', to: '#000eac', adapter: 'color' })
 )
 
 function formatResults(results) {

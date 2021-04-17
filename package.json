@@ -100,7 +100,7 @@
   },
   "jest": {
     "transformIgnorePatterns": [
-      "node_modules/(?!(@animini/core-latest)/)"
+      "node_modules/(?!(@animini/.*-latest)/)"
     ]
   }
 }
