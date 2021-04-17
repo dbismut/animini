@@ -4,7 +4,7 @@
   "keywords": [],
   "private": true,
   "dependencies": {
-    "@animini/core-latest": "npm:@animini/core@^0.0.3",
+    "@animini/core-latest": "npm:@animini/core@^0.0.4",
     "benchmark": "^2.1.4",
     "console-table-printer": "^2.8.2",
     "fs-extra": "^9.1.0",
