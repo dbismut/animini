@@ -1,6 +1,6 @@
 # @animini/dom
 
-## 0.0.6.1
+## 0.0.7
 
 ### Patch Changes
 
