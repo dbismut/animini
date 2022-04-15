@@ -13,15 +13,15 @@
   },
   "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
-    "react": ">=16.8.0",
     "@react-three/fiber": "^6.0.10",
+    "react": ">=16.8.0",
     "three": ">=0.127.0"
   },
   "dependencies": {
     "@animini/core": "^0.0.6"
   },
   "devDependencies": {
-    "@react-three/fiber": "^6.0.10",
-    "three": "^0.127.0"
+    "@react-three/fiber": "^8.0.11",
+    "three": "^0.139.2"
   }
 }
