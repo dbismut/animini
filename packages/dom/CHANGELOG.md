@@ -1,5 +1,11 @@
 # @animini/dom
 
+## 0.0.7
+
+### Patch Changes
+
+- a1fccbc: fix opacity
+
 ## 0.0.6
 
 ### Patch Changes
