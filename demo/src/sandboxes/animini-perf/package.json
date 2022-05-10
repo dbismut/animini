@@ -4,15 +4,16 @@
   "version": "1.0.0",
   "dependencies": {
     "@animini/dom": "*",
-    "@react-spring/web": "^9.1.0",
+    "@react-spring/web": "^9.4.5",
     "animejs": "^3.2.1",
-    "framer-motion": "^4.1.3",
-    "gsap": "^3.6.1",
-    "leva": "*",
+    "framer-motion": "^6.3.3",
+    "gsap": "^3.10.4",
+    "leva": "0.9.25",
+    "motion": "^10.8.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "tinycolor2": "^1.4.2",
-    "react-scripts": "4.0.3"
+    "react-scripts": "5.1.0"
   },
   "scripts": {
     "start": "react-scripts start",
