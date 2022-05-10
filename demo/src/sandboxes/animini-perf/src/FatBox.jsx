@@ -1,22 +1,17 @@
 import React, { useRef, useEffect } from 'react'
-import { animate, spring } from 'motion'
-
-const easing = spring({ damping: 26, stiffness: 170 })
+import fat from './fat'
 
 export default function Box({ x, y, backgroundColor, scale, style }) {
   const ref = useRef()
 
   useEffect(() => {
-    animate(
-      ref.current,
-      {
-        x,
-        y,
-        scale,
-        backgroundColor,
-      },
-      { easing }
-    )
+    fat.animate(ref.current, {
+      translateX: x + 'px',
+      translateY: y + 'px',
+      scaleX: scale,
+      scaleY: scale,
+      backgroundColor,
+    })
   }, [x, y, backgroundColor, scale])
 
   return <div ref={ref} style={style} />

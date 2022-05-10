@@ -1,5 +1,5 @@
 import React from 'react'
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '@use-gesture/react'
 import { useControls, button } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
 import { useAnimini, spring } from '@animini/dom'
@@ -35,7 +35,7 @@ export default function App() {
         })
       )
     },
-    { domTarget: ref }
+    { target: ref }
   )
 
   return (

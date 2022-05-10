@@ -17,7 +17,7 @@ yarn add @animini/three
 ### Instructions
 
 ```js
-import { useDrag } from 'react-use-gesture'
+import { useDrag } from '@use-gesture/react'
 import { useAnimini, spring } from '@animini/dom'
 
 export default function App() {

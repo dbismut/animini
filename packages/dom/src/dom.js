@@ -1,16 +1,22 @@
 import { color } from './adapters'
 
 const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
-const ADAPTERS = { color, backgroundColor: color }
+const ADAPTERS = {
+  color,
+  backgroundColor: color,
+  borderColor: color,
+}
 const NO_PX = ['opacity']
 
 export function setValues(rawStyle, el) {
   const { x, y, scale, ...rest } = rawStyle
   for (let key in rest) {
     const adapter = ADAPTERS[key]
-    const value = rest[key]
-    if (adapter || NO_PX.includes(key)) el.style[key] = value
-    else el.style[key] = value + 'px'
+    let value = rest[key]
+    if (!adapter && !NO_PX.includes(key) && !isNaN(value)) {
+      value += 'px'
+    }
+    el.style[key] = value
   }
   if (x === undefined && y === undefined && scale === undefined) return
   if (!x && !y && (scale === void 0 || scale === 1)) el.style.removeProperty('transform')
