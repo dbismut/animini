@@ -1,5 +1,11 @@
 # @animini/dom
 
+## 0.0.8
+
+### Patch Changes
+
+- 15ad827: fix px
+
 ## 0.0.7
 
 ### Patch Changes
