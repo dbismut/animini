@@ -22,6 +22,6 @@
   },
   "devDependencies": {
     "@react-three/fiber": "^8.0.11",
-    "three": "^0.139.2"
+    "three": "^0.140.2"
   }
 }

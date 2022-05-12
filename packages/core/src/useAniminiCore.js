@@ -52,6 +52,6 @@ export function useAniminiCore(target, elementPayload, fn) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [update])
 
-  const get = useCallback(() => rawValues.current, [])
+  const get = useCallback((key) => rawValues.current[key], [])
   return [el, { get, start }]
 }

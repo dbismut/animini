@@ -19,6 +19,6 @@
     "@animini/core": "^0.0.6"
   },
   "devDependencies": {
-    "three": "^0.139.2"
+    "three": "^0.140.2"
   }
 }
