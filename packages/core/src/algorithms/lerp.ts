@@ -1,10 +1,13 @@
-import { Algorithm } from '../types'
 import { lerp as lerpFn } from '../utils'
+import type { AnimatedValue } from '../animated/AnimatedValue'
+import { Algorithm } from '../types'
 
 // TODO ADD EASING
 
-export const lerp: Algorithm = {
-  update(this) {
-    return lerpFn(this.value, this.target, this.config.factor || 0.05)
+type LerpConfig = { factor?: number }
+
+export function lerp({ factor = 0.05 }: LerpConfig = {}): Algorithm {
+  return function update(a: AnimatedValue) {
+    return lerpFn(a.value, a.target, factor)
   }
 }

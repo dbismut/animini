@@ -1,5 +1,4 @@
 import { AnimatedValue } from './animated/AnimatedValue'
-import { Animated } from './animated/Animated'
 import { FrameLoop } from './FrameLoop'
 
 export type ParsedValue = number | number[] | Record<string, number>
@@ -11,11 +10,7 @@ export type Adapter = {
   onUpdate(target: any, key: string | number): void
 }
 
-export type Algorithm = {
-  update(this: AnimatedValue): number
-  memo?(): any
-  setup?(this: Animated): void
-}
+export type Algorithm = (a: AnimatedValue) => number
 
 export type Payload = Record<string, any>
 
@@ -24,3 +19,10 @@ export type Target = {
   setValues?(rawValues: Payload, element: any, payload: Payload): void
   getInitialValueAndAdapter(element: any, key: string, payload: Payload): [any, Adapter]
 }
+
+export type ConfigValue = {
+  immediate?: boolean
+  easing?: Algorithm
+}
+
+export type Config = ConfigValue | ((key: string) => ConfigValue)

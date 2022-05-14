@@ -15,7 +15,7 @@ const Mesh = () => {
   useControls({
     changeColor: button(() => apiMat.start({ color: '#f00' })),
     changeScale: button(() => api.start({ scale: { x: 2, y: 1, z: 2 } })),
-    changeRotation: button(() => api.start({ rotation: { x: 2, y: 1, z: 2 } })),
+    changeRotation: button(() => api.start({ rotation: { x: 2, y: 1, z: 2 } }))
   })
 
   return (
@@ -30,7 +30,8 @@ export default function App() {
     <Canvas
       dpr={[1, 2]}
       camera={{ position: [0, 0, 16], fov: 50 }}
-      style={{ background: 'dimgray', height: '100vh', width: '100vw' }}>
+      style={{ background: 'dimgray', height: '100vh', width: '100vw' }}
+    >
       <OrbitControls />
       <directionalLight />
       <Mesh />

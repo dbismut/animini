@@ -8,7 +8,7 @@
   "sideEffects": false,
   "preconstruct": {
     "entrypoints": [
-      "./index.js",
+      "./index.ts",
       "./algorithms/index.ts"
     ]
   },
@@ -20,8 +20,5 @@
   "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
     "react": ">=16.8.0"
-  },
-  "dependencies": {
-    "memoize-one": "^6.0.0"
   }
 }

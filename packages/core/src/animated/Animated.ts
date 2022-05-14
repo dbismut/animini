@@ -2,11 +2,9 @@ import type { FrameLoop } from '../FrameLoop'
 import { AnimatedValue } from './AnimatedValue'
 import { each, map } from '../utils'
 import { lerp } from '../algorithms'
-import { Adapter, ParsedValue, Algorithm } from '../types'
+import { Adapter, ParsedValue, ConfigValue } from '../types'
 
-type Config = {
-  immediate?: boolean
-}
+const defaultLerp = lerp()
 
 type Time = {
   elapsed?: number
@@ -15,24 +13,18 @@ type Time = {
 
 export class Animated {
   public time: Time = {}
-  public config: Config = {}
   public target: any
   public _value: ParsedValue
   public onUpdate
-  public fn!: () => number
-  public memo?(): any
   private parse
-  private setup?(): void
   private _movingChildren = 0
   private children: AnimatedValue[]
 
-  constructor(value: any, algo: Algorithm, private adapter: Adapter, private loop: FrameLoop) {
+  constructor(value: any, private adapter: Adapter, private loop: FrameLoop) {
     this.loop = loop
     this.adapter = adapter
     this.onUpdate = adapter?.onUpdate
     this.parse = adapter?.parse
-
-    this.setAlgo(algo)
 
     this._value = adapter?.parseInitial ? adapter.parseInitial(value) : value
     this.children = map(this._value, (_v, i) => new AnimatedValue(this, i))
@@ -45,23 +37,17 @@ export class Animated {
     return this.adapter?.format ? this.adapter.format(this._value) : this._value
   }
 
-  setAlgo(algo: Algorithm = lerp) {
-    this.fn = algo.update
-    if (algo.setup) this.setup = algo.setup
-    if (algo.memo) this.memo = algo.memo()
-  }
-
-  start(target: any, config = {}) {
+  start(target: any, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
     this.time.elapsed = 0
     this.target = this.parse ? this.parse(target) : target
     this._movingChildren = 0
-    this.config = config
 
-    if (!this.config.immediate) {
-      this.setup?.()
-    }
+    // if (!this.config.immediate) {
+    //   this.setup?.()
+    // }
+
     each(this.children, (child) => {
-      child.start()
+      child.start({ immediate, easing })
       if (!child.idle) this._movingChildren++
     })
   }

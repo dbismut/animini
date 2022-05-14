@@ -4,8 +4,8 @@
   "keywords": [],
   "private": true,
   "dependencies": {
-    "@animini/core-latest": "npm:@animini/core@^0.0.6",
-    "@animini/dom-latest": "npm:@animini/dom@^0.0.8",
+    "@animini/core-latest": "npm:@animini/core@latest",
+    "@animini/dom-latest": "npm:@animini/dom@latest",
     "benchmark": "^2.1.4",
     "console-table-printer": "^2.11.0",
     "fs-extra": "^10.0.1",

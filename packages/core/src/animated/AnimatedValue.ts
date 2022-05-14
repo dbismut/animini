@@ -1,20 +1,16 @@
+import { ConfigValue } from '../types'
 import type { Animated } from './Animated'
 
 export class AnimatedValue {
   private previousValue?: number
   public startVelocity?: number
   private precision?: number
+  private config!: Required<ConfigValue>
   public idle = true
   public distance = 0
   public velocity = 0
 
   constructor(public parent: Animated, private index: number | string) {}
-  get fn() {
-    return this.parent.fn
-  }
-  get config() {
-    return this.parent.config
-  }
   get time() {
     return this.parent.time
   }
@@ -30,12 +26,13 @@ export class AnimatedValue {
     this.index !== -1 ? (this.parent._value[this.index] = value) : (this.parent._value = value)
   }
 
-  start() {
+  start(config: Required<ConfigValue>) {
+    this.config = config
     this.previousValue = this.value
     this.idle = this.target === this.value
     this.startVelocity = this.velocity
 
-    if (this.config.immediate) {
+    if (config.immediate) {
       this.value = this.target
     } else if (!this.idle) {
       this.distance = this.target - this.value
@@ -51,7 +48,7 @@ export class AnimatedValue {
     }
 
     this.previousValue = this.value
-    this.value = this.fn()
+    this.value = this.config.easing(this)
 
     this.velocity = (this.value - this.previousValue!) / this.time.delta!
 

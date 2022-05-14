@@ -1,28 +1,26 @@
-import memoizeOne from 'memoize-one'
 import type { AnimatedValue } from '../animated/AnimatedValue'
-import type { Animated } from '../animated/Animated'
 import { Algorithm } from '../types'
 
-function getSpringConfig(k: number, c: number, m: number, v0: number) {
+function getSpringConfig(k: number, c: number, m: number, v0?: number) {
   const zeta = c / (2 * Math.sqrt(k * m))
   const w0 = Math.sqrt(k / m) * 0.001
   const w1 = w0 * Math.sqrt(1.0 - zeta * zeta)
   return { k, c, m, zeta, w0, w1, v0 }
 }
 
-export const spring: Algorithm = {
-  memo() {
-    return memoizeOne(getSpringConfig)
-  },
-  setup() {
-    const { tension = 170, friction = 26, mass = 1, velocity } = this.config
-    this._config = this.memo(tension, friction, mass, velocity)
-  },
+type SpringConfig = {
+  tension?: number
+  friction?: number
+  mass?: number
+  velocity?: number
+}
 
-  update() {
-    const t = this.time.elapsed!
-    const { zeta, w1, w0, v0 = this.startVelocity ?? 0 } = this.parent._config
-    const { target: to, distance: x0 } = this
+export function spring({ tension = 170, friction = 26, mass = 1, velocity }: SpringConfig = {}): Algorithm {
+  const config = getSpringConfig(tension, friction, mass, velocity)
+  return function update(a: AnimatedValue) {
+    const t = a.time.elapsed!
+    const { zeta, w1, w0, v0 = a.startVelocity ?? 0 } = config
+    const { target: to, distance: x0 } = a
 
     let value
 

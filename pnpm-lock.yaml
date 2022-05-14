@@ -109,10 +109,7 @@ importers:
       vite: 2.9.9
 
   packages/core:
-    specifiers:
-      memoize-one: ^6.0.0
-    dependencies:
-      memoize-one: 6.0.0
+    specifiers: {}
 
   packages/dom:
     specifiers:
@@ -136,8 +133,8 @@ importers:
 
   perf:
     specifiers:
-      '@animini/core-latest': npm:@animini/core@^0.0.6
-      '@animini/dom-latest': npm:@animini/dom@^0.0.8
+      '@animini/core-latest': npm:@animini/core@latest
+      '@animini/dom-latest': npm:@animini/dom@latest
       benchmark: ^2.1.4
       console-table-printer: ^2.11.0
       fs-extra: ^10.0.1
@@ -6863,11 +6860,6 @@ packages:
       { integrity: sha512-hdN1wVrZbb29eBGiGjJbeP8JbKjq1urkHJ/LIP/NY48MZ1QVXUsQBV1G1zvYFHn1XE06cwjBsOI2K3Ulnj1YXQ== }
     engines: { node: '>=8' }
     dev: true
-
-  /memoize-one/6.0.0:
-    resolution:
-      { integrity: sha512-rkpe71W0N0c0Xz6QD0eJETuWAJGnJ9afsl1srmwPrI+yBCkge5EycXXbYRyvL29zZVUWQCY7InPRCv3GDXuZNw== }
-    dev: false
 
   /meow/6.1.1:
     resolution:

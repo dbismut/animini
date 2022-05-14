@@ -1,5 +1,8 @@
+import { Vector3 } from 'three'
+
 function parseInitial(euler) {
-  return euler.toVector3()
+  const v = new Vector3()
+  return v.setFromEuler(euler)
 }
 
 function onUpdate(element, key) {

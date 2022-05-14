@@ -1,21 +1,17 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
-import { Algorithm, Payload, Target } from './types'
+import { Config, Payload, Target } from './types'
 
 // TODO move algo inside config
 
-export function useAniminiCore(target: Target, elementPayload: Payload, algo: Algorithm) {
+export function useAniminiCore(target: Target, elementPayload: Payload, masterConfig?: Config) {
   const loop = target.loop || GlobalLoop
 
   const el = useRef(null)
   const rawValues = useRef<Payload>({})
   const animations = useMemo(() => new Map<string, Animated>(), [])
   const resolveRef = useRef<(value?: unknown) => void>()
-
-  useEffect(() => {
-    animations.forEach((animated) => animated.setAlgo(algo))
-  }, [algo, animations])
 
   const update = useCallback(() => {
     if (!el.current) return
@@ -36,14 +32,14 @@ export function useAniminiCore(target: Target, elementPayload: Payload, algo: Al
   }, [target, animations])
 
   const start = useCallback(
-    (to, config) =>
+    (to: any, config: Config | undefined = masterConfig) =>
       new Promise((resolve) => {
         resolveRef.current = resolve
         let idle = true
         for (let key in to) {
           if (!animations.has(key)) {
             const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, elementPayload)
-            const animated = new Animated(value, algo, adapter, loop)
+            const animated = new Animated(value, adapter, loop)
             animations.set(key, animated)
           }
           const animated = animations.get(key)!
@@ -55,7 +51,7 @@ export function useAniminiCore(target: Target, elementPayload: Payload, algo: Al
         else resolveRef.current()
       }),
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [update, algo, animations]
+    [update, masterConfig, animations]
   )
 
   const stop = useCallback(
