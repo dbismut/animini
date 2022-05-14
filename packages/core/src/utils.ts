@@ -15,7 +15,7 @@ export function equal<P>(v0: P, v1: P) {
   return v0 === v1
 }
 
-export function each(array: unknown[], iterator: (v: unknown, i: number) => void) {
+export function each<P>(array: P[], iterator: (v: P, i: number) => void) {
   if (Array.isArray(array)) {
     for (let i = 0; i < array.length; i++) iterator(array[i], i)
   } else {
@@ -23,12 +23,12 @@ export function each(array: unknown[], iterator: (v: unknown, i: number) => void
   }
 }
 
-export function map(obj: Record<string, unknown>, iterator: (v: unknown, key: string | number) => void) {
+export function map<P, K>(obj: P | P[] | Record<string, P>, iterator: (v: P, key: string | number) => K) {
   if (typeof obj === 'object') {
     if (Array.isArray(obj)) {
       return obj.map(iterator)
     }
     return Object.entries(obj).map(([key, value]) => iterator(value, key))
   }
-  return iterator(obj, -1)
+  return iterator(obj, -1) as any
 }

@@ -9,7 +9,7 @@
   "preconstruct": {
     "entrypoints": [
       "./index.js",
-      "./algorithms/index.js"
+      "./algorithms/index.ts"
     ]
   },
   "repository": {

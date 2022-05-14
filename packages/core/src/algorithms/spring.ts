@@ -1,13 +1,16 @@
 import memoizeOne from 'memoize-one'
+import type { AnimatedValue } from '../animated/AnimatedValue'
+import type { Animated } from '../animated/Animated'
+import { Algorithm } from '../types'
 
-function getSpringConfig(k, c, m, v0) {
+function getSpringConfig(k: number, c: number, m: number, v0: number) {
   const zeta = c / (2 * Math.sqrt(k * m))
   const w0 = Math.sqrt(k / m) * 0.001
   const w1 = w0 * Math.sqrt(1.0 - zeta * zeta)
   return { k, c, m, zeta, w0, w1, v0 }
 }
 
-export const spring = {
+export const spring: Algorithm = {
   memo() {
     return memoizeOne(getSpringConfig)
   },
@@ -17,7 +20,7 @@ export const spring = {
   },
 
   update() {
-    const t = this.time.elapsed
+    const t = this.time.elapsed!
     const { zeta, w1, w0, v0 = this.startVelocity ?? 0 } = this.parent._config
     const { target: to, distance: x0 } = this
 
@@ -32,5 +35,5 @@ export const spring = {
     }
 
     return value
-  },
+  }
 }
