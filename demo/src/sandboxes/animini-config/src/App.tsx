@@ -31,7 +31,7 @@ export default function App() {
     stop: button(() => api.stop())
   })
 
-  const [ref, api] = useAnimini()
+  const [ref, api] = useAnimini<HTMLDivElement>()
 
   return (
     <div className="flex fill center">

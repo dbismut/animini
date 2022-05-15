@@ -13,7 +13,7 @@ export default function App() {
     springConfig: levaSpring({ render: (get) => get('easeMethod') === spring })
   })
 
-  const [ref, api] = useAnimini()
+  const [ref, api] = useAnimini<HTMLDivElement>()
   const easing = easeMethod(easeMethod === lerp ? { factor } : springConfig)
 
   useDrag(
