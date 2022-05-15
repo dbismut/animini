@@ -5,12 +5,16 @@ import { Config, Payload, Target } from './types'
 
 // TODO move algo inside config
 
-export function useAniminiCore(target: Target, elementPayload: Payload, masterConfig?: Config) {
+export function useAniminiCore<ElementType, ValueType extends Payload>(
+  target: Target<ElementType, ValueType>,
+  initialStyle: any,
+  masterConfig?: Config
+) {
   const loop = target.loop || GlobalLoop
 
-  const el = useRef(null)
-  const rawValues = useRef<Payload>({})
-  const animations = useMemo(() => new Map<string, Animated>(), [])
+  const el = useRef<ElementType>(null)
+  const rawValues = useRef<ValueType>({} as any)
+  const animations = useMemo(() => new Map<keyof ValueType, Animated>(), [])
   const resolveRef = useRef<(value?: unknown) => void>()
 
   const update = useCallback(() => {
@@ -20,10 +24,10 @@ export function useAniminiCore(target: Target, elementPayload: Payload, masterCo
     animations.forEach((animated, key) => {
       animated.update()
       rawValues.current[key] = animated.value
-      animated.onUpdate?.(el.current, key)
+      animated.onUpdate?.(el.current, key as string)
       idle &&= animated.idle
     })
-    target.setValues?.(rawValues.current, el.current, elementPayload)
+    target.setValues?.(rawValues.current, el.current, initialStyle)
     if (idle) {
       loop.stop(update)
       resolveRef.current?.()
@@ -32,13 +36,13 @@ export function useAniminiCore(target: Target, elementPayload: Payload, masterCo
   }, [target, animations])
 
   const start = useCallback(
-    (to: any, config: Config | undefined = masterConfig) =>
+    (to: Partial<ValueType>, config: Config | undefined = masterConfig) =>
       new Promise((resolve) => {
         resolveRef.current = resolve
         let idle = true
         for (let key in to) {
           if (!animations.has(key)) {
-            const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, elementPayload)
+            const [value, adapter] = target.getInitialValueAndAdapter(el.current!, key, initialStyle)
             const animated = new Animated(value, adapter, loop)
             animations.set(key, animated)
           }
@@ -67,6 +71,7 @@ export function useAniminiCore(target: Target, elementPayload: Payload, masterCo
     return stop
   }, [stop])
 
-  const get = useCallback((key: string) => rawValues.current[key], [])
-  return [el, { get, start, stop }]
+  const get = useCallback((key: keyof ValueType) => rawValues.current[key], [])
+  const api = { get, start, stop }
+  return [el, api] as [typeof el, typeof api]
 }

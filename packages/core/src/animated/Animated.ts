@@ -20,7 +20,7 @@ export class Animated {
   private _movingChildren = 0
   private children: AnimatedValue[]
 
-  constructor(value: any, private adapter: Adapter, private loop: FrameLoop) {
+  constructor(value: any, private adapter: Adapter | undefined, private loop: FrameLoop) {
     this.loop = loop
     this.adapter = adapter
     this.onUpdate = adapter?.onUpdate
