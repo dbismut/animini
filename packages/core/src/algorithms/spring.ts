@@ -15,11 +15,14 @@ type SpringConfig = {
   velocity?: number
 }
 
-export function spring({ tension = 170, friction = 26, mass = 1, velocity }: SpringConfig = {}): Algorithm {
-  const config = getSpringConfig(tension, friction, mass, velocity)
+export function spring({ tension: k = 170, friction: c = 26, mass: m = 1, velocity }: SpringConfig = {}): Algorithm {
+  const zeta = c / (2 * Math.sqrt(k * m))
+  const w0 = Math.sqrt(k / m) * 0.001
+  const w1 = w0 * Math.sqrt(1.0 - zeta * zeta)
+
   return function update(a: AnimatedValue) {
     const t = a.time.elapsed!
-    const { zeta, w1, w0, v0 = a.startVelocity ?? 0 } = config
+    const v0 = velocity ?? (a.startVelocity || 0)
     const { target: to, distance: x0 } = a
 
     let value
