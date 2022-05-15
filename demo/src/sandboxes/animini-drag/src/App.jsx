@@ -1,29 +1,20 @@
 import React from 'react'
 import { useDrag } from '@use-gesture/react'
-import { useControls, button } from 'leva'
+import { useControls } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
 import { useAnimini, spring, lerp } from '@animini/dom'
 
 import styles from './styles.module.css'
-
 export default function App() {
-  const { method, factor, springConfig, stickToDrag } = useControls({
+  const { easeMethod, factor, springConfig, stickToDrag } = useControls({
     stickToDrag: false,
-    method: { value: spring, options: { lerp, spring } },
-    factor: { value: 0.05, min: 0, max: 1, optional: true, render: (get) => get('method') === lerp },
-    springConfig: levaSpring({ render: (get) => get('method') === spring }),
-    'set width': button(async () => {
-      await api.start({ width: 300 }, { tension: 120 })
-      // await api.start({ width: 30 }, { tension: 120 })
-    }),
-    'set color': button(() => api.start({ backgroundColor: '#000' })),
-    'set height': button(() => api.start({ height: 500 }, { factor: 0.01 })),
-    'reset height': button(() => api.start({ height: 50 }, { factor: 0.01 })),
-    stop: button(() => api.stop())
+    easeMethod: { value: spring, options: { lerp, spring } },
+    factor: { value: 0.05, min: 0, max: 1, optional: true, render: (get) => get('easeMethod') === lerp },
+    springConfig: levaSpring({ render: (get) => get('easeMethod') === spring })
   })
 
   const [ref, api] = useAnimini()
-  const easing = method(method === lerp ? { factor } : springConfig)
+  const easing = easeMethod(easeMethod === lerp ? { factor } : springConfig)
 
   useDrag(
     ({ active, movement: [x, y] }) => {

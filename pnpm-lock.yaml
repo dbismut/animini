@@ -69,16 +69,17 @@ importers:
     specifiers:
       '@animini/dom': '*'
       '@animini/three': '*'
-      '@leva-ui/plugin-spring': 0.9.18
+      '@leva-ui/plugin-bezier': '*'
+      '@leva-ui/plugin-spring': '*'
       '@react-spring/web': ^9.4.5
       '@react-three/drei': 8.20.2
       '@react-three/fiber': ^8.0.11
-      '@use-gesture/react': ^10.2.12
+      '@use-gesture/react': '*'
       '@vitejs/plugin-react': ^1.3.2
       animejs: ^3.2.1
       framer-motion: ^6.3.3
       gsap: ^3.10.4
-      leva: 0.9.25
+      leva: '*'
       motion: ^10.8.1
       react: ^18.1.0
       react-dom: ^18.1.0
@@ -89,7 +90,8 @@ importers:
     dependencies:
       '@animini/dom': link:../packages/dom
       '@animini/three': link:../packages/three
-      '@leva-ui/plugin-spring': 0.9.18_hpiqka5icd7g5eoemrgivytnaq
+      '@leva-ui/plugin-bezier': 0.9.19_onyvatlevvtj7f3vhy4totxygm
+      '@leva-ui/plugin-spring': 0.9.18_onyvatlevvtj7f3vhy4totxygm
       '@react-spring/web': 9.4.5_ef5jwxihqo6n7gxfmzogljlgcm
       '@react-three/drei': 8.20.2_lgypeyzyphpcpurlbjuhc3gnue
       '@react-three/fiber': 8.0.14_5vzz734aui5gu3jm6wlduec5ym
@@ -97,7 +99,7 @@ importers:
       animejs: 3.2.1
       framer-motion: 6.3.3_ef5jwxihqo6n7gxfmzogljlgcm
       gsap: 3.10.4
-      leva: 0.9.25_ef5jwxihqo6n7gxfmzogljlgcm
+      leva: 0.9.26_ef5jwxihqo6n7gxfmzogljlgcm
       motion: 10.8.1_ef5jwxihqo6n7gxfmzogljlgcm
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
@@ -2189,7 +2191,21 @@ packages:
       '@jridgewell/sourcemap-codec': 1.4.13
     dev: true
 
-  /@leva-ui/plugin-spring/0.9.18_hpiqka5icd7g5eoemrgivytnaq:
+  /@leva-ui/plugin-bezier/0.9.19_onyvatlevvtj7f3vhy4totxygm:
+    resolution:
+      { integrity: sha512-bp9+qQudiA+/7qEdFBSOfwW4vljU6lap8ASMXH0bEYtUAYJTY/pmWWyB68bbeDq2ohOUEDzsDTctkCh3L28AjQ== }
+    peerDependencies:
+      leva: '>=0.9.23'
+      react: '>=16.8.0'
+      react-dom: '>=16.8.0'
+    dependencies:
+      leva: 0.9.26_ef5jwxihqo6n7gxfmzogljlgcm
+      react: 18.1.0
+      react-dom: 18.1.0_react@18.1.0
+      react-use-measure: 2.1.1_ef5jwxihqo6n7gxfmzogljlgcm
+    dev: false
+
+  /@leva-ui/plugin-spring/0.9.18_onyvatlevvtj7f3vhy4totxygm:
     resolution:
       { integrity: sha512-E9S250G3Dc4/p2A7CVJkBGVCi7JzAb+WcJ7IjzxyizBKBcheYyS20dM7/q0+ce0ReLV78J14UUfl8uZ5yqcldw== }
     peerDependencies:
@@ -2198,7 +2214,7 @@ packages:
       react-dom: '>=16.8.0'
     dependencies:
       '@react-spring/web': 9.3.1_ef5jwxihqo6n7gxfmzogljlgcm
-      leva: 0.9.25_ef5jwxihqo6n7gxfmzogljlgcm
+      leva: 0.9.26_ef5jwxihqo6n7gxfmzogljlgcm
       react: 18.1.0
       react-dom: 18.1.0_react@18.1.0
     dev: false
@@ -6683,9 +6699,9 @@ packages:
       language-subtag-registry: 0.3.21
     dev: true
 
-  /leva/0.9.25_ef5jwxihqo6n7gxfmzogljlgcm:
+  /leva/0.9.26_ef5jwxihqo6n7gxfmzogljlgcm:
     resolution:
-      { integrity: sha512-QSgf+yAFsByfTj2ayXV+fel1JSN/8Cppyyv2NwkBw6RETzXkRlUAS4EUxFFJC7ZwHCgTAGzL0PRk0DaMznEnJw== }
+      { integrity: sha512-xVPqjGN+To0dU2N1A177vVdRaYbzvvUlZkxvVOeMKQiBfT6/+8D35tDpnZf6NSclxsI64g2tO0Byf+CYf8Dffw== }
     peerDependencies:
       react: '>=16.8.0'
       react-dom: '>=16.8.0'

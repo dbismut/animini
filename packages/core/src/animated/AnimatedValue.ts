@@ -4,6 +4,7 @@ import type { Animated } from './Animated'
 export class AnimatedValue {
   private previousValue?: number
   public startVelocity?: number
+  public from!: number
   private precision?: number
   private config!: Required<ConfigValue>
   public idle = true
@@ -28,7 +29,7 @@ export class AnimatedValue {
 
   start(config: Required<ConfigValue>) {
     this.config = config
-    this.previousValue = this.value
+    this.previousValue = this.from = this.value
     this.idle = this.target === this.value
     this.startVelocity = this.velocity
 

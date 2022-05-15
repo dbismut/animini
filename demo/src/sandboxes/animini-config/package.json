@@ -1,16 +1,15 @@
 {
-  "name": "animini-three",
+  "name": "animini-config",
   "version": "1.0.0",
   "main": "src/index.jsx",
   "dependencies": {
-    "@react-three/drei": "^4.1.4",
-    "@react-three/fiber": "^6.0.10",
-    "@animini/three": "*",
+    "@leva-ui/plugin-spring": "*",
+    "@leva-ui/plugin-bezier": "*",
+    "@animini/dom": "*",
     "leva": "*",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
-    "react-scripts": "5.0.1",
-    "three": "*"
+    "react-scripts": "5.0.1"
   },
   "scripts": {
     "start": "react-scripts start",
