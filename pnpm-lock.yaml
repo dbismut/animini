@@ -74,6 +74,7 @@ importers:
       '@react-spring/web': ^9.4.5
       '@react-three/drei': 8.20.2
       '@react-three/fiber': ^8.0.11
+      '@types/three': ^0.140.0
       '@use-gesture/react': '*'
       '@vitejs/plugin-react': ^1.3.2
       animejs: ^3.2.1
@@ -107,6 +108,7 @@ importers:
       tinycolor2: 1.4.2
       wouter: 2.8.0-alpha.2_react@18.1.0
     devDependencies:
+      '@types/three': 0.140.0
       '@vitejs/plugin-react': 1.3.2
       vite: 2.9.9
 
@@ -126,11 +128,13 @@ importers:
     specifiers:
       '@animini/core': ^0.0.6
       '@react-three/fiber': ^8.0.11
+      '@types/three': ^0.140.0
       three: ^0.140.2
     dependencies:
       '@animini/core': link:../core
     devDependencies:
       '@react-three/fiber': 8.0.14_three@0.140.2
+      '@types/three': 0.140.0
       three: 0.140.2
 
   perf:
@@ -3249,6 +3253,11 @@ packages:
   /@types/stack-utils/2.0.1:
     resolution:
       { integrity: sha512-Hl219/BT5fLAaz6NDkSuhzasy49dwQS/DSdu4MdggFB8zcXv7vflBI3xp7FEmkmdDkBUI2bPUNeMttp2knYdxw== }
+    dev: true
+
+  /@types/three/0.140.0:
+    resolution:
+      { integrity: sha512-YPJLSIY6uKUOp1k6BZYDq5GtEIdhfeK04UCbc9IPAVbdn/RNjkfrbnyd7smrsNkJhc0IFASLpd3AAYgwqgXKVQ== }
     dev: true
 
   /@types/yargs-parser/21.0.0:

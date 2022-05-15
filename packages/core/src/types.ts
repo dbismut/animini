@@ -1,3 +1,4 @@
+import { Animated } from './animated/Animated'
 import { AnimatedValue } from './animated/AnimatedValue'
 import { FrameLoop } from './FrameLoop'
 
@@ -7,7 +8,7 @@ export type Adapter = {
   parse?(value: any): ParsedValue | undefined
   parseInitial?(value: any): ParsedValue | undefined
   format?(value: ParsedValue): any
-  onUpdate?(target: any, key: string | number): void
+  onUpdate?(this: Animated, target: any, key: string | number): void
 }
 
 export type Algorithm = (a: AnimatedValue) => number
@@ -20,7 +21,7 @@ export type Target<ElementType, ValueType extends Payload> = {
   getInitialValueAndAdapter<K extends keyof ValueType>(
     element: ElementType,
     key: K,
-    initialStyle: any
+    initialStyle?: any
   ): [ValueType[K], Adapter | undefined]
 }
 
