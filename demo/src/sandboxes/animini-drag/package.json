@@ -1,7 +1,7 @@
 {
   "name": "animini-drag",
   "version": "1.0.0",
-  "main": "src/index.jsx",
+  "main": "src/index.tsx",
   "dependencies": {
     "@leva-ui/plugin-spring": "*",
     "@animini/dom": "*",
