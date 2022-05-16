@@ -25,8 +25,10 @@ export default function App() {
         default:
           easing = method(get('duration'), get('easeConfig'))
       }
-      await api.start({ width: 300 }, { easing })
-      await api.start({ width: 100 }, { easing })
+      try {
+        await api.start({ scale: 2 }, { easing })
+        await api.start({ scale: 0.5 }, { easing })
+      } catch {}
     }),
     stop: button(() => api.stop())
   })

@@ -16,6 +16,9 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
   const rawValues = useRef<ValueType>({} as any)
   const animations = useMemo(() => new Map<keyof ValueType, Animated>(), [])
   const resolveRef = useRef<(value?: unknown) => void>()
+  const rejectRef = useRef<(value?: unknown) => void>()
+  const configRef = useRef(masterConfig)
+  configRef.current = masterConfig
 
   const update = useCallback(() => {
     if (!el.current) return
@@ -36,9 +39,10 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
   }, [target, animations])
 
   const start = useCallback(
-    (to: Partial<ValueType>, config: Config | undefined = masterConfig) =>
-      new Promise((resolve) => {
+    (to: Partial<ValueType>, config = configRef.current) => {
+      return new Promise((resolve, reject) => {
         resolveRef.current = resolve
+        rejectRef.current = reject
         let idle = true
         for (let key in to) {
           if (!animations.has(key)) {
@@ -53,23 +57,28 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
         if (!idle) loop.start(update)
         // if animation is already idle resolve promise right away
         else resolveRef.current()
-      }),
+      })
+    },
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    [update, masterConfig, animations]
+    [update, animations]
   )
 
   const stop = useCallback(
     () => {
       loop.stop(update)
-      resolveRef.current?.()
+      rejectRef.current?.()
     },
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [update]
   )
 
   useEffect(() => {
-    return stop
-  }, [stop])
+    return () => {
+      loop.stop(update)
+      resolveRef.current?.()
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [update])
 
   const get = useCallback((key: keyof ValueType) => rawValues.current[key], [])
   const api = { get, start, stop }
