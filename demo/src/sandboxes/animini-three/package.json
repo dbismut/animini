@@ -12,6 +12,11 @@
     "react-scripts": "5.0.1",
     "three": "*"
   },
+  "devDependencies": {
+    "@types/react": "^18.0.9",
+    "@types/react-dom": "^18.0.3",
+    "@types/three": "^0.140.0"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
