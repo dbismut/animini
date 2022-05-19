@@ -3,8 +3,8 @@ import { Adapter } from '@animini/core'
 export const color: Adapter = {
   parse(str: string) {
     if (str.indexOf('rgb') === 0) {
-      const [r, g, b, a = 1] = str.match(/\d+/g)!
-      return [~~r, ~~g, ~~b, ~~a]
+      const [r, g, b, a = '1'] = str.match(/\d+(?:\.\d+)?/g)!
+      return [~~r, ~~g, ~~b, parseFloat(a)]
     }
     if (str.indexOf('#') === 0) {
       const [r = '0', g = '0', b = '0', a] = str.substring(1).match(/.{1,2}/g)!
@@ -12,6 +12,6 @@ export const color: Adapter = {
     }
   },
   format(c: number[]) {
-    return `rgba(${~~c[0]}, ${~~c[1]}, ${~~c[2]}, ${~~c[3]})`
+    return `rgba(${~~c[0]}, ${~~c[1]}, ${~~c[2]}, ${c[3]})`
   }
 }

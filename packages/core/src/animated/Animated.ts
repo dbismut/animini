@@ -3,6 +3,7 @@ import { AnimatedValue } from './AnimatedValue'
 import { each, map } from '../utils'
 import { lerp } from '../algorithms'
 import { Adapter, ParsedValue, ConfigValue } from '../types'
+import { GlobalLoop } from '../FrameLoop'
 
 const defaultLerp = lerp()
 
@@ -20,8 +21,7 @@ export class Animated {
   private _movingChildren = 0
   private children: AnimatedValue[]
 
-  constructor(value: any, private adapter: Adapter | undefined, private loop: FrameLoop) {
-    this.loop = loop
+  constructor(value: any, private adapter?: Adapter, private loop: FrameLoop = GlobalLoop) {
     this.adapter = adapter
     this.onUpdate = adapter?.onUpdate
     this.parse = adapter?.parse
