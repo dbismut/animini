@@ -1,4 +1,3 @@
-import React from 'react'
 import { useAnimini } from '@animini/three'
 import { useControls, button } from 'leva'
 import { Canvas } from '@react-three/fiber'

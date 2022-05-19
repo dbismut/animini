@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import { useState } from 'react'
 import { useControls, button } from 'leva'
 import tinycolor from 'tinycolor2'
 import AniminiBox from './AniminiBox'
@@ -19,20 +19,20 @@ const styles = Array(COUNT)
     left: Math.random() * 100 + 'vw',
     width: 10,
     height: 10,
-    backgroundColor: tinycolor.random().toHexString(),
+    backgroundColor: tinycolor.random().toHexString()
   }))
 
 const stillStyles = Array(COUNT).fill({
   x: 0,
   y: 0,
   scale: 1,
-  backgroundColor: tinycolor.random().toHexString(),
+  backgroundColor: tinycolor.random().toHexString()
 })
 const moveStyles = stillStyles.map(() => ({
   x: Math.random() * 500 - 250,
   y: Math.random() * 500 - 250,
   scale: 1 + Math.random(),
-  backgroundColor: tinycolor.random().toHexString(),
+  backgroundColor: tinycolor.random().toHexString()
 }))
 
 export default function Perf() {
@@ -50,7 +50,7 @@ export default function Perf() {
         setClicked(false)
         console.log('TIME:', performance.now() - ts)
       })
-    }),
+    })
   })
 
   const motionStyles = move ? moveStyles : stillStyles
@@ -63,8 +63,9 @@ export default function Perf() {
           color: '#f00',
           position: 'relative',
           zIndex: 10,
-          backgroundColor: '#fff',
-        }}>
+          backgroundColor: '#fff'
+        }}
+      >
         {clicked && 'CLICKED'}
       </b>
       {styles.slice(0, count).map((style, i) => (
