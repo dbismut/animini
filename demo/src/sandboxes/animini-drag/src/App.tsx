@@ -24,7 +24,7 @@ export default function App() {
           x: active ? x : 0,
           y: active ? y : 0,
           opacity: active ? 0.5 : 1,
-          backgroundColor: active ? '#5698cf' : '#ec625c'
+          backgroundColor: active ? '#5698cf50' : '#ec625c'
         },
         (k) => ({
           easing,
