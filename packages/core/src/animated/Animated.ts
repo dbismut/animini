@@ -44,10 +44,6 @@ export class Animated {
     this.to = this.parse ? this.parse(to) : to
     this._movingChildren = 0
 
-    // if (!this.config.immediate) {
-    //   this.setup?.()
-    // }
-
     each(this.children, (child) => {
       child.start({ immediate, easing })
       if (!child.idle) this._movingChildren++
