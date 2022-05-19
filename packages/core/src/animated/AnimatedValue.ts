@@ -15,8 +15,8 @@ export class AnimatedValue {
   get time() {
     return this.parent.time
   }
-  get target() {
-    return this.index !== -1 ? this.parent.target[this.index] : this.parent.target
+  get to() {
+    return this.index !== -1 ? this.parent.to[this.index] : this.parent.to
   }
   get value() {
     // @ts-expect-error
@@ -30,20 +30,20 @@ export class AnimatedValue {
   start(config: Required<ConfigValue>) {
     this.config = config
     this.previousValue = this.from = this.value
-    this.idle = this.target === this.value
+    this.idle = this.to === this.value
     this.startVelocity = this.velocity
 
     if (config.immediate) {
-      this.value = this.target
+      this.value = this.to
     } else if (!this.idle) {
-      this.distance = this.target - this.value
+      this.distance = this.to - this.value
       this.precision = Math.min(1, Math.abs(this.distance) * 0.001)
     }
   }
 
   update() {
     if (this.idle) return
-    if (this.value === this.target) {
+    if (this.value === this.to) {
       this.idle = true
       return
     }
@@ -54,10 +54,10 @@ export class AnimatedValue {
     this.velocity = (this.value - this.previousValue!) / this.time.delta!
 
     const isMoving = Math.abs(this.velocity) > this.precision!
-    const isTravelling = Math.abs(this.target - this.value) > this.precision!
+    const isTravelling = Math.abs(this.to - this.value) > this.precision!
 
     this.idle = !isMoving && !isTravelling
 
-    if (this.idle) this.value = this.target
+    if (this.idle) this.value = this.to
   }
 }

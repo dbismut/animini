@@ -116,6 +116,6 @@ export function ease(duration: number, [m1X, m1Y, m2X, m2Y]: EaseConfig = [0.25,
   return function update(a: AnimatedValue) {
     const t = Math.min(1, a.time.elapsed! / duration)
     const p = bezierCurve(t)
-    return lerp(a.from, a.target, p)
+    return lerp(a.from, a.to, p)
   }
 }

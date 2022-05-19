@@ -6,6 +6,6 @@ type LerpConfig = { factor?: number }
 
 export function lerp({ factor = 0.05 }: LerpConfig = {}): Algorithm {
   return function update(a: AnimatedValue) {
-    return lerpFn(a.value, a.target, factor)
+    return lerpFn(a.value, a.to, factor)
   }
 }

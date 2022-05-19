@@ -14,7 +14,7 @@ type Time = {
 
 export class Animated {
   public time: Time = {}
-  public target: any
+  public to: any
   public _value: ParsedValue
   public onUpdate
   private parse
@@ -27,7 +27,9 @@ export class Animated {
     this.parse = adapter?.parse
 
     this._value = adapter?.parseInitial ? adapter.parseInitial(value) : value
-    this.children = map(this._value, (_v, i) => new AnimatedValue(this, i))
+    this.children = map(this._value, (_v, i) => {
+      return new AnimatedValue(this, i)
+    })
   }
 
   get idle() {
@@ -37,9 +39,9 @@ export class Animated {
     return this.adapter?.format ? this.adapter.format(this._value) : this._value
   }
 
-  start(target: any, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
+  start(to: any, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
     this.time.elapsed = 0
-    this.target = this.parse ? this.parse(target) : target
+    this.to = this.parse ? this.parse(to) : to
     this._movingChildren = 0
 
     // if (!this.config.immediate) {

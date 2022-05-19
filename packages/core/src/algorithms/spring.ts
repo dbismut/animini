@@ -1,13 +1,6 @@
 import type { AnimatedValue } from '../animated/AnimatedValue'
 import { Algorithm } from '../types'
 
-function getSpringConfig(k: number, c: number, m: number, v0?: number) {
-  const zeta = c / (2 * Math.sqrt(k * m))
-  const w0 = Math.sqrt(k / m) * 0.001
-  const w1 = w0 * Math.sqrt(1.0 - zeta * zeta)
-  return { k, c, m, zeta, w0, w1, v0 }
-}
-
 type SpringConfig = {
   tension?: number
   friction?: number
@@ -23,7 +16,7 @@ export function spring({ tension: k = 170, friction: c = 26, mass: m = 1, veloci
   return function update(a: AnimatedValue) {
     const t = a.time.elapsed!
     const v0 = velocity ?? (a.startVelocity || 0)
-    const { target: to, distance: x0 } = a
+    const { to, distance: x0 } = a
 
     let value
 

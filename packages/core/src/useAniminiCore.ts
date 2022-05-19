@@ -3,8 +3,6 @@ import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
 import { Config, Payload, Target } from './types'
 
-// TODO move algo inside config
-
 export function useAniminiCore<ElementType, ValueType extends Payload>(
   target: Target<ElementType, ValueType>,
   initialStyle: any,
