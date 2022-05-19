@@ -1,14 +1,13 @@
-import { Animated } from './animated/Animated'
 import { AnimatedValue } from './animated/AnimatedValue'
 import { FrameLoop } from './FrameLoop'
 
 export type ParsedValue = number | number[] | Record<string, number>
 
 export type Adapter = {
-  parse?(value: any): ParsedValue | undefined
-  parseInitial?(value: any): ParsedValue | undefined
+  parse?(value: any): ParsedValue
+  parseInitial?(value: any): ParsedValue
   format?(value: ParsedValue): any
-  onUpdate?(this: Animated, target: any, key: string | number): void
+  onUpdate?(target: any, key: string | number, value: any): void
 }
 
 export type Algorithm = (a: AnimatedValue) => number

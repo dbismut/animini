@@ -2,10 +2,10 @@ import { ConfigValue } from '../types'
 import type { Animated } from './Animated'
 
 export class AnimatedValue {
-  private previousValue?: number
-  public startVelocity?: number
+  private previousValue!: number
+  public startVelocity!: number
   public from!: number
-  private precision?: number
+  private precision: number = 1
   private config!: Required<ConfigValue>
   public idle = true
   public distance = 0
@@ -20,11 +20,11 @@ export class AnimatedValue {
   }
   get value() {
     // @ts-expect-error
-    return this.index !== -1 ? this.parent._value[this.index] : this.parent._value
+    return this.index !== -1 ? this.parent.value[this.index] : this.parent.value
   }
   set value(value) {
     // @ts-expect-error
-    this.index !== -1 ? (this.parent._value[this.index] = value) : (this.parent._value = value)
+    this.index !== -1 ? (this.parent.value[this.index] = value) : (this.parent.value = value)
   }
 
   start(config: Required<ConfigValue>) {
@@ -51,10 +51,10 @@ export class AnimatedValue {
     this.previousValue = this.value
     this.value = this.config.easing(this)
 
-    this.velocity = (this.value - this.previousValue!) / this.time.delta!
+    this.velocity = (this.value - this.previousValue) / this.time.delta
 
-    const isMoving = Math.abs(this.velocity) > this.precision!
-    const isTravelling = Math.abs(this.to - this.value) > this.precision!
+    const isMoving = Math.abs(this.velocity) > this.precision
+    const isTravelling = Math.abs(this.to - this.value) > this.precision
 
     this.idle = !isMoving && !isTravelling
 

@@ -2,32 +2,24 @@ import type { FrameLoop } from '../FrameLoop'
 import { AnimatedValue } from './AnimatedValue'
 import { each, map } from '../utils'
 import { lerp } from '../algorithms'
-import { Adapter, ParsedValue, ConfigValue } from '../types'
+import { ParsedValue, ConfigValue } from '../types'
 import { GlobalLoop } from '../FrameLoop'
 
 const defaultLerp = lerp()
 
 type Time = {
-  elapsed?: number
-  delta?: number
+  elapsed: number
+  delta: number
 }
 
 export class Animated {
-  public time: Time = {}
+  public time = {} as Time
   public to: any
-  public _value: ParsedValue
-  public onUpdate
-  private parse
   private _movingChildren = 0
   private children: AnimatedValue[]
 
-  constructor(value: any, private adapter?: Adapter, private loop: FrameLoop = GlobalLoop) {
-    this.adapter = adapter
-    this.onUpdate = adapter?.onUpdate
-    this.parse = adapter?.parse
-
-    this._value = adapter?.parseInitial ? adapter.parseInitial(value) : value
-    this.children = map(this._value, (_v, i) => {
+  constructor(public value: ParsedValue, private loop: FrameLoop = GlobalLoop) {
+    this.children = map(value, (_v, i) => {
       return new AnimatedValue(this, i)
     })
   }
@@ -35,13 +27,10 @@ export class Animated {
   get idle() {
     return this._movingChildren <= 0
   }
-  get value() {
-    return this.adapter?.format ? this.adapter.format(this._value) : this._value
-  }
 
   start(to: any, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
     this.time.elapsed = 0
-    this.to = this.parse ? this.parse(to) : to
+    this.to = to
     this._movingChildren = 0
 
     each(this.children, (child) => {
@@ -51,8 +40,8 @@ export class Animated {
   }
 
   update() {
-    this.time.elapsed! += this.loop.time.delta!
-    this.time.delta = this.loop.time.delta!
+    this.time.elapsed += this.loop.time.delta
+    this.time.delta = this.loop.time.delta
 
     each(this.children, (child) => {
       if (!child.idle) {

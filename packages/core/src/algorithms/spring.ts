@@ -14,8 +14,8 @@ export function spring({ tension: k = 170, friction: c = 26, mass: m = 1, veloci
   const w1 = w0 * Math.sqrt(1.0 - zeta * zeta)
 
   return function update(a: AnimatedValue) {
-    const t = a.time.elapsed!
-    const v0 = velocity ?? (a.startVelocity || 0)
+    const t = a.time.elapsed
+    const v0 = velocity ?? a.startVelocity
     const { to, distance: x0 } = a
 
     let value

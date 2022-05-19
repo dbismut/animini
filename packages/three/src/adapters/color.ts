@@ -9,6 +9,7 @@ function parse(str: string) {
     const [r = '0', g = '0', b = '0'] = str.substring(1).match(/.{1,2}/g)!
     return { r: parseInt(r, 16) / 255, g: parseInt(g, 16) / 255, b: parseInt(b, 16) / 255 }
   }
+  return parseFloat(str)
 }
 
 export const color: Adapter = { parse }

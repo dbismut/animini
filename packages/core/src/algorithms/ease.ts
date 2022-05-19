@@ -114,7 +114,7 @@ type EaseConfig = [m1X: number, m1Y: number, m2X: number, m2Y: number]
 export function ease(duration: number, [m1X, m1Y, m2X, m2Y]: EaseConfig = [0.25, 0.1, 0.25, 1]): Algorithm {
   const bezierCurve = bezier(m1X, m1Y, m2X, m2Y)
   return function update(a: AnimatedValue) {
-    const t = Math.min(1, a.time.elapsed! / duration)
+    const t = Math.min(1, a.time.elapsed / duration)
     const p = bezierCurve(t)
     return lerp(a.from, a.to, p)
   }

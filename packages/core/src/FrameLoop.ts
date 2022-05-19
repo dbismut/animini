@@ -3,17 +3,17 @@ function now() {
 }
 
 type Time = {
-  _elapsed?: number
-  elapsed?: number
-  start?: number
-  delta?: number
+  _elapsed: number
+  elapsed: number
+  start: number
+  delta: number
 }
 
 export class FrameLoop {
   private rafId = 0
   private running = false
   private queue = new Set<Function>()
-  public time: Time = {}
+  public time = {} as Time
 
   tick() {
     if (!this.running) return
@@ -52,10 +52,10 @@ export class FrameLoop {
 
   updateTime() {
     const ts = now()
-    const _elapsed = ts - this.time.start!
-    this.time.delta = Math.max(1, Math.min(64, Math.round(_elapsed - this.time._elapsed!)))
+    const _elapsed = ts - this.time.start
+    this.time.delta = Math.max(1, Math.min(64, Math.round(_elapsed - this.time._elapsed)))
     this.time._elapsed = _elapsed
-    this.time.elapsed! += this.time.delta
+    this.time.elapsed += this.time.delta
   }
 }
 
