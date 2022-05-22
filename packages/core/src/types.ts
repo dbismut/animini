@@ -10,7 +10,9 @@ export type Adapter = {
   onUpdate?(target: any, key: string | number, value: any): void
 }
 
-export type Algorithm = (a: AnimatedValue) => number
+export type Algorithm = {
+  update: (a: AnimatedValue) => number
+}
 
 export type Payload = Record<string, any>
 

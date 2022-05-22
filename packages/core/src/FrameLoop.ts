@@ -30,7 +30,8 @@ export class FrameLoop {
     if (!this.running) {
       this.time = { start: now(), elapsed: 0, delta: 0, _elapsed: 0 }
       this.running = true
-      this.tick()
+      // we need elapsed
+      this.rafId = window.requestAnimationFrame(this.tick.bind(this))
     }
   }
 
@@ -53,7 +54,7 @@ export class FrameLoop {
   updateTime() {
     const ts = now()
     const _elapsed = ts - this.time.start
-    this.time.delta = Math.max(1, Math.min(64, Math.round(_elapsed - this.time._elapsed)))
+    this.time.delta = Math.max(1, Math.min(64, _elapsed - this.time._elapsed))
     this.time._elapsed = _elapsed
     this.time.elapsed += this.time.delta
   }
