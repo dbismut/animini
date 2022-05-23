@@ -36,23 +36,25 @@ export class AnimatedValue {
   }
 
   update() {
-    if (this.idle) return
+    if (!this.idle) {
+      this.previousValue = this.value
+      this.value = this.config.immediate ? this.to : this.config.easing.update(this)
 
-    this.previousValue = this.value
-    this.value = this.config.immediate ? this.to : this.config.easing.update(this)
+      this.velocity = (this.value - this.previousValue) / this.time.delta
 
-    this.velocity = (this.value - this.previousValue) / this.time.delta
-
-    if (this.to === this.value) {
-      this.idle = true
-    } else {
-      const isMoving = Math.abs(this.velocity) > this.precision / 100
-      const isTravelling = Math.abs(this.to - this.value) > this.precision
-
-      if (!isMoving) {
+      if (this.to === this.value) {
         this.idle = true
-        if (!isTravelling) this.value = this.to
+      } else {
+        const isMoving = Math.abs(this.velocity) > this.precision / 100
+        const isTravelling = Math.abs(this.to - this.value) > this.precision
+
+        if (!isMoving) {
+          this.idle = true
+          if (!isTravelling) this.value = this.to
+        }
       }
     }
+
+    return this.value
   }
 }

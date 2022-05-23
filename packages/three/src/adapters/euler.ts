@@ -6,7 +6,7 @@ export const euler: Adapter = {
     const v = new Vector3()
     return v.setFromEuler(euler) as any as Record<string, number>
   },
-  onUpdate(element, key, value) {
+  onChange(element, key, value) {
     element[key].setFromVector3(value)
   }
 }

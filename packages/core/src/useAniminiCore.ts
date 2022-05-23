@@ -32,7 +32,7 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
 
       const value = adapter?.format ? adapter.format(animated.value) : animated.value
       rawValues.current[key] = value
-      adapter?.onUpdate?.(el.current, key as string, value)
+      adapter?.onChange?.(el.current, key as string, value)
       idle &&= animated.idle
     })
     target.setValues?.(rawValues.current, el.current, initialStyle)

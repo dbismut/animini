@@ -7,7 +7,7 @@ export type Adapter = {
   parse?(value: any): ParsedValue
   parseInitial?(value: any): ParsedValue
   format?(value: ParsedValue): any
-  onUpdate?(target: any, key: string | number, value: any): void
+  onChange?(target: any, key: string | number, value: any): void
 }
 
 export type Algorithm = {
