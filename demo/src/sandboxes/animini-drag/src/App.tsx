@@ -7,7 +7,7 @@ import styles from './styles.module.css'
 export default function App() {
   const { easeMethod, factor, springConfig, stickToDrag } = useControls({
     stickToDrag: false,
-    easeMethod: { value: spring, options: { lerp, spring } },
+    easeMethod: { value: lerp, options: { lerp, spring } },
     factor: { value: 0.05, min: 0, max: 1, optional: true, render: (get) => get('easeMethod') === lerp },
     springConfig: levaSpring({ render: (get) => get('easeMethod') === spring })
   })
@@ -22,7 +22,6 @@ export default function App() {
           scale: active ? 1.2 : 1,
           x: active ? x : 0,
           y: active ? y : 0,
-          opacity: active ? 0.5 : 1,
           backgroundColor: active ? '#5698cf50' : '#ec625c'
         },
         (k) => ({

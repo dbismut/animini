@@ -4,6 +4,7 @@ import { Link, Route } from 'wouter'
 import styles from './styles.module.css'
 
 import Drag from './sandboxes/animini-drag/src/App'
+import Inertia from './sandboxes/animini-inertia/src/App'
 import Config from './sandboxes/animini-config/src/App'
 import Perf from './sandboxes/animini-perf/src/App'
 import Three from './sandboxes/animini-three/src/App'
@@ -11,6 +12,7 @@ import ThreePerf from './sandboxes/animini-three-perf/src/App'
 
 const links = {
   'animini-drag': Drag,
+  'animini-inertia': Inertia,
   'animini-config': Config,
   'animini-perf': Perf,
   'animini-three': Three,

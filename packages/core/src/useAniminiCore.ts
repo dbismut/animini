@@ -1,7 +1,7 @@
 import { useRef, useCallback, useEffect, useMemo } from 'react'
 import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
-import { Adapter, Config, Payload, Target } from './types'
+import { Adapter, Config, ParsedValue, Payload, Target } from './types'
 
 type Animation = {
   animated: Animated
@@ -65,8 +65,7 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
             adapter = animation.adapter
           }
 
-          const _to = adapter?.parse ? adapter.parse(to[key]) : to[key]
-
+          const _to = adapter?.parse ? adapter.parse(to[key]) : (to[key] as ParsedValue)
           animated.start(_to, typeof config === 'function' ? config(key) : config)
           idle &&= animated.idle
         }

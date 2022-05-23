@@ -14,7 +14,6 @@ type Time = {
 
 export class Animated {
   public time = {} as Time
-  public to: any
   private _movingChildren = 0
   private children: AnimatedValue[]
 
@@ -28,13 +27,13 @@ export class Animated {
     return this._movingChildren <= 0
   }
 
-  start(to: any, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
+  start(to: ParsedValue, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
     this.time.elapsed = 0
-    this.to = to
     this._movingChildren = 0
 
-    each(this.children, (child) => {
-      child.start({ immediate, easing })
+    each(this.children, (child, key) => {
+      const _to = typeof to === 'number' ? to : (to as any)[key]
+      child.start(_to, { immediate, easing })
       if (!child.idle) this._movingChildren++
     })
   }

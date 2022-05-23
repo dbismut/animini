@@ -6,6 +6,7 @@ export class AnimatedValue {
   private previousValue!: number
   public startVelocity!: number
   public from!: number
+  public to!: number
   private precision: number = 1
   private config!: Required<ConfigValue>
   public idle = true
@@ -16,12 +17,6 @@ export class AnimatedValue {
   get time() {
     return this.parent.time
   }
-  get to() {
-    return this.index !== -1 ? this.parent.to[this.index] : this.parent.to
-  }
-  set to(value) {
-    this.index !== -1 ? (this.parent.to[this.index] = value) : (this.parent.to = value)
-  }
   get value() {
     return this.index !== -1 ? (this.parent.value as any)[this.index] : this.parent.value
   }
@@ -29,15 +24,14 @@ export class AnimatedValue {
     this.index !== -1 ? ((this.parent.value as any)[this.index] = value) : (this.parent.value = value)
   }
 
-  start(config: Required<ConfigValue>) {
+  start(to: number, config: Required<ConfigValue>) {
     this.config = config
     this.from = this.value
-
-    this.idle = config.immediate && this.to === this.value
-
+    this.to = to
+    this.distance = this.to - this.from
     this.startVelocity = this.velocity
 
-    this.distance = this.to - this.from
+    this.idle = config.immediate && this.to === this.value
     this.precision = clamp(Math.abs(this.distance) * 0.001, 0.01, 1)
   }
 
