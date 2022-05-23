@@ -1,5 +1,5 @@
 import { useAniminiCore, Config } from '@animini/core'
-import { Object3D } from 'three'
+import type { Object3D } from 'three'
 import target from './three'
 import { ElementType, Values } from './types'
 

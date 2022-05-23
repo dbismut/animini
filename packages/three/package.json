@@ -13,7 +13,7 @@
   },
   "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
-    "@react-three/fiber": "^6.0.10",
+    "@react-three/fiber": "^8.0.19",
     "react": ">=16.8.0",
     "three": ">=0.127.0"
   },
@@ -21,7 +21,7 @@
     "@animini/core": "^0.0.6"
   },
   "devDependencies": {
-    "@react-three/fiber": "^8.0.11",
+    "@react-three/fiber": "^8.0.19",
     "@types/three": "^0.140.0",
     "three": "^0.140.2"
   }

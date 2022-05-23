@@ -45,11 +45,10 @@ export class AnimatedValue {
       if (this.to === this.value) {
         this.idle = true
       } else {
-        const isMoving = Math.abs(this.velocity) > this.precision / 100
-        const isTravelling = Math.abs(this.to - this.value) > this.precision
-
+        const isMoving = Math.abs(this.velocity) > 1e-6
         if (!isMoving) {
           this.idle = true
+          const isTravelling = Math.abs(this.to - this.value) > this.precision
           if (!isTravelling) this.value = this.to
         }
       }
