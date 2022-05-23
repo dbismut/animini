@@ -1,4 +1,4 @@
-import { lerp as lerpFn } from '../utils'
+import { lerp as lerpFn } from '../utils/math'
 import type { AnimatedValue } from '../animated/AnimatedValue'
 import { Algorithm } from '../types'
 

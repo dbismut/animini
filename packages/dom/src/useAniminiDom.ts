@@ -1,7 +1,7 @@
 import { useRef, useEffect } from 'react'
 import { Config, useAniminiCore } from '@animini/core'
 import target from './dom'
-import { Styles } from './type'
+import { Styles } from './types'
 
 export function useAnimini<Element extends HTMLElement = HTMLElement>(masterConfig?: Config) {
   const initialStyle = useRef<CSSStyleDeclaration>()

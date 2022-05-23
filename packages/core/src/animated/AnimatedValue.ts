@@ -1,5 +1,5 @@
 import { ConfigValue } from '../types'
-import { clamp } from '../utils'
+import { clamp } from '../utils/math'
 import type { Animated } from './Animated'
 
 export class AnimatedValue {
@@ -19,6 +19,9 @@ export class AnimatedValue {
   get to() {
     return this.index !== -1 ? this.parent.to[this.index] : this.parent.to
   }
+  set to(value) {
+    this.index !== -1 ? (this.parent.to[this.index] = value) : (this.parent.to = value)
+  }
   get value() {
     return this.index !== -1 ? (this.parent.value as any)[this.index] : this.parent.value
   }
@@ -34,7 +37,7 @@ export class AnimatedValue {
 
     this.startVelocity = this.velocity
 
-    this.distance = this.to - this.value
+    this.distance = this.to - this.from
     this.precision = clamp(Math.abs(this.distance) * 0.001, 0.01, 1)
   }
 

@@ -1,5 +1,5 @@
 import { color } from './adapters'
-import { Styles } from './type'
+import { Styles } from './types'
 import { Adapter, Target } from '@animini/core'
 
 const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }

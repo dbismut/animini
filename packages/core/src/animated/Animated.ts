@@ -1,6 +1,6 @@
 import type { FrameLoop } from '../FrameLoop'
 import { AnimatedValue } from './AnimatedValue'
-import { each, map } from '../utils'
+import { each, map } from '../utils/object'
 import { lerp } from '../algorithms'
 import { ParsedValue, ConfigValue } from '../types'
 import { GlobalLoop } from '../FrameLoop'

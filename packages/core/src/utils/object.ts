@@ -1,13 +1,3 @@
-// https://github.com/mattdesl/lerp
-
-export function lerp(v0: number, v1: number, t: number) {
-  return v0 * (1 - t) + v1 * t
-}
-
-export function clamp(value: number, min: number, max: number) {
-  return Math.max(min, Math.min(max, value))
-}
-
 export function equal<P>(v0: P, v1: P) {
   if (Array.isArray(v0)) {
     return v0.every((val, index) => val === (v1 as any)[index])
