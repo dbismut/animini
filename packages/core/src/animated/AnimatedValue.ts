@@ -1,4 +1,4 @@
-import { ConfigValue } from '../types'
+import { ConfigValue, ParsedValue } from '../types'
 import { clamp } from '../utils/math'
 import type { Animated } from './Animated'
 
@@ -24,10 +24,10 @@ export class AnimatedValue {
     this.index !== -1 ? ((this.parent.value as any)[this.index] = value) : (this.parent.value = value)
   }
 
-  start(to: number, config: Required<ConfigValue>) {
+  start(to: ParsedValue, config: Required<ConfigValue>) {
     this.config = config
     this.from = this.value
-    this.to = to
+    this.to = this.index === -1 ? to : (to as any)[this.index]
     this.distance = this.to - this.from
     this.startVelocity = this.velocity
 

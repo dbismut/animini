@@ -32,8 +32,7 @@ export class Animated {
     this._movingChildren = 0
 
     each(this.children, (child, key) => {
-      const _to = typeof to === 'number' ? to : (to as any)[key]
-      child.start(_to, { immediate, easing })
+      child.start(to, { immediate, easing })
       if (!child.idle) this._movingChildren++
     })
   }
