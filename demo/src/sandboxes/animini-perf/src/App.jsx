@@ -48,6 +48,7 @@ export default function Perf() {
       const raf = window.requestIdleCallback || window.requestAnimationFrame
       raf(() => {
         setClicked(false)
+        // eslint-disable-next-line no-console
         console.log('TIME:', performance.now() - ts)
       })
     })

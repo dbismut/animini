@@ -24,7 +24,12 @@ export default function App() {
         immediate: active
       }))
     },
-    { target: ref, from: () => [api.get('x') || 0, api.get('y') || 0] as [number, number] }
+    {
+      target: ref,
+      from: () => [api.get('x') || 0, api.get('y') || 0] as [number, number],
+      bounds: { left: -limitXY.x, right: limitXY.x, top: -limitXY.y, bottom: limitXY.y },
+      rubberband: true
+    }
   )
 
   return (

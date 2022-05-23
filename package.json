@@ -25,16 +25,19 @@
   "size-limit": [
     {
       "name": "core",
-      "limit": "3 KB",
+      "import": "{ useAniminiCore }",
+      "limit": "2.5 KB",
       "path": "packages/core/dist/*.prod.js"
     },
     {
       "name": "dom",
+      "import": "{ useAnimini }",
       "limit": "4 KB",
       "path": "packages/dom/dist/*.prod.js"
     },
     {
       "name": "three",
+      "import": "{ useAnimini }",
       "limit": "3.5 KB",
       "path": "packages/three/dist/*.prod.js",
       "ignore": [

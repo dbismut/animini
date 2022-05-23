@@ -3,10 +3,11 @@ import { Algorithm } from '../types'
 import { rubberbandIfOutOfBounds } from '../utils/math'
 import { spring } from './spring'
 
-type InertiaConfig = { momentum?: number; min?: number; max?: number; rubberband?: number }
+type InertiaConfig = { momentum?: number; min?: number; max?: number; rubberband?: number; velocity?: number }
 
 export function inertia({
   momentum = 0.998,
+  velocity,
   min = -Infinity,
   max = Infinity,
   rubberband = 0.15
@@ -15,7 +16,9 @@ export function inertia({
 
   return {
     update(a: AnimatedValue) {
-      if (!a.startVelocity) return a.value
+      const v0 = velocity ?? a.startVelocity
+
+      if (!v0) return a.value
 
       if (a.value < min || a.value > max) {
         a.start(a.value < min ? min : max, { immediate: false, easing: springEase })
@@ -23,7 +26,7 @@ export function inertia({
       }
 
       const e = Math.exp(-(1 - momentum) * a.time.elapsed)
-      const value = a.from + (a.startVelocity / (1 - momentum)) * (1 - e)
+      const value = a.from + (v0 / (1 - momentum)) * (1 - e)
 
       return rubberbandIfOutOfBounds(value, min, max, rubberband)
     }
