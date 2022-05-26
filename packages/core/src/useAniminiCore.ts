@@ -8,6 +8,9 @@ type Animation = {
   adapter?: Adapter
 }
 
+// TODO unit support
+// TODO interpolator
+
 export function useAniminiCore<ElementType, ValueType extends Payload>(
   target: Target<ElementType, ValueType>,
   initialStyle: any,

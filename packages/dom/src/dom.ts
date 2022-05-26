@@ -13,6 +13,7 @@ const ADAPTERS: Partial<Record<keyof CSSStyleDeclaration, Adapter>> = {
   borderBottomColor: color,
   borderRightColor: color,
   fill: color,
+  stroke: color,
   textDecorationColor: color
 }
 const NO_PX = ['opacity']
