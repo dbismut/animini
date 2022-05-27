@@ -1,4 +1,4 @@
-import { Adapter } from 'packages/core/src'
+import { Adapter } from '@animini/core'
 
 export const transform: Adapter = {
   parse(value) {
