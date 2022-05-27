@@ -1,4 +1,4 @@
-import { Adapter } from '@animini/core'
+import { DomAdapter } from '../types'
 
 // TODO hsl ?
 
@@ -76,7 +76,7 @@ function parse(str: string) {
   return [r, g, b, a ?? 1]
 }
 
-export const color: Adapter = {
+export const color: DomAdapter = {
   parse,
   format(c: number[]) {
     return `rgba(${~~c[0]}, ${~~c[1]}, ${~~c[2]}, ${c[3]})`

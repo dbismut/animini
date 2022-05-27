@@ -19,7 +19,7 @@ export class Animated {
 
   constructor(public value: ParsedValue, private loop: FrameLoop = GlobalLoop) {
     this.children = map(value, (_v, i) => {
-      return new AnimatedValue(this, i, value)
+      return new AnimatedValue(this, i)
     })
   }
 

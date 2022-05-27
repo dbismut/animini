@@ -1,14 +1,20 @@
 import { AnimatedValue } from './animated/AnimatedValue'
 import { FrameLoop } from './FrameLoop'
 
-export type NumberOrString = number | string
-export type ParsedValue = NumberOrString | NumberOrString[] | Record<string, NumberOrString>
+export type ParsedValue = number | number[] | Record<string, number>
 
-export type Adapter = {
-  parse?(value: any): ParsedValue
-  parseInitial?(value: any): ParsedValue
+export type AdapterFn<ElementType, ValueType extends Payload, R> = (
+  value: any,
+  key: string | number | symbol,
+  target: ElementType | undefined | null,
+  currentValues: any
+) => R
+
+export type Adapter<ElementType, ValueType extends Payload> = {
+  parse?: AdapterFn<ElementType, ValueType, ParsedValue>
+  parseInitial?: AdapterFn<ElementType, ValueType, ParsedValue>
   format?(value: ParsedValue): any
-  onChange?(target: any, key: string | number, value: any): void
+  onChange?: AdapterFn<ElementType, ValueType, void>
 }
 
 export type Algorithm = {
@@ -23,8 +29,8 @@ export type Target<ElementType, ValueType extends Payload> = {
   getInitialValueAndAdapter<K extends keyof ValueType>(
     element: ElementType,
     key: K,
-    initialStyle?: any
-  ): [ValueType[K], Adapter | undefined]
+    currentValues?: any
+  ): [ValueType[K], Adapter<ElementType, ValueType> | undefined]
 }
 
 export type ConfigValue = {

@@ -3,9 +3,9 @@ import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
 import { Adapter, Config, ParsedValue, Payload, Target } from './types'
 
-type Animation = {
+type Animation<ElementType, ValueType extends Payload> = {
   animated: Animated
-  adapter?: Adapter
+  adapter?: Adapter<ElementType, ValueType>
 }
 
 // TODO unit support
@@ -13,14 +13,14 @@ type Animation = {
 
 export function useAniminiCore<ElementType, ValueType extends Payload>(
   target: Target<ElementType, ValueType>,
-  initialStyle: any,
+  currentValues: any,
   masterConfig?: Config
 ) {
   const loop = target.loop || GlobalLoop
 
   const el = useRef<ElementType>(null)
   const rawValues = useRef<ValueType>({} as any)
-  const animations = useMemo(() => new Map<keyof ValueType, Animation>(), [])
+  const animations = useMemo(() => new Map<keyof ValueType, Animation<ElementType, ValueType>>(), [])
   const resolveRef = useRef<(value?: unknown) => void>()
   const rejectRef = useRef<(value?: unknown) => void>()
   const configRef = useRef(masterConfig)
@@ -35,10 +35,10 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
 
       const value = adapter?.format ? adapter.format(animated.value) : animated.value
       rawValues.current[key] = value
-      adapter?.onChange?.(el.current, key as string, value)
+      adapter?.onChange?.(value, key, el.current, currentValues)
       idle &&= animated.idle
     })
-    target.setValues?.(rawValues.current, el.current, initialStyle)
+    target.setValues?.(rawValues.current, el.current, currentValues)
     if (idle) {
       loop.stop(update)
       resolveRef.current?.()
@@ -55,11 +55,13 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
         for (let key in to) {
           const animation = animations.get(key)
           let animated: Animated
-          let adapter: Adapter | undefined
+          let adapter: Adapter<ElementType, ValueType> | undefined
 
           if (!animation) {
-            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current!, key, initialStyle)
-            const value = _adapter?.parseInitial ? _adapter?.parseInitial(_value) : _value
+            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current!, key, currentValues)
+            const value = _adapter?.parseInitial
+              ? _adapter?.parseInitial(_value, key, el.current, currentValues)
+              : _value
             animated = new Animated(value, loop)
             adapter = _adapter
             animations.set(key, { animated, adapter })
@@ -68,7 +70,7 @@ export function useAniminiCore<ElementType, ValueType extends Payload>(
             adapter = animation.adapter
           }
 
-          const _to = adapter?.parse ? adapter.parse(to[key]) : (to[key] as ParsedValue)
+          const _to = adapter?.parse ? adapter.parse(to[key], key, el.current, currentValues) : (to[key] as ParsedValue)
           animated.start(_to, typeof config === 'function' ? config(key) : config)
           idle &&= animated.idle
         }
