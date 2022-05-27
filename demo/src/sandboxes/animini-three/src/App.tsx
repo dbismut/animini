@@ -11,7 +11,7 @@ const Mesh = () => {
 
   const [ref, api] = useAnimini<THREE.Mesh>()
   useControls({
-    changeColor: button(() => apiMat.start({ color: '#f00' })),
+    changeColor: button(() => apiMat.start({ color: 'rgb(255,0,0)' })),
     changeScale: button(() => api.start({ scale: { x: 2, y: 1, z: 2 } })),
     changeRotation: button(() => api.start({ rotation: { x: 2, y: 1, z: 2 } }))
   })

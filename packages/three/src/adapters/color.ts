@@ -1,15 +1,10 @@
-import { Adapter } from '@animini/core'
+import { ThreeAdapter } from '../types'
+import { Color } from 'three'
 
-function parse(str: string) {
-  if (str.indexOf('rgb') === 0) {
-    const [r, g, b] = str.match(/\d+/g)!
-    return { r: ~~r / 255, g: ~~g / 255, b: ~~b / 255 }
+const kk = new Color()
+
+export const color: ThreeAdapter = {
+  parse(str: string) {
+    return kk.set(str) as unknown as Record<string, number>
   }
-  if (str.indexOf('#') === 0) {
-    const [r = '0', g = '0', b = '0'] = str.substring(1).match(/.{1,2}/g)!
-    return { r: parseInt(r, 16) / 255, g: parseInt(g, 16) / 255, b: parseInt(b, 16) / 255 }
-  }
-  return parseFloat(str)
 }
-
-export const color: Adapter = { parse }
