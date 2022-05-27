@@ -1,1 +1,2 @@
-export * from './color'
+export { color } from './color'
+export { transform } from './transform'

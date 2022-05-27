@@ -1,10 +1,10 @@
-import { color } from './adapters'
+import { color, transform } from './adapters'
 import { Styles } from './types'
 import { Adapter, Target } from '@animini/core'
 
 const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
 
-const ADAPTERS: Partial<Record<keyof CSSStyleDeclaration, Adapter>> = {
+const ADAPTERS: Partial<Record<keyof Styles, Adapter>> = {
   color,
   backgroundColor: color,
   borderColor: color,
@@ -14,7 +14,9 @@ const ADAPTERS: Partial<Record<keyof CSSStyleDeclaration, Adapter>> = {
   borderRightColor: color,
   fill: color,
   stroke: color,
-  textDecorationColor: color
+  textDecorationColor: color,
+  x: transform,
+  y: transform
 }
 const NO_PX = ['opacity']
 
@@ -44,7 +46,6 @@ const dom: Target<HTMLElement, Styles> = {
       value = getTranslateValues(styleRef.current!)[key as keyof Transform]
     } else {
       value = styleRef.current![key as any]
-      value = adapter ? value : parseFloat(value)
     }
     return [value, adapter] as [Styles[typeof key], Adapter | undefined]
   }
@@ -53,6 +54,8 @@ const dom: Target<HTMLElement, Styles> = {
 export default dom
 
 type Transform = { scale: number; x: number; y: number; z: number }
+
+const matrixRegexp = /matrix.*\((.+)\)/
 
 function getTranslateValues(style: CSSStyleDeclaration): Transform {
   const matrix = style.transform
@@ -64,13 +67,11 @@ function getTranslateValues(style: CSSStyleDeclaration): Transform {
 
   // Can either be 2d or 3d transform
   const matrixType = matrix.includes('3d') ? '3d' : '2d'
-  const matrixValues = matrix.match(/matrix.*\((.+)\)/)![1].split(', ')
+  const matrixValues = matrix.match(matrixRegexp)![1].split(', ')
 
   if (matrixType === '2d') {
     return { scale: ~~matrixValues[0], x: ~~matrixValues[4], y: ~~matrixValues[5], z: 0 }
   }
 
-  // if (matrixType === '3d') {
   return { scale: ~~matrixValues[0], x: ~~matrixValues[12], y: ~~matrixValues[13], z: ~~matrixValues[14] }
-  // }
 }

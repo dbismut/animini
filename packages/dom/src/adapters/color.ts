@@ -21,7 +21,6 @@ function parse(str: string) {
 */
 
 const hexToIntTable: Record<string, number> = {}
-// const intToHexTable = new Array<string>(255)
 
 for (let i = 0; i < 256; i++) {
   let hex = i.toString(16)
@@ -31,7 +30,6 @@ for (let i = 0; i < 256; i++) {
   }
 
   hexToIntTable[hex] = i
-  // intToHexTable[i] = hex
 }
 
 function substringMatch(str: string, from: string, to?: string) {

@@ -1,7 +1,8 @@
 import { AnimatedValue } from './animated/AnimatedValue'
 import { FrameLoop } from './FrameLoop'
 
-export type ParsedValue = number | number[] | Record<string, number>
+export type NumberOrString = number | string
+export type ParsedValue = NumberOrString | NumberOrString[] | Record<string, NumberOrString>
 
 export type Adapter = {
   parse?(value: any): ParsedValue
