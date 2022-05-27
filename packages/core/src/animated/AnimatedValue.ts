@@ -1,5 +1,4 @@
 import { ConfigValue, ParsedValue } from '../types'
-import { clamp } from '../utils/math'
 import type { Animated } from './Animated'
 
 export class AnimatedValue {
@@ -32,7 +31,7 @@ export class AnimatedValue {
     this.startVelocity = this.velocity
 
     this.idle = config.immediate && this.to === this.value
-    this.precision = clamp(Math.abs(this.distance) * 0.001, 0.01, 1) ** 2
+    this.precision = Math.min(Math.abs(this.distance) * 1e-4, 1)
   }
 
   update() {
@@ -47,8 +46,15 @@ export class AnimatedValue {
       } else {
         const isMoving = Math.abs(this.velocity) > this.precision
         if (!isMoving) {
-          this.idle = true
-          if (!this.config.easing.wanders) this.value = this.to
+          if (!this.config.easing.wanders) {
+            const isTravelling = Math.abs(this.to - this.value) > this.precision
+            if (!isTravelling) {
+              this.idle = true
+              this.value = this.to
+            }
+          } else {
+            this.idle = true
+          }
         }
       }
     }

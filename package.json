@@ -17,6 +17,7 @@
     "release": "pnpm build && pnpm changeset publish",
     "tsc": "tsc --noEmit",
     "size": "pnpm size-limit",
+    "test:size": "pnpm build && pnpm size && pnpm dev",
     "prepare": "husky install",
     "demo:dev": "pnpm --filter demo run dev",
     "test:perf": "jest ./perf/tests/perf.*.js",

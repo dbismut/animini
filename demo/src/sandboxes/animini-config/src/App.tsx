@@ -12,7 +12,7 @@ export default function App() {
     springConfig: levaSpring({ render: (get) => get('easeMethod') === spring }),
     easeConfig: bezier({ render: (get) => get('easeMethod') === ease }),
     duration: { value: 300, render: (get) => get('easeMethod') === ease },
-    'set width': button(async (get) => {
+    animate: button(async (get) => {
       const method = get('easeMethod')
       let easing
       switch (method) {
@@ -26,7 +26,7 @@ export default function App() {
           easing = method(get('duration'), get('easeConfig'))
       }
       try {
-        await api.start({ scale: 2 }, { easing })
+        await api.start({ x: '50%' }, { easing })
         await api.start({ scale: 0.5 }, { easing })
       } catch {}
     }),

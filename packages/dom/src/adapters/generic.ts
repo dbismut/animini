@@ -3,10 +3,15 @@ import { DomAdapter } from '../types'
 
 const parse: DomAdapter['parse'] = (value, _key, el) => {
   let [_value, unit] = parseUnitValue(value)
-  if (unit === '%') {
-    // @ts-expect-error
-    const parentWidth: number = el?.offsetParent?.offsetWidth
-    _value *= parentWidth / 100
+  switch (unit) {
+    case '%':
+      // @ts-expect-error
+      const parentWidth: number = el?.offsetParent?.offsetWidth || 0
+      return (_value * parentWidth) / 100
+    case 'vw':
+      return (_value * window.innerWidth) / 100
+    case 'vh':
+      return (_value * window.innerHeight) / 100
   }
   return _value
 }
