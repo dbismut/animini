@@ -32,7 +32,7 @@ export class AnimatedValue {
     this.startVelocity = this.velocity
 
     this.idle = config.immediate && this.to === this.value
-    this.precision = clamp(Math.abs(this.distance) * 0.001, 0.01, 1)
+    this.precision = clamp(Math.abs(this.distance) * 0.001, 0.01, 1) ** 2
   }
 
   update() {
@@ -45,11 +45,10 @@ export class AnimatedValue {
       if (this.to === this.value) {
         this.idle = true
       } else {
-        const isMoving = Math.abs(this.velocity) > 1e-6
+        const isMoving = Math.abs(this.velocity) > this.precision
         if (!isMoving) {
           this.idle = true
-          const isTravelling = Math.abs(this.to - this.value) > this.precision
-          if (!isTravelling) this.value = this.to
+          if (!this.config.easing.wanders) this.value = this.to
         }
       }
     }

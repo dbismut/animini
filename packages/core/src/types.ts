@@ -18,6 +18,7 @@ export type Adapter<ElementType, ValueType extends Payload> = {
 }
 
 export type Algorithm = {
+  wanders?: boolean
   update: (a: AnimatedValue) => number
 }
 

@@ -15,6 +15,7 @@ export function inertia({
   const springEase = spring()
 
   return {
+    wanders: true,
     update(a: AnimatedValue) {
       const v0 = velocity ?? a.startVelocity
 
