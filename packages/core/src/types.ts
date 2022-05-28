@@ -3,7 +3,7 @@ import { FrameLoop } from './FrameLoop'
 
 export type ParsedValue = number | number[] | Record<string, number>
 
-export type AdapterFn<ElementType, ValueType extends Payload, R> = (
+export type AdapterFn<ElementType, R> = (
   value: any,
   key: string | number | symbol,
   target: ElementType | undefined | null,
@@ -11,13 +11,17 @@ export type AdapterFn<ElementType, ValueType extends Payload, R> = (
 ) => R
 
 export type Adapter<ElementType, ValueType extends Payload> = {
-  parse?: AdapterFn<ElementType, ValueType, ParsedValue>
-  parseInitial?: AdapterFn<ElementType, ValueType, ParsedValue>
+  parse?: AdapterFn<ElementType, ParsedValue>
+  parseInitial?: AdapterFn<ElementType, ParsedValue>
   format?(value: ParsedValue): any
-  onChange?: AdapterFn<ElementType, ValueType, void>
+  onChange?: AdapterFn<ElementType, void>
 }
 
 export type Algorithm = {
+  /**
+   * When true, the algorithm doesn't always reach its destination (ie inertia).
+   * @note should probably be renamed.
+   */
   wanders?: boolean
   update: (a: AnimatedValue) => number
 }

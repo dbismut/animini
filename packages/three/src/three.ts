@@ -1,10 +1,10 @@
 import { invalidate, addEffect } from '@react-three/fiber'
-import { Adapter, FrameLoop, Target } from '@animini/core'
+import { FrameLoop, Target } from '@animini/core'
 import { Color, Euler } from 'three'
 import { color, euler } from './adapters'
-import { ElementType, Values } from './types'
+import { ElementType, ThreeAdapter, Values } from './types'
 
-const ADAPTERS = new Map<any, Adapter>([
+const ADAPTERS = new Map<any, ThreeAdapter>([
   [Color, color],
   [Euler, euler]
 ])

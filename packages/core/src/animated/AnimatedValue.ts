@@ -31,31 +31,31 @@ export class AnimatedValue {
     this.startVelocity = this.velocity
 
     this.idle = config.immediate && this.to === this.value
-    this.precision = Math.min(Math.abs(this.distance) * 1e-4, 1)
+    this.precision = config.easing.wanders ? 0.01 : Math.min(Math.abs(this.distance) * 1e-4, 1)
   }
 
   update() {
-    if (!this.idle) {
-      this.previousValue = this.value
-      this.value = this.config.immediate ? this.to : this.config.easing.update(this)
+    if (this.idle) return this.value
 
-      this.velocity = (this.value - this.previousValue) / this.time.delta
+    this.previousValue = this.value
+    this.value = this.config.immediate ? this.to : this.config.easing.update(this)
+    this.velocity = (this.value - this.previousValue) / this.time.delta
 
-      if (this.to === this.value) {
-        this.idle = true
-      } else {
-        const isMoving = Math.abs(this.velocity) > this.precision
-        if (!isMoving) {
-          if (!this.config.easing.wanders) {
-            const isTravelling = Math.abs(this.to - this.value) > this.precision
-            if (!isTravelling) {
-              this.idle = true
-              this.value = this.to
-            }
-          } else {
-            this.idle = true
-          }
+    if (this.to === this.value) {
+      this.idle = true
+      return this.value
+    }
+
+    const isMoving = Math.abs(this.velocity) > this.precision
+    if (!isMoving) {
+      if (!this.config.easing.wanders) {
+        const isTravelling = Math.abs(this.to - this.value) > this.precision
+        if (!isTravelling) {
+          this.idle = true
+          this.value = this.to
         }
+      } else {
+        this.idle = true
       }
     }
 
