@@ -20,16 +20,19 @@ yarn add @animini/three
 import { useDrag } from '@use-gesture/react'
 import { useAnimini, spring } from '@animini/dom'
 
+const easing = spring()
+
 export default function App() {
-  const [ref, api] = useAnimini(spring) // leave useAnimini() to use default Lerp
+  const [ref, api] = useAnimini()
 
   useDrag(
     ({ active, movement: [x, y] }) => {
       api.start({ scale: active ? 1.2 : 1, x: active ? x : 0, y: active ? y : 0 }, (k) => ({
         immediate: k !== 'scale' && active,
+        easing
       }))
     },
-    { domTarget: ref }
+    { target: ref }
   )
 
   return <div ref={ref} />
