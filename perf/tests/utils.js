@@ -29,7 +29,7 @@ export function animateLatest({ motion, limit, from, to, config, adapter }) {
 export function animateSource({ motion, limit, from, to, config, adapter }) {
   const loop = { time: { elapsed: 0, delta: 16 } }
   const _motion = { easing: motion === 'spring' ? spring(config) : lerp(config) }
-  const animated = new Animated(from, AdaptersSource[adapter], loop)
+  const animated = new Animated(from, loop)
   animated.start(to, _motion)
   let iterations = 0
   while (!animated.idle && iterations < limit) {
