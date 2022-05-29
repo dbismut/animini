@@ -1,13 +1,15 @@
 import { Animated } from '../../packages/core/src/animated/Animated'
 import { spring, lerp } from '../../packages/core/src/algorithms'
-import { color } from '../../packages/dom/src/adapters'
+// import { color } from '../../packages/dom/src/adapters'
 
 import { Animated as AnimatedLatest } from '@animini/core-latest/src/animated/Animated'
 import { spring as springLatest } from '@animini/core-latest/src/algorithms'
 import { color as colorLatest } from '@animini/dom-latest/src/adapters'
 
-const AdaptersSource = { color }
+// const AdaptersSource = { color }
 const AdaptersLatest = { color: colorLatest }
+
+// TODO test adapters (possibly reinject adapters inside animated...)
 
 export function animateLatest({ motion, limit, from, to, config, adapter }) {
   const loop = { time: { elapsed: 0, delta: 16 } }
