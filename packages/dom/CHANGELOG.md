@@ -1,5 +1,24 @@
 # @animini/dom
 
+## 0.1.0
+
+### Minor Changes
+
+- b442912: - typescript
+  - promise-based
+  - added api.stop
+  - ability to change algorithm per animation call
+  - added ease algorithm
+  - added inertia algorithm
+  - improved color parsing for dom
+  - improved color parsing for three
+  - unit support for dom
+
+### Patch Changes
+
+- Updated dependencies [b442912]
+  - @animini/core@0.1.0
+
 ## 0.0.8
 
 ### Patch Changes
