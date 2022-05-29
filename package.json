@@ -20,6 +20,7 @@
     "test:size": "pnpm build && pnpm size",
     "prepare": "husky install",
     "demo:dev": "pnpm --filter demo run dev",
+    "demo:build": "pnpm --filter demo run build",
     "demo:serve": "pnpm --filter demo run build && pnpm --filter demo run serve",
     "test:perf": "jest ./perf/tests/perf.*.js",
     "test:bench": "jest ./perf/tests/bench.*.js"
