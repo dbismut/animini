@@ -1,6 +1,6 @@
 {
   "name": "@animini/dom",
-  "version": "0.0.8",
+  "version": "0.1.0",
   "description": "animini target for the dom",
   "keywords": [],
   "main": "dist/animini-dom.cjs.js",
@@ -16,7 +16,7 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@animini/core": "^0.0.6"
+    "@animini/core": "^0.1.0"
   },
   "devDependencies": {
     "three": "^0.141.0"
