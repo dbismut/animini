@@ -23,7 +23,9 @@
     "demo:build": "pnpm --filter demo run build",
     "demo:serve": "pnpm --filter demo run build && pnpm --filter demo run serve",
     "test:perf": "jest ./perf/tests/perf.*.js",
-    "test:bench": "jest ./perf/tests/bench.*.js"
+    "test:bench": "jest ./perf/tests/bench.*.js",
+    "ci:version": "pnpm changeset version && pnpm --filter \"@animini/*\" install --lockfile-only",
+    "ci:publish": "pnpm build && pnpm changeset publish"
   },
   "size-limit": [
     {
