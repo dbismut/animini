@@ -103,5 +103,15 @@
     "transformIgnorePatterns": [
       "<rootDir>/node_modules/(?!(@animini/.*-latest)/)"
     ]
+  },
+  "pnpm": {
+    "peerDependencyRules": {
+      "ignoreMissing": [
+        "react",
+        "react-dom",
+        "@babel/plugin-syntax-flow",
+        "@babel/plugin-transform-react-jsx"
+      ]
+    }
   }
 }
