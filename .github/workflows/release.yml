@@ -37,17 +37,17 @@ jobs:
           version: 7.1.0
           run_install: true
 
-      - name: Copy README file to React package
+      - name: Copy README file to Dom package
         uses: canastro/copy-file-action@master
         with:
           source: 'README.md'
-          target: 'packages/react/README.md'
+          target: 'packages/dom/README.md'
 
-      - name: Copy README file to Vanilla package
+      - name: Copy README file to Three package
         uses: canastro/copy-file-action@master
         with:
           source: 'README.md'
-          target: 'packages/vanilla/README.md'
+          target: 'packages/three/README.md'
 
       - name: Set up NPM credentials
         run: echo "//registry.npmjs.org/:_authToken=${NPM_TOKEN}" > ~/.npmrc
