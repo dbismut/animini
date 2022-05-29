@@ -1,5 +1,9 @@
 [![npm (tag)](https://img.shields.io/npm/v/@animini/dom?style=flat&colorA=000000&colorB=000000)](https://www.npmjs.com/package/@animini/dom) [![npm bundle size](https://img.shields.io/bundlephobia/minzip/@animini/dom?style=flat&colorA=000000&colorB=000000&label=gzipped)](https://bundlephobia.com/result?p=@animini/dom)
 
+## Demo
+
+https://animini.vercel.app/
+
 ## Installation
 
 ### For the DOM
