@@ -11,6 +11,7 @@ type Animation<ElementType, ValueType extends Payload> = {
 // TODO interpolator
 // TODO chaining ?
 // TODO from ?
+// TODO staggering
 
 export function useAniminiCore<ElementType, ValueType extends Payload>(
   target: Target<ElementType, ValueType>,
