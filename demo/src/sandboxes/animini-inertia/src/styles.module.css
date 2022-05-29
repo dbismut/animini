@@ -1,0 +1,16 @@
+.drag {
+  height: 80px;
+  width: 80px;
+  background-color: #ec625c;
+  touch-action: none;
+}
+
+.bounds {
+  --border: 10px;
+  --drag: 80px;
+  position: absolute;
+  pointer-events: none;
+  border: var(--border) solid cornsilk;
+  width: calc((var(--limitX, 300px) + var(--border)) * 2 + var(--drag));
+  height: calc((var(--limitY, 300px) + var(--border)) * 2 + var(--drag));
+}

@@ -1,13 +1,15 @@
 import { Animated } from '../../packages/core/src/animated/Animated'
-import { spring } from '../../packages/core/src/algorithms'
-import { color } from '../../packages/dom/src/adapters'
+import { spring, lerp } from '../../packages/core/src/algorithms'
+// import { color } from '../../packages/dom/src/adapters'
 
 import { Animated as AnimatedLatest } from '@animini/core-latest/src/animated/Animated'
 import { spring as springLatest } from '@animini/core-latest/src/algorithms'
 import { color as colorLatest } from '@animini/dom-latest/src/adapters'
 
-const AdaptersSource = { color }
+// const AdaptersSource = { color }
 const AdaptersLatest = { color: colorLatest }
+
+// TODO test adapters (possibly reinject adapters inside animated...)
 
 export function animateLatest({ motion, limit, from, to, config, adapter }) {
   const loop = { time: { elapsed: 0, delta: 16 } }
@@ -28,9 +30,9 @@ export function animateLatest({ motion, limit, from, to, config, adapter }) {
 
 export function animateSource({ motion, limit, from, to, config, adapter }) {
   const loop = { time: { elapsed: 0, delta: 16 } }
-  const _motion = motion === 'spring' ? spring : undefined
-  const animated = new Animated(from, _motion, AdaptersSource[adapter], loop)
-  animated.start(to, config)
+  const _motion = { easing: motion === 'spring' ? spring(config) : lerp(config) }
+  const animated = new Animated(from, loop)
+  animated.start(to, _motion)
   let iterations = 0
   while (!animated.idle && iterations < limit) {
     iterations++

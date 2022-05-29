@@ -1,11 +1,13 @@
 import React, { useEffect } from 'react'
 import { useAnimini, spring } from '@animini/dom'
 
+const config = { easing: spring() }
+
 export default function Box({ x, y, backgroundColor, scale, style }) {
-  const [ref, api] = useAnimini(spring)
+  const [ref, api] = useAnimini()
 
   useEffect(() => {
-    api.start({ x, y, backgroundColor, scale })
+    api.start({ x, y, backgroundColor, scale }, config)
   }, [x, y, backgroundColor, scale, api])
 
   return <div ref={ref} style={style} />

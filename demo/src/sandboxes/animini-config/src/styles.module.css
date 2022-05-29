@@ -1,0 +1,7 @@
+.square {
+  height: 200px;
+  width: 200px;
+  border-radius: 4px;
+  background-color: #ec625c;
+  touch-action: none;
+}

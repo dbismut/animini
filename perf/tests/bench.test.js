@@ -35,8 +35,8 @@ async function bench(label, cb) {
       [label]: {
         latest: results['1'].hz,
         source: results['0'].hz,
-        vs: 1 - results['0'].hz / results['1'].hz,
-      },
+        vs: 1 - results['0'].hz / results['1'].hz
+      }
     })
     expect(0).toBeLessThan(1000)
   })
@@ -47,9 +47,9 @@ bench('spring int (10 itr.)', (useSource) => animatedBench(useSource, { motion: 
 bench('spring array (10 itr.)', (useSource) =>
   animatedBench(useSource, { motion: 'spring', limit: 10, from: [0, 0, 0], to: [100, 200, 300] })
 )
-bench('spring color (10 itr.)', (useSource) =>
-  animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
-)
+// bench('spring color (10 itr.)', (useSource) =>
+//   animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
+// )
 
 function formatResults(results) {
   const r = {}

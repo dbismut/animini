@@ -8,14 +8,15 @@ import { spring as levaSpring } from '@leva-ui/plugin-spring'
 const colors = ['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff']
 
 function Box({ position, scale, rotation, color }) {
-  const [mesh, setMesh] = useAnimini(spring)
-  const [material, setMaterial] = useAnimini(spring)
-  const { config } = useControls({ config: levaSpring() })
+  const [mesh, setMesh] = useAnimini()
+  const [material, setMaterial] = useAnimini()
+  const { springConfig } = useControls({ springConfig: levaSpring() })
 
   useLayoutEffect(() => {
+    const config = { easing: spring(springConfig) }
     setMesh.start({ position, scale, rotation }, config)
     setMaterial.start({ color }, config)
-  }, [color, position, scale, rotation, config, setMesh, setMaterial])
+  }, [color, position, scale, rotation, springConfig, setMesh, setMaterial])
 
   return (
     <mesh ref={mesh}>
@@ -34,7 +35,7 @@ function Content() {
       position: { x: 250 - Math.random() * 500, y: 250 - Math.random() * 500, z: i * 3 },
       color: colors[Math.round(Math.random() * (colors.length - 1))],
       scale: { x: 1 + r * 200, y: 1 + r * 100, z: 10 },
-      rotation: { x: 0, y: 0, z: THREE.Math.degToRad(Math.round(Math.random()) * 45) },
+      rotation: { x: 0, y: 0, z: THREE.Math.degToRad(Math.round(Math.random()) * 45) }
     }
   })
 

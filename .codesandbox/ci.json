@@ -2,9 +2,11 @@
   "packages": ["packages/*"],
   "sandboxes": [
     "/demo/src/sandboxes/animini-drag",
+    "/demo/src/sandboxes/animini-inertia",
+    "/demo/src/sandboxes/animini-config",
     "/demo/src/sandboxes/animini-perf",
     "/demo/src/sandboxes/animini-three",
     "/demo/src/sandboxes/animini-three-perf"
   ],
-  "node": "14"
+  "node": "16"
 }
