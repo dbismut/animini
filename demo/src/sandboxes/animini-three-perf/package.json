@@ -4,8 +4,8 @@
   "main": "src/index.jsx",
   "dependencies": {
     "@leva-ui/plugin-spring": "*",
-    "@react-three/drei": "^4.1.4",
-    "@react-three/fiber": "^6.0.10",
+    "@react-three/drei": "^9.11.3",
+    "@react-three/fiber": "^8.0.18",
     "@animini/three": "*",
     "leva": "*",
     "react": "^18.1.0",

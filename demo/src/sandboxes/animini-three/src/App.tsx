@@ -26,7 +26,6 @@ const Mesh = () => {
 export default function App() {
   return (
     <Canvas
-      dpr={[1, 2]}
       camera={{ position: [0, 0, 16], fov: 50 }}
       style={{ background: 'dimgray', height: '100vh', width: '100vw' }}
     >
