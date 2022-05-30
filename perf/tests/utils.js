@@ -3,19 +3,19 @@ import { spring, lerp } from '../../packages/core/src/algorithms'
 // import { color } from '../../packages/dom/src/adapters'
 
 import { Animated as AnimatedLatest } from '@animini/core-latest/src/animated/Animated'
-import { spring as springLatest } from '@animini/core-latest/src/algorithms'
-import { color as colorLatest } from '@animini/dom-latest/src/adapters'
+import { lerp as lerpLatest, spring as springLatest } from '@animini/core-latest/src/algorithms'
+// import { color as colorLatest } from '@animini/dom-latest/src/adapters'
 
 // const AdaptersSource = { color }
-const AdaptersLatest = { color: colorLatest }
+// const AdaptersLatest = { color: colorLatest }
 
 // TODO test adapters (possibly reinject adapters inside animated...)
 
 export function animateLatest({ motion, limit, from, to, config, adapter }) {
   const loop = { time: { elapsed: 0, delta: 16 } }
-  const _motion = motion === 'spring' ? springLatest : undefined
-  const animated = new AnimatedLatest(from, _motion, AdaptersLatest[adapter], loop)
-  animated.start(to, config)
+  const _motion = { easing: motion === 'spring' ? springLatest(config) : lerpLatest(config) }
+  const animated = new AnimatedLatest(from, loop)
+  animated.start(to, _motion)
   let iterations = 0
   while (!animated.idle && iterations < limit) {
     iterations++
@@ -23,7 +23,7 @@ export function animateLatest({ motion, limit, from, to, config, adapter }) {
     animated.update()
   }
 
-  // console.log('LATEST', animated.value)
+  // console.log('SOURCE', animated.value)
 
   return iterations
 }
