@@ -18,7 +18,7 @@
     "three": ">=0.127.0"
   },
   "dependencies": {
-    "@animini/core": "^0.1.0"
+    "@animini/core": "0.1.0"
   },
   "devDependencies": {
     "@react-three/fiber": "^8.0.19",

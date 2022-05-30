@@ -16,7 +16,7 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@animini/core": "^0.1.0"
+    "@animini/core": "0.1.0"
   },
   "devDependencies": {
     "three": "^0.141.0"
