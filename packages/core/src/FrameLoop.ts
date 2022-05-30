@@ -11,9 +11,10 @@ type Time = {
 
 export class FrameLoop {
   private rafId = 0
-  private running = false
   private queue = new Set<Function>()
+  private running = false
   public time = {} as Time
+  onDemand = false
 
   tick() {
     if (!this.running) return
@@ -22,6 +23,7 @@ export class FrameLoop {
   }
 
   update() {
+    if (!this.running) return
     this.updateTime()
     this.queue.forEach((cb) => cb())
   }
@@ -30,8 +32,9 @@ export class FrameLoop {
     if (!this.running) {
       this.time = { start: now(), elapsed: 0, delta: 0, _elapsed: 0 }
       this.running = true
-      // we need elapsed
-      this.rafId = window.requestAnimationFrame(this.tick.bind(this))
+      if (!this.onDemand)
+        // we need elapsed time to be > 0 on the first frame
+        this.rafId = window.requestAnimationFrame(this.tick.bind(this))
     }
   }
 
