@@ -1,5 +1,12 @@
 # @animini/dom
 
+## 0.1.3
+
+### Patch Changes
+
+- Updated dependencies [bb94d14]
+  - @animini/core@0.1.3
+
 ## 0.1.2
 
 ### Patch Changes
