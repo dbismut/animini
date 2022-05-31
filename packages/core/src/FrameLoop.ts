@@ -1,6 +1,10 @@
+import { clamp } from './utils'
+
 function now() {
   return typeof performance != 'undefined' ? performance.now() : Date.now()
 }
+
+const FPS = 100 / 6
 
 type Time = {
   _elapsed: number
@@ -13,7 +17,6 @@ export class FrameLoop {
   private rafId = 0
   private queue = new Set<Function>()
   private running = false
-  private updating = false
   public time = {} as Time
   onDemand = false
 
@@ -24,20 +27,19 @@ export class FrameLoop {
   }
 
   update() {
-    if (!this.running || this.updating) return
-    this.updating = true
+    if (!this.running) return
     this.updateTime()
     this.queue.forEach((cb) => cb())
-    this.updating = false
   }
 
   run() {
     if (!this.running) {
       this.time = { start: now(), elapsed: 0, delta: 0, _elapsed: 0 }
       this.running = true
-      if (!this.onDemand)
+      if (!this.onDemand) {
         // we need elapsed time to be > 0 on the first frame
         this.rafId = window.requestAnimationFrame(this.tick.bind(this))
+      }
     }
   }
 
@@ -60,7 +62,7 @@ export class FrameLoop {
   updateTime() {
     const ts = now()
     const _elapsed = ts - this.time.start
-    this.time.delta = Math.max(1, Math.min(64, _elapsed - this.time._elapsed))
+    this.time.delta = clamp(_elapsed - this.time._elapsed, FPS, 64)
     this.time._elapsed = _elapsed
     this.time.elapsed += this.time.delta
   }
