@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.1.3
+
+### Patch Changes
+
+- bb94d14: fix timestamp of first frame
+
 ## 0.1.2
 
 ### Patch Changes
