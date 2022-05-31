@@ -36,7 +36,7 @@ const Example = ({ link }) => {
         target="_blank"
         rel="noopener noreferrer"
       >
-        Open Source
+        Codesandbox
       </a>
       <Component />
     </>
@@ -48,6 +48,22 @@ export default function App() {
     <>
       <Route path="/">
         <div className={styles.page}>
+          <div>
+            <a
+              href="https://github.com/dbismut/animini"
+              target="_blank"
+              rel="noopener noreferrer"
+              style={{
+                textDecoration: 'none',
+                fontWeight: 500,
+                fontSize: '0.85em',
+                color: '#fff',
+                backgroundColor: '#000'
+              }}
+            >
+              Github repo →
+            </a>
+          </div>
           <h1>Animini demos</h1>
           <h2>Sandboxes</h2>
           <div className={styles.linkList}>

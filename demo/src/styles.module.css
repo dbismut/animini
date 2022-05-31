@@ -7,13 +7,11 @@
 
 .btn {
   padding: 10px;
-  background: #000;
-  color: #fff;
   font-weight: 500;
   font-size: 14px;
   text-decoration: none;
   border-radius: 2px;
-  border: 1px solid #333;
+  border: 1px solid transparent;
 }
 
 .back {
@@ -21,6 +19,9 @@
   left: 10px;
   bottom: 10px;
   z-index: 100;
+  background-color: #000;
+  border-color: #333;
+  color: #fff;
 }
 
 .source {
@@ -28,6 +29,9 @@
   right: 10px;
   bottom: 10px;
   z-index: 100;
+  background-color: #000;
+  border-color: #333;
+  color: #fff;
 }
 
 .link {
@@ -35,6 +39,7 @@
 }
 
 .linkList {
-  display: grid;
+  display: inline-flex;
+  flex-direction: column;
   gap: 10px;
 }
