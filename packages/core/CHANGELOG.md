@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.1.2
+
+### Patch Changes
+
+- 6b9d542: fix global loop in three
+
 ## 0.1.1
 
 ### Patch Changes
