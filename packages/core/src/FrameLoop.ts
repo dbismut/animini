@@ -13,6 +13,7 @@ export class FrameLoop {
   private rafId = 0
   private queue = new Set<Function>()
   private running = false
+  private updating = false
   public time = {} as Time
   onDemand = false
 
@@ -23,9 +24,11 @@ export class FrameLoop {
   }
 
   update() {
-    if (!this.running) return
+    if (!this.running || this.updating) return
+    this.updating = true
     this.updateTime()
     this.queue.forEach((cb) => cb())
+    this.updating = false
   }
 
   run() {

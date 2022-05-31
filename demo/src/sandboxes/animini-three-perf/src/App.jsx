@@ -35,7 +35,7 @@ function Content() {
       position: { x: 250 - Math.random() * 500, y: 250 - Math.random() * 500, z: i * 3 },
       color: colors[Math.round(Math.random() * (colors.length - 1))],
       scale: { x: 1 + r * 200, y: 1 + r * 100, z: 10 },
-      rotation: { x: 0, y: 0, z: THREE.Math.degToRad(Math.round(Math.random()) * 45) }
+      rotation: { x: 0, y: 0, z: THREE.MathUtils.degToRad(Math.round(Math.random()) * 45) }
     }
   })
 
