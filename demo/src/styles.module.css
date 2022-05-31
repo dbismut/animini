@@ -5,11 +5,7 @@
   min-height: 100vh;
 }
 
-.back {
-  position: fixed;
-  left: 10px;
-  bottom: 10px;
-  z-index: 100;
+.btn {
   padding: 10px;
   background: #000;
   color: #fff;
@@ -18,6 +14,20 @@
   text-decoration: none;
   border-radius: 2px;
   border: 1px solid #333;
+}
+
+.back {
+  position: fixed;
+  left: 10px;
+  bottom: 10px;
+  z-index: 100;
+}
+
+.source {
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+  z-index: 100;
 }
 
 .link {

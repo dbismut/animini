@@ -28,8 +28,16 @@ const Example = ({ link }) => {
     <>
       <Link href="/">
         {/*eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-        <a className={styles.back}>← Back</a>
+        <a className={`${styles.btn} ${styles.back}`}>← Back</a>
       </Link>
+      <a
+        className={`${styles.btn} ${styles.source}`}
+        href={`https://codesandbox.io/s/github/dbismut/animini/tree/main/demo/src/sandboxes/${link}`}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        Open Source
+      </a>
       <Component />
     </>
   )
