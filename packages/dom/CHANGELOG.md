@@ -1,5 +1,13 @@
 # @animini/dom
 
+## 0.1.4
+
+### Patch Changes
+
+- a7b464c: dom: immediate transition to NaN strings
+- Updated dependencies [a7b464c]
+  - @animini/core@0.1.4
+
 ## 0.1.3
 
 ### Patch Changes
