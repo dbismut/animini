@@ -26,7 +26,7 @@ export default function App() {
           easing = method(get('duration'), get('easeConfig'))
       }
       try {
-        await api.start({ x: '50%' }, { easing })
+        await api.start({ x: '50%', position: 'fixed' }, { easing })
         await api.start({ scale: 0.5 }, { easing })
       } catch {}
     }),

@@ -3,6 +3,7 @@ import { DomAdapter } from '../types'
 
 const parse: DomAdapter['parse'] = (value, _key, el) => {
   let [_value, unit] = parseUnitValue(value)
+  if (isNaN(_value)) return value
   switch (unit) {
     case '%':
       // @ts-expect-error

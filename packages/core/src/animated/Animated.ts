@@ -17,7 +17,7 @@ export class Animated {
   private _movingChildren = 0
   private children: AnimatedValue[]
 
-  constructor(public value: ParsedValue, private loop: FrameLoop = GlobalLoop) {
+  constructor(public value: string | ParsedValue, private loop: FrameLoop = GlobalLoop) {
     this.children = map(value, (_v, i) => {
       return new AnimatedValue(this, i)
     })
@@ -27,11 +27,11 @@ export class Animated {
     return this._movingChildren <= 0
   }
 
-  start(to: ParsedValue, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
+  start(to: string | ParsedValue, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
     this.time.elapsed = 0
     this._movingChildren = 0
 
-    each(this.children, (child, key) => {
+    each(this.children, (child) => {
       child.start(to, { immediate, easing })
       if (!child.idle) this._movingChildren++
     })

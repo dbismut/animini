@@ -10,10 +10,11 @@ export type AdapterFn<ElementType, R> = (
   currentValues: any
 ) => R
 
+// TODO fix ValueType
 export type Adapter<ElementType, ValueType extends Payload> = {
   parse?: AdapterFn<ElementType, ParsedValue>
   parseInitial?: AdapterFn<ElementType, ParsedValue>
-  format?(value: ParsedValue): any
+  format?(value: string | ParsedValue): any
   onChange?: AdapterFn<ElementType, void>
 }
 
