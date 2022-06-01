@@ -6,35 +6,43 @@ export class AnimatedValue {
   public startVelocity!: number
   public from!: number
   public to!: number
+  private na: boolean // non applicable transition
   private precision: number = 1
   private config!: Required<ConfigValue>
   public idle = true
   public distance = 0
   public velocity = 0
 
-  constructor(public parent: Animated, private index: number | string) {}
+  constructor(public parent: Animated, private key: number | string) {
+    this.na = typeof this.value === 'string'
+  }
   get time() {
     return this.parent.time
   }
   get value() {
-    return this.index !== -1 ? (this.parent.value as any)[this.index] : this.parent.value
+    return this.key !== -1 ? (this.parent.value as any)[this.key] : this.parent.value
   }
   set value(value) {
-    this.index !== -1 ? ((this.parent.value as any)[this.index] = value) : (this.parent.value = value)
+    this.key !== -1 ? ((this.parent.value as any)[this.key] = value) : (this.parent.value = value)
   }
 
-  start(to: ParsedValue, config: Required<ConfigValue>) {
+  start(to: string | ParsedValue, config: Required<ConfigValue>) {
+    this.to = this.key === -1 ? to : (to as any)[this.key]
     this.config = config
     this.from = this.value
-    this.to = this.index === -1 ? to : (to as any)[this.index]
-    this.distance = this.to - this.from
-    this.startVelocity = this.velocity
-
+    if (!this.na) {
+      this.distance = this.to - this.from
+      this.startVelocity = this.velocity
+      this.precision = config.easing.wanders ? 0.01 : Math.min(Math.abs(this.distance) * 1e-4, 1)
+    }
     this.idle = config.immediate && this.to === this.value
-    this.precision = config.easing.wanders ? 0.01 : Math.min(Math.abs(this.distance) * 1e-4, 1)
   }
 
   update() {
+    if (this.na) {
+      this.value = this.to
+      this.idle = true
+    }
     if (this.idle) return this.value
 
     this.previousValue = this.value
