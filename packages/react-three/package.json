@@ -1,6 +1,6 @@
 {
   "name": "@animini/react-three",
-  "version": "0.1.4",
+  "version": "0.2.0",
   "description": "animini hook for React Three Fiber",
   "keywords": [],
   "main": "dist/animini-react-three.cjs.js",
@@ -18,8 +18,8 @@
     "three": ">=0.140.0"
   },
   "dependencies": {
-    "@animini/core": "0.1.4",
-    "@animini/core-react": "0.1.4",
-    "@animini/target-three": "0.1.4"
+    "@animini/core": "0.2.0",
+    "@animini/core-react": "0.2.0",
+    "@animini/target-three": "0.2.0"
   }
 }
