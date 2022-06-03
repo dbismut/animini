@@ -1,7 +1,6 @@
 {
   "name": "@animini/core-react",
   "version": "0.1.4",
-  "private": true,
   "description": "React core for animini",
   "keywords": [],
   "main": "dist/animini-core-react.cjs.js",

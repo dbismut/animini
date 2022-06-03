@@ -1,7 +1,6 @@
 {
   "name": "@animini/target-dom",
   "version": "0.1.4",
-  "private": true,
   "description": "animini target for the dom",
   "keywords": [],
   "main": "dist/animini-target-dom.cjs.js",
