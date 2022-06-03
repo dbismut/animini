@@ -4,8 +4,7 @@
   "keywords": [],
   "private": true,
   "dependencies": {
-    "@animini/core-latest": "https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.3",
-    "@animini/dom-latest": "https://gitpkg.now.sh/dbismut/animini/packages/dom?main&v=0.1.3",
+    "@animini/core-latest": "https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.4",
     "benchmark": "^2.1.4",
     "console-table-printer": "^2.11.0",
     "fs-extra": "^10.0.1",

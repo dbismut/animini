@@ -133,32 +133,34 @@ importers:
 
   packages/react-dom:
     specifiers:
+      '@animini/core': 0.1.4
       '@animini/core-react': 0.1.4
       '@animini/target-dom': 0.1.4
     dependencies:
+      '@animini/core': link:../core
       '@animini/core-react': link:../core-react
       '@animini/target-dom': link:../../targets/target-dom
 
   packages/react-three:
     specifiers:
+      '@animini/core': 0.1.4
       '@animini/core-react': 0.1.4
       '@animini/target-three': 0.1.4
     dependencies:
+      '@animini/core': link:../core
       '@animini/core-react': link:../core-react
       '@animini/target-three': link:../../targets/target-three
 
   perf:
     specifiers:
-      '@animini/core-latest': https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.3
-      '@animini/dom-latest': https://gitpkg.now.sh/dbismut/animini/packages/dom?main&v=0.1.3
+      '@animini/core-latest': https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.4
       benchmark: ^2.1.4
       console-table-printer: ^2.11.0
       fs-extra: ^10.0.1
       microtime: ^3.0.0
       systeminformation: ^5.11.14
     dependencies:
-      '@animini/core-latest': '@gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.3'
-      '@animini/dom-latest': '@gitpkg.now.sh/dbismut/animini/packages/dom?main&v=0.1.3'
+      '@animini/core-latest': '@gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.4'
       benchmark: 2.1.4
       console-table-printer: 2.11.0
       fs-extra: 10.1.0
@@ -186,13 +188,6 @@ packages:
       '@jridgewell/gen-mapping': 0.1.1
       '@jridgewell/trace-mapping': 0.3.13
     dev: true
-
-  /@animini/core/0.1.3:
-    resolution:
-      { integrity: sha512-fq6PpScm9+Fx6i2hMze/ny6WF3PN9OZH8IpY7dy45UZHQ2Wrj5HlsxxrtCaQ0zATQ+ohhIUBxKXm/wjQV9r6JQ== }
-    peerDependencies:
-      react: '>=16.8.0'
-    dev: false
 
   /@babel/code-frame/7.16.7:
     resolution:
@@ -9494,20 +9489,8 @@ packages:
     dependencies:
       react: 18.1.0
 
-  '@gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.3':
-    resolution: { tarball: https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.3 }
+  '@gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.4':
+    resolution: { tarball: https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.4 }
     name: '@animini/core'
-    version: 0.1.3
-    peerDependencies:
-      react: '>=16.8.0'
-    dev: false
-
-  '@gitpkg.now.sh/dbismut/animini/packages/dom?main&v=0.1.3':
-    resolution: { tarball: https://gitpkg.now.sh/dbismut/animini/packages/dom?main&v=0.1.3 }
-    name: '@animini/dom'
-    version: 0.1.3
-    peerDependencies:
-      react: '>=16.8.0'
-    dependencies:
-      '@animini/core': 0.1.3
+    version: 0.1.4
     dev: false
