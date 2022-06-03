@@ -1,5 +1,5 @@
 import { useDrag } from '@use-gesture/react'
-import { useAnimini, inertia } from '@animini/dom'
+import { useAnimini, inertia } from '@animini/react-dom'
 import { useControls } from 'leva'
 import styles from './styles.module.css'
 

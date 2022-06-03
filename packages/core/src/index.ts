@@ -1,4 +1,5 @@
-export { useAniminiCore } from './useAniminiCore'
+export { buildReactHook } from './buildReactHook'
+export { buildAnimate } from './buildAnimate'
 export { spring } from './algorithms/spring'
 export * from './utils'
 export * from './FrameLoop'

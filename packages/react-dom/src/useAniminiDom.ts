@@ -1,11 +1,12 @@
 import { useRef, useEffect } from 'react'
-import { Config, useAniminiCore } from '@animini/core'
-import target from './dom'
-import { Styles } from './types'
+import { buildReactHook, Config } from '@animini/core'
+import { dom } from '@animini/target-dom'
+
+export const useAniminiDom = buildReactHook(dom)
 
 export function useAnimini<Element extends HTMLElement = HTMLElement>(masterConfig?: Config) {
   const currentValues = useRef<CSSStyleDeclaration>()
-  const [el, api] = useAniminiCore<Element, Styles>(target, currentValues, masterConfig)
+  const [el, api] = useAniminiDom<Element>(currentValues, masterConfig)
 
   useEffect(() => {
     currentValues.current = window.getComputedStyle(el.current!)

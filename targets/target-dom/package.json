@@ -1,21 +1,20 @@
 {
-  "name": "@animini/three",
+  "name": "@animini/target-dom",
   "version": "0.1.4",
-  "description": "animini target for three",
+  "private": true,
+  "description": "animini target for the dom",
   "keywords": [],
-  "main": "dist/animini-three.cjs.js",
-  "module": "dist/animini-three.esm.js",
+  "main": "dist/animini-target-dom.cjs.js",
+  "module": "dist/animini-target-dom.esm.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/dbismut/animini.git",
-    "directory": "packages/three"
+    "directory": "packages/target-dom"
   },
   "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
-    "@react-three/fiber": "^8.0.19",
-    "react": ">=16.8.0",
-    "three": ">=0.127.0"
+    "react": ">=16.8.0"
   },
   "dependencies": {
     "@animini/core": "0.1.4"

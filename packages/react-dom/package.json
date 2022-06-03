@@ -1,17 +1,20 @@
 {
-  "name": "@animini/dom",
+  "name": "@animini/react-dom",
   "version": "0.1.4",
-  "description": "animini target for the dom",
+  "description": "animini target for React dom",
   "keywords": [],
-  "main": "dist/animini-dom.cjs.js",
-  "module": "dist/animini-dom.esm.js",
+  "main": "dist/animini-react-dom.cjs.js",
+  "module": "dist/animini-react-dom.esm.js",
   "sideEffects": false,
   "repository": {
     "type": "git",
     "url": "https://github.com/dbismut/animini.git",
-    "directory": "packages/dom"
+    "directory": "packages/react-dom"
   },
   "bugs": "https://github.com/dbismut/animini/issues",
+  "peerDependencies": {
+    "react": ">=16.8.0"
+  },
   "dependencies": {
     "@animini/core": "0.1.4",
     "@animini/target-dom": "0.1.4"

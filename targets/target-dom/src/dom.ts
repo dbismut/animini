@@ -21,9 +21,9 @@ const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
 
 const NO_ADAPTER = ['opacity', 'scale']
 
-const dom: Target<HTMLElement, Styles> = {
-  setValues(rawStyle, el) {
-    const { x, y, scale, ...rest } = rawStyle
+export const dom: Target<HTMLElement, Styles> = {
+  setValues(values, el) {
+    const { x, y, scale, ...rest } = values
     for (let key in rest) {
       // @ts-expect-error
       el.style[key] = rest[key]
@@ -46,8 +46,6 @@ const dom: Target<HTMLElement, Styles> = {
     return [value, adapter] as [Styles[typeof key], DomAdapter | undefined]
   }
 }
-
-export default dom
 
 type Transform = { scale: number; x: number; y: number; z: number }
 

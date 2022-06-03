@@ -1,9 +1,8 @@
-import { useAniminiCore, Config, GlobalLoop } from '@animini/core'
+import { useEffect } from 'react'
+import { buildReactHook, Config, GlobalLoop } from '@animini/core'
+import { three, ElementType } from '@animini/target-three'
 import { addEffect } from '@react-three/fiber'
 import type { Object3D } from 'three'
-import target from './three'
-import { ElementType, Values } from './types'
-import { useEffect } from 'react'
 
 let count = 0
 
@@ -23,9 +22,12 @@ function setGlobalLoopOnDemand() {
   }
 }
 
+export const useAniminiThree = buildReactHook(three)
+
 export function useAnimini<Element extends ElementType = Object3D>(masterConfig?: Config) {
   useEffect(() => {
     return setGlobalLoopOnDemand()
   }, [])
-  return useAniminiCore<Element, Values<Element>>(target, undefined, masterConfig)
+
+  return useAniminiThree<Element>(undefined, masterConfig)
 }

@@ -1,7 +1,7 @@
 import { useControls, button } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
 import { bezier } from '@leva-ui/plugin-bezier'
-import { useAnimini, spring, lerp, ease } from '@animini/dom'
+import { useAnimini, spring, lerp, ease } from '@animini/react-dom'
 
 import styles from './styles.module.css'
 
