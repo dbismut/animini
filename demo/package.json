@@ -8,8 +8,8 @@
     "serve": "vite preview"
   },
   "dependencies": {
-    "@animini/dom": "*",
-    "@animini/three": "*",
+    "@animini/react-dom": "*",
+    "@animini/react-three": "*",
     "@leva-ui/plugin-bezier": "*",
     "@leva-ui/plugin-spring": "*",
     "@react-spring/web": "^9.4.5",

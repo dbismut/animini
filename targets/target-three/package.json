@@ -1,25 +1,22 @@
 {
-  "name": "@animini/core",
+  "name": "@animini/target-three",
   "version": "0.1.4",
   "private": true,
-  "description": "small animation lib",
+  "description": "animini target for Three",
   "keywords": [],
-  "main": "dist/animini-core.cjs.js",
-  "module": "dist/animini-core.esm.js",
+  "main": "dist/animini-target-three.cjs.js",
+  "module": "dist/animini-target-three.esm.js",
   "sideEffects": false,
-  "preconstruct": {
-    "entrypoints": [
-      "./index.ts",
-      "./algorithms/index.ts"
-    ]
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/dbismut/animini.git",
-    "directory": "packages/core"
+    "directory": "packages/target-three"
   },
   "bugs": "https://github.com/dbismut/animini/issues",
   "peerDependencies": {
     "react": ">=16.8.0"
+  },
+  "dependencies": {
+    "@animini/core": "0.1.4"
   }
 }

@@ -1,7 +1,7 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { useAnimini, spring } from '@animini/three'
+import { useAnimini, spring } from '@animini/react-three'
 import { useControls } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
 

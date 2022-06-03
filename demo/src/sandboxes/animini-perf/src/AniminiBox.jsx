@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { useAnimini, spring } from '@animini/dom'
+import { useAnimini, spring } from '@animini/react-dom'
 
 const config = { easing: spring() }
 

@@ -8,7 +8,7 @@ const ADAPTERS = new Map<any, ThreeAdapter>([
   [Euler, euler]
 ])
 
-const three: Target<ElementType, Values<ElementType>> = {
+export const three: Target<ElementType, Values<ElementType>> = {
   getInitialValueAndAdapter(element, key) {
     const value = element[key]
     const constructor = value.__proto__.constructor
@@ -16,5 +16,3 @@ const three: Target<ElementType, Values<ElementType>> = {
     return [value, adapter]
   }
 }
-
-export default three

@@ -5,7 +5,7 @@
   "dependencies": {
     "@leva-ui/plugin-spring": "*",
     "@leva-ui/plugin-bezier": "*",
-    "@animini/dom": "*",
+    "@animini/react-dom": "*",
     "leva": "*",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",

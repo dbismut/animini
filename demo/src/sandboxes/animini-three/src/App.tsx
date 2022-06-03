@@ -1,4 +1,4 @@
-import { useAnimini } from '@animini/three'
+import { useAnimini } from '@animini/react-three'
 import { useControls, button } from 'leva'
 import { Canvas } from '@react-three/fiber'
 import { OrbitControls } from '@react-three/drei'

@@ -5,7 +5,8 @@
   "private": true,
   "preconstruct": {
     "packages": [
-      "packages/*"
+      "packages/*",
+      "targets/*"
     ]
   },
   "scripts": {

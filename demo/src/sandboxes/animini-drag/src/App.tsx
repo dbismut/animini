@@ -1,7 +1,7 @@
 import { useDrag } from '@use-gesture/react'
 import { useControls } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
-import { useAnimini, spring, lerp } from '@animini/dom'
+import { useAnimini, spring, lerp } from '@animini/react-dom'
 import styles from './styles.module.css'
 
 export default function App() {
