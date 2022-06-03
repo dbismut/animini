@@ -30,22 +30,16 @@
   },
   "size-limit": [
     {
-      "name": "core",
-      "import": "{ useAniminiCore }",
-      "limit": "2 KB",
-      "path": "packages/core/dist/*.esm.js"
-    },
-    {
-      "name": "dom",
+      "name": "react-dom",
       "import": "{ useAnimini }",
       "limit": "3 KB",
-      "path": "packages/dom/dist/*.esm.js"
+      "path": "packages/react-dom/dist/*.esm.js"
     },
     {
-      "name": "three",
+      "name": "react-three",
       "import": "{ useAnimini }",
       "limit": "3 KB",
-      "path": "packages/three/dist/*.esm.js",
+      "path": "packages/react-three/dist/*.esm.js",
       "ignore": [
         "three",
         "@react-three/fiber"
