@@ -151,6 +151,14 @@ importers:
       '@animini/core-react': link:../core-react
       '@animini/target-three': link:../../targets/target-three
 
+  packages/three:
+    specifiers:
+      '@animini/core': 0.1.4
+      '@animini/target-three': 0.1.4
+    dependencies:
+      '@animini/core': link:../core
+      '@animini/target-three': link:../../targets/target-three
+
   perf:
     specifiers:
       '@animini/core-latest': https://gitpkg.now.sh/dbismut/animini/packages/core?main&v=0.1.4
