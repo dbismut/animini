@@ -1,5 +1,6 @@
 import { useEffect } from 'react'
-import { buildReactHook, Config, GlobalLoop } from '@animini/core'
+import { Config, GlobalLoop } from '@animini/core'
+import { buildReactHook } from '@animini/core-react'
 import { three, ElementType } from '@animini/target-three'
 import { addEffect } from '@react-three/fiber'
 import type { Object3D } from 'three'

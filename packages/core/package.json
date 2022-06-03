@@ -2,7 +2,7 @@
   "name": "@animini/core",
   "version": "0.1.4",
   "private": true,
-  "description": "small animation lib",
+  "description": "Core of animini",
   "keywords": [],
   "main": "dist/animini-core.cjs.js",
   "module": "dist/animini-core.esm.js",
@@ -18,8 +18,5 @@
     "url": "https://github.com/dbismut/animini.git",
     "directory": "packages/core"
   },
-  "bugs": "https://github.com/dbismut/animini/issues",
-  "peerDependencies": {
-    "react": ">=16.8.0"
-  }
+  "bugs": "https://github.com/dbismut/animini/issues"
 }

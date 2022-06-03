@@ -1,5 +1,6 @@
 import { useRef, useEffect } from 'react'
-import { buildReactHook, Config } from '@animini/core'
+import { Config } from '@animini/core'
+import { buildReactHook } from '@animini/core-react'
 import { dom } from '@animini/target-dom'
 
 export const useAniminiDom = buildReactHook(dom)

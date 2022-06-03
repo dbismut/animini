@@ -1,7 +1,7 @@
 {
   "name": "@animini/dom",
   "version": "0.1.4",
-  "description": "animini target for the dom",
+  "description": "animini for the dom",
   "keywords": [],
   "main": "dist/animini-dom.cjs.js",
   "module": "dist/animini-dom.esm.js",

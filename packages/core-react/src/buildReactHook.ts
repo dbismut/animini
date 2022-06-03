@@ -1,6 +1,5 @@
 import { useRef, useEffect, useMemo } from 'react'
-import { buildAnimate } from './buildAnimate'
-import { Config, Payload, Target } from './types'
+import { buildAnimate, Config, Payload, Target } from '@animini/core'
 
 export function buildReactHook<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
   const animate = buildAnimate(target)

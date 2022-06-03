@@ -117,6 +117,12 @@ importers:
   packages/core:
     specifiers: {}
 
+  packages/core-react:
+    specifiers:
+      '@animini/core': 0.1.4
+    dependencies:
+      '@animini/core': link:../core
+
   packages/dom:
     specifiers:
       '@animini/core': 0.1.4
@@ -127,18 +133,18 @@ importers:
 
   packages/react-dom:
     specifiers:
-      '@animini/core': 0.1.4
+      '@animini/core-react': 0.1.4
       '@animini/target-dom': 0.1.4
     dependencies:
-      '@animini/core': link:../core
+      '@animini/core-react': link:../core-react
       '@animini/target-dom': link:../../targets/target-dom
 
   packages/react-three:
     specifiers:
-      '@animini/core': 0.1.4
+      '@animini/core-react': 0.1.4
       '@animini/target-three': 0.1.4
     dependencies:
-      '@animini/core': link:../core
+      '@animini/core-react': link:../core-react
       '@animini/target-three': link:../../targets/target-three
 
   perf:
