@@ -13,11 +13,12 @@ type Animation<ElementType, ValueType extends Payload> = {
 // TODO staggering
 
 export function buildAnimate<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
-  return function animate(element: ElementType | { current: ElementType }, currentValues: any, masterConfig?: Config) {
+  return function animate(element: ElementType | { current: ElementType }, masterConfig?: Config) {
     const loop = target.loop || GlobalLoop
     const el = typeof element === 'object' && 'current' in element ? element : { current: element }
     const values: any = {}
     const animations = new Map<keyof ValueType, Animation<ElementType, ValueType>>()
+    let cachedValues: any
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
@@ -30,10 +31,10 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
 
         const value = adapter?.format ? adapter.format(animated.value) : animated.value
         values[key] = value
-        adapter?.onChange?.(value, key, el.current, currentValues)
+        adapter?.onChange?.(value, key, el.current, cachedValues)
         idle &&= animated.idle
       })
-      target.setValues?.(values, el.current, currentValues)
+      target.setValues?.(values, el.current)
       if (idle) {
         loop.stop(update)
         resolveRef()
@@ -52,9 +53,9 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
           let adapter: Adapter<ElementType, ValueType> | undefined
 
           if (!animation) {
-            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current, key, currentValues)
+            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current, key, cachedValues)
             const value = _adapter?.parseInitial
-              ? _adapter?.parseInitial(_value, key, el.current, currentValues)
+              ? _adapter?.parseInitial(_value, key, el.current, cachedValues)
               : _value
             animated = new Animated(value, loop)
             adapter = _adapter
@@ -64,7 +65,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
             adapter = animation.adapter
           }
 
-          const _to = adapter?.parse ? adapter.parse(to[key], key, el.current, currentValues) : (to[key] as ParsedValue)
+          const _to = adapter?.parse ? adapter.parse(to[key], key, el.current, cachedValues) : (to[key] as ParsedValue)
           animated.start(_to, typeof config === 'function' ? config(key) : config)
           idle &&= animated.idle
         }
@@ -85,7 +86,10 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
     }
 
     const get = (key: keyof ValueType) => values[key]
-    const api = { get, start, stop, clean }
+    const setCachedValues = () => {
+      cachedValues = target.getCurrentValues?.(el.current)
+    }
+    const api = { get, start, stop, clean, setCachedValues }
     return api
   }
 }
