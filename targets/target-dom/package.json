@@ -1,6 +1,6 @@
 {
   "name": "@animini/target-dom",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "animini target for the dom",
   "keywords": [],
   "main": "dist/animini-target-dom.cjs.js",
@@ -13,6 +13,6 @@
   },
   "bugs": "https://github.com/dbismut/animini/issues",
   "dependencies": {
-    "@animini/core": "0.2.0"
+    "@animini/core": "0.2.1"
   }
 }
