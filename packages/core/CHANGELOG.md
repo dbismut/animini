@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.2.1
+
+### Patch Changes
+
+- bf2fd1b: Internal refactoring
+
 ## 0.2.0
 
 ### Minor Changes
