@@ -1,2 +1,2 @@
-export { dom } from './dom'
+export { dom } from './targetDom'
 export * from './types'

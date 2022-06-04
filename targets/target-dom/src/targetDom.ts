@@ -22,6 +22,9 @@ const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
 const NO_ADAPTER = ['opacity', 'scale']
 
 export const dom: Target<HTMLElement, Styles> = {
+  getCurrentValues(element) {
+    return window.getComputedStyle(element)
+  },
   setValues(values, el) {
     const { x, y, scale, ...rest } = values
     for (let key in rest) {
@@ -35,13 +38,13 @@ export const dom: Target<HTMLElement, Styles> = {
     })`
   },
 
-  getInitialValueAndAdapter(_element, key, styleRef: React.RefObject<CSSStyleDeclaration>) {
+  getInitialValueAndAdapter(_element, key, style: CSSStyleDeclaration) {
     let value
     const adapter = ADAPTERS[key as any] || (!NO_ADAPTER.includes(key as string) ? generic : undefined)
     if (key in TRANSFORM_KEYS) {
-      value = getTranslateValues(styleRef.current!)[key as keyof Transform]
+      value = getTranslateValues(style)[key as keyof Transform]
     } else {
-      value = styleRef.current![key as any]
+      value = style[key as any]
     }
     return [value, adapter] as [Styles[typeof key], DomAdapter | undefined]
   }

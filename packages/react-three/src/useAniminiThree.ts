@@ -30,5 +30,5 @@ export function useAnimini<Element extends ElementType = Object3D>(masterConfig?
     return setGlobalLoopOnDemand()
   }, [])
 
-  return useAniminiThree<Element>(undefined, masterConfig)
+  return useAniminiThree<Element>(masterConfig)
 }

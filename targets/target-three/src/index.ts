@@ -1,2 +1,2 @@
-export { three } from './three'
+export { three } from './targetThree'
 export * from './types'
