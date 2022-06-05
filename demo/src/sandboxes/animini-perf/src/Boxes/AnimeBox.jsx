@@ -11,7 +11,7 @@ export default function Box({ x, y, backgroundColor, scale, style }) {
       translateY: y,
       scale,
       background: backgroundColor,
-      easing: 'spring(1, 170, 26, 0)',
+      easing: 'spring(1, 170, 26, 0)'
     })
   }, [x, y, backgroundColor, scale])
 

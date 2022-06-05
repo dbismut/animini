@@ -1,13 +1,14 @@
 import { useState } from 'react'
 import { useControls, button } from 'leva'
 import tinycolor from 'tinycolor2'
-import AniminiBox from './AniminiBox'
-import SpringBox from './SpringBox'
-import MotionBox from './MotionBox'
-import GsapBox from './GsapBox'
-import FramerMotionBox from './FramerMotionBox'
-import FatBox from './FatBox'
-import AnimeBox from './AnimeBox'
+import AniminiBox from './Boxes/AniminiBox'
+import AniminiVanillaBox from './Boxes/AniminiVanillaBox'
+import SpringBox from './Boxes/SpringBox'
+import MotionBox from './Boxes/MotionBox'
+import GsapBox from './Boxes/GsapBox'
+import FramerMotionBox from './Boxes/FramerMotionBox'
+import FatBox from './Boxes/FatBox'
+import AnimeBox from './Boxes/AnimeBox'
 
 const COUNT = 4000
 
@@ -40,7 +41,9 @@ export default function Perf() {
   const [clicked, setClicked] = useState(false)
   const { count, Model: Box } = useControls({
     count: { value: 1000, min: 100, max: 4000 },
-    Model: { options: { AniminiBox, AnimeBox, SpringBox, MotionBox, FramerMotionBox, GsapBox, FatBox } },
+    Model: {
+      options: { AniminiBox, AniminiVanillaBox, AnimeBox, SpringBox, MotionBox, FramerMotionBox, GsapBox, FatBox }
+    },
     Shuffle: button(() => {
       const ts = performance.now()
       setClicked(true)

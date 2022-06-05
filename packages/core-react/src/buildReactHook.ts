@@ -2,7 +2,7 @@ import { useRef, useEffect, useState } from 'react'
 import { buildAnimate, Config, Payload, Target } from '@animini/core'
 
 export function buildReactHook<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
-  const animate = buildAnimate(target)
+  const animate = buildAnimate({ target })
 
   return function useAnimini<ElementType>(masterConfig?: Config) {
     const el = useRef<ElementType>(null)

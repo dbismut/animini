@@ -13,7 +13,7 @@ export default function Box({ x, y, backgroundColor, scale, style }) {
         x,
         y,
         scale,
-        backgroundColor,
+        backgroundColor
       },
       { easing }
     )

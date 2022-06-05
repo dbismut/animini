@@ -104,7 +104,7 @@ const builtin_easing = {
   backIn: [0.6, -0.28, 0.735, 0.045],
   backOut: [0.175, 0.885, 0.32, 1.275],
   backInOut: [0.68, -0.55, 0.265, 1.55],
-  snap: [0.1, 1, 0.1, 1],
+  snap: [0.1, 1, 0.1, 1]
 }
 
 // BezierEasing
@@ -262,7 +262,7 @@ const presets = {
 
   zoomIn: SUPPORT_TRANSFORM ? { scaleX: 1, scaleY: 1 } : { width: '100%', height: '100%' },
   zoomOut: SUPPORT_TRANSFORM ? { scaleX: 0, scaleY: 0 } : { width: 0, height: 0 },
-  zoomToggle: SUPPORT_TRANSFORM ? { scaleX: '!=1', scaleY: '!=1' } : { width: '!=100%', height: '!=100%' },
+  zoomToggle: SUPPORT_TRANSFORM ? { scaleX: '!=1', scaleY: '!=1' } : { width: '!=100%', height: '!=100%' }
 }
 
 if (SUPPORT_PRESET) {
@@ -593,7 +593,7 @@ if (SUPPORT_ANIMATE) {
             callback: this.callback,
             step: this.step,
             force: this.force,
-            loop: this.loop,
+            loop: this.loop
           })
 
           if (DEBUG) {
@@ -760,7 +760,7 @@ const matrix2d_index = {
   skewX: 2,
   scaleY: 3,
   translateX: 4,
-  translateY: 5,
+  translateY: 5
 }
 
 /**
@@ -777,7 +777,7 @@ const filter_default_values = {
   'hue-rotate': 1,
   invert: 1,
   saturate: 2,
-  sepia: 1,
+  sepia: 1
 }
 
 /*
@@ -809,7 +809,7 @@ const scroll_keys = SUPPORT_SCROLL
   ? {
       scrollTop: 1,
       scrollLeft: 2,
-      scroll: 3,
+      scroll: 3
     }
   : null
 
@@ -956,7 +956,7 @@ function hsl_to_rgb(h, s, l) {
   return {
     r: (r * 255 + 0.5) >> 0,
     g: (g * 255 + 0.5) >> 0,
-    b: (b * 255 + 0.5) >> 0,
+    b: (b * 255 + 0.5) >> 0
   }
 }
 
@@ -2141,7 +2141,7 @@ function parse_keyframes(styles, style_keys, style_length, config_duration) {
 
       if (is_undefined(inner_style['to'])) {
         style[inner_key] = inner_style = {
-          to: inner_style,
+          to: inner_style
         }
       }
 
@@ -2685,7 +2685,7 @@ if (SUPPORT_ANIMATE) {
     FatPrototype.transform = function (obj, styles, config, callback) {
       if (is_string(styles)) {
         styles = {
-          transform: styles,
+          transform: styles
         }
       }
 
@@ -2698,7 +2698,7 @@ if (SUPPORT_ANIMATE) {
     FatPrototype.filter = function (obj, styles, config, callback) {
       if (is_string(styles)) {
         styles = {
-          filter: styles,
+          filter: styles
         }
       }
 
@@ -2895,7 +2895,7 @@ function native(obj, styles, config) {
     current_obj.animate(styles_arr, {
       delay: config_delay,
       duration: config_duration,
-      ease: config_ease,
+      ease: config_ease
     }).onfinish = function () {
       for (let k = 0; k < style_length; k++) {
         const key = style_keys[k]
@@ -2924,7 +2924,7 @@ function profile_start(key) {
       /** @export */ time: 0,
       /** @export */ count: 0,
       /** @export */ ops: 0,
-      /** @export */ nano: 0,
+      /** @export */ nano: 0
     })
   ).ops = (performance || Date).now()
 }
