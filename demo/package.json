@@ -8,6 +8,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@animini/dom": "*",
     "@animini/react-dom": "*",
     "@animini/react-three": "*",
     "@leva-ui/plugin-bezier": "*",

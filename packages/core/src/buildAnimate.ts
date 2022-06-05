@@ -12,11 +12,19 @@ type Animation<ElementType, ValueType extends Payload> = {
 // TODO from ?
 // TODO staggering
 
-export function buildAnimate<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
+type Args<ElementType, ValueType extends Payload> = {
+  target: Target<ElementType, ValueType>
+  syncCachedValues?: boolean
+}
+
+export function buildAnimate<ElementType, ValueType extends Payload>({
+  target,
+  syncCachedValues = false
+}: Args<ElementType, ValueType>) {
   return function animate(element: ElementType | { current: ElementType }, masterConfig?: Config) {
     const loop = target.loop || GlobalLoop
     const el = typeof element === 'object' && 'current' in element ? element : { current: element }
-    const values: any = {}
+    const currentValues: any = {}
     const animations = new Map<keyof ValueType, Animation<ElementType, ValueType>>()
     let cachedValues: any
     let resolveRef: (value?: unknown) => void
@@ -30,11 +38,11 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
         animated.update()
 
         const value = adapter?.format ? adapter.format(animated.value) : animated.value
-        values[key] = value
+        currentValues[key] = value
         adapter?.onChange?.(value, key, el.current, cachedValues)
         idle &&= animated.idle
       })
-      target.setValues?.(values, el.current)
+      target.setValues?.(currentValues, el.current)
       if (idle) {
         loop.stop(update)
         resolveRef()
@@ -85,10 +93,14 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
       resolveRef?.()
     }
 
-    const get = (key: keyof ValueType) => values[key]
+    const get = (key: keyof ValueType) => currentValues[key]
+
     const setCachedValues = () => {
       cachedValues = target.getCurrentValues?.(el.current)
     }
+
+    if (syncCachedValues) setCachedValues()
+
     const api = { get, start, stop, clean, setCachedValues }
     return api
   }

@@ -9,7 +9,7 @@ export default function Box({ x, y, backgroundColor, scale, style }) {
       x,
       y,
       scale,
-      backgroundColor,
+      backgroundColor
     })
   }, [x, y, backgroundColor, scale])
 

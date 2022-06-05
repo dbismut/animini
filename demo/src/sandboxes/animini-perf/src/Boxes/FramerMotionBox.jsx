@@ -4,7 +4,7 @@ import { motion } from 'framer-motion'
 const spring = {
   type: 'spring',
   damping: 26,
-  stiffness: 170,
+  stiffness: 170
 }
 
 export default function Box({ x, y, backgroundColor, scale, style }) {
