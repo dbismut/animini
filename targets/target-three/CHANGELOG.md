@@ -1,5 +1,12 @@
 # @animini/target-three
 
+## 0.2.2
+
+### Patch Changes
+
+- Updated dependencies [6c367d3]
+  - @animini/core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes

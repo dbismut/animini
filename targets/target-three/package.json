@@ -1,6 +1,6 @@
 {
   "name": "@animini/target-three",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "animini target for Three",
   "keywords": [],
   "main": "dist/animini-target-three.cjs.js",
@@ -16,6 +16,6 @@
     "three": ">=0.140.0"
   },
   "dependencies": {
-    "@animini/core": "0.2.1"
+    "@animini/core": "0.2.2"
   }
 }

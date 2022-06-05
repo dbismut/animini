@@ -1,5 +1,13 @@
 # @animini/core-react
 
+## 0.2.2
+
+### Patch Changes
+
+- 6c367d3: add syncCachedValues param to buildAnimate
+- Updated dependencies [6c367d3]
+  - @animini/core@0.2.2
+
 ## 0.2.1
 
 ### Patch Changes
