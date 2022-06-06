@@ -1,5 +1,13 @@
 # @animini/target-dom
 
+## 0.2.3
+
+### Patch Changes
+
+- fd31840: Remove cached values
+- Updated dependencies [fd31840]
+  - @animini/core@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
