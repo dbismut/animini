@@ -3,4 +3,4 @@ packages:
   - 'packages/*'
   - 'targets/*'
   - 'demo'
-  - 'perf'
+  - 'test-perf'

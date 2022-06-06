@@ -6,8 +6,7 @@ export type ParsedValue = number | number[] | Record<string, number>
 export type AdapterFn<ElementType, R> = (
   value: any,
   key: string | number | symbol,
-  target: ElementType | undefined | null,
-  cachedValues: any
+  target: ElementType | undefined | null
 ) => R
 
 // TODO fix ValueType
@@ -31,12 +30,10 @@ export type Payload = Record<string, any>
 
 export type Target<ElementType, ValueType extends Payload> = {
   loop?: FrameLoop
-  getCurrentValues?(element: ElementType): Record<string, any>
   setValues?(rawValues: ValueType, element: ElementType): void
   getInitialValueAndAdapter<K extends keyof ValueType>(
     element: ElementType,
-    key: K,
-    cachedValues?: any
+    key: K
   ): [ValueType[K], Adapter<ElementType, ValueType> | undefined]
 }
 

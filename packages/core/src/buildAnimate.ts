@@ -26,7 +26,6 @@ export function buildAnimate<ElementType, ValueType extends Payload>({
     const el = typeof element === 'object' && 'current' in element ? element : { current: element }
     const currentValues: any = {}
     const animations = new Map<keyof ValueType, Animation<ElementType, ValueType>>()
-    let cachedValues: any
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
@@ -39,7 +38,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>({
 
         const value = adapter?.format ? adapter.format(animated.value) : animated.value
         currentValues[key] = value
-        adapter?.onChange?.(value, key, el.current, cachedValues)
+        adapter?.onChange?.(value, key, el.current)
         idle &&= animated.idle
       })
       target.setValues?.(currentValues, el.current)
@@ -61,10 +60,8 @@ export function buildAnimate<ElementType, ValueType extends Payload>({
           let adapter: Adapter<ElementType, ValueType> | undefined
 
           if (!animation) {
-            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current, key, cachedValues)
-            const value = _adapter?.parseInitial
-              ? _adapter?.parseInitial(_value, key, el.current, cachedValues)
-              : _value
+            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current, key)
+            const value = _adapter?.parseInitial ? _adapter?.parseInitial(_value, key, el.current) : _value
             animated = new Animated(value, loop)
             adapter = _adapter
             animations.set(key, { animated, adapter })
@@ -73,7 +70,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>({
             adapter = animation.adapter
           }
 
-          const _to = adapter?.parse ? adapter.parse(to[key], key, el.current, cachedValues) : (to[key] as ParsedValue)
+          const _to = adapter?.parse ? adapter.parse(to[key], key, el.current) : (to[key] as ParsedValue)
           animated.start(_to, typeof config === 'function' ? config(key) : config)
           idle &&= animated.idle
         }
@@ -95,13 +92,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>({
 
     const get = (key: keyof ValueType) => currentValues[key]
 
-    const setCachedValues = () => {
-      cachedValues = target.getCurrentValues?.(el.current)
-    }
-
-    if (syncCachedValues) setCachedValues()
-
-    const api = { get, start, stop, clean, setCachedValues }
+    const api = { get, start, stop, clean }
     return api
   }
 }

@@ -5,6 +5,7 @@ import styles from './styles.module.css'
 
 import Drag from './sandboxes/animini-drag/src/App'
 // import ConfigFat from './sandboxes/animini-config-fat/src/App'
+import ConfigAnime from './sandboxes/animini-config-anime/src/App'
 import Inertia from './sandboxes/animini-inertia/src/App'
 import Config from './sandboxes/animini-config/src/App'
 import Perf from './sandboxes/animini-perf/src/App'
@@ -17,8 +18,9 @@ const links = {
   'animini-config': Config,
   'animini-perf': Perf,
   'animini-three': Three,
-  'animini-three-perf': ThreePerf
-  // 'animini-config-fat': ConfigFat
+  'animini-three-perf': ThreePerf,
+  'animini-config-anime': ConfigAnime
+  // 'animini-config-fat': ConfigFat,
 }
 
 const Example = ({ link }) => {
