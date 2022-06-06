@@ -9,7 +9,6 @@ export function buildReactHook<ElementType, ValueType extends Payload>(target: T
     const [api] = useState(() => animate(el as any, masterConfig))
 
     useEffect(() => {
-      api.setCachedValues()
       return () => api.clean()
     }, [api])
 
