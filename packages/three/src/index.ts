@@ -2,4 +2,4 @@ import { buildAnimate } from '@animini/core'
 import { three } from '@animini/target-three'
 export * from '@animini/core/algorithms'
 
-export const animate = buildAnimate({ target: three, syncCachedValues: true })
+export const animate = buildAnimate(three)

@@ -12,15 +12,7 @@ type Animation<ElementType, ValueType extends Payload> = {
 // TODO from ?
 // TODO staggering
 
-type Args<ElementType, ValueType extends Payload> = {
-  target: Target<ElementType, ValueType>
-  syncCachedValues?: boolean
-}
-
-export function buildAnimate<ElementType, ValueType extends Payload>({
-  target,
-  syncCachedValues = false
-}: Args<ElementType, ValueType>) {
+export function buildAnimate<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
   return function animate(element: ElementType | { current: ElementType }, masterConfig?: Config) {
     const loop = target.loop || GlobalLoop
     const el = typeof element === 'object' && 'current' in element ? element : { current: element }
