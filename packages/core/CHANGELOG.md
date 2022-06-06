@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.2.3
+
+### Patch Changes
+
+- fd31840: Remove cached values
+
 ## 0.2.2
 
 ### Patch Changes

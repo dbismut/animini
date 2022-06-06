@@ -1,5 +1,13 @@
 # @animini/dom
 
+## 0.2.3
+
+### Patch Changes
+
+- Updated dependencies [fd31840]
+  - @animini/core@0.2.3
+  - @animini/target-dom@0.2.3
+
 ## 0.2.2
 
 ### Patch Changes
