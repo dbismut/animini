@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.2.4
+
+### Patch Changes
+
+- a0f7cdb: Adapter inside Animated
+
 ## 0.2.3
 
 ### Patch Changes
