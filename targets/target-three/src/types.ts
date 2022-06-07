@@ -9,4 +9,4 @@ export type Values<Element extends ElementType> = Record<
   string | number | Record<string, number> | number[]
 >
 
-export type ThreeAdapter = Adapter<ElementType, Values<ElementType>>
+export type ThreeAdapter = Adapter<ElementType>

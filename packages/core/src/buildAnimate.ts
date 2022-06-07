@@ -1,11 +1,6 @@
 import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
-import { Adapter, Config, ParsedValue, Payload, Target } from './types'
-
-type Animation<ElementType, ValueType extends Payload> = {
-  animated: Animated
-  adapter?: Adapter<ElementType, ValueType>
-}
+import { Config, Payload, Target } from './types'
 
 // TODO interpolator
 // TODO chaining ?
@@ -17,7 +12,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
     const loop = target.loop || GlobalLoop
     const el = typeof element === 'object' && 'current' in element ? element : { current: element }
     const currentValues: any = {}
-    const animations = new Map<keyof ValueType, Animation<ElementType, ValueType>>()
+    const animations = new Map<keyof ValueType, Animated<ElementType>>()
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
@@ -25,12 +20,9 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
       if (!el.current) return
 
       let idle = true
-      animations.forEach(({ animated, adapter }, key) => {
+      animations.forEach((animated, key) => {
         animated.update()
-
-        const value = adapter?.format ? adapter.format(animated.value) : animated.value
-        currentValues[key] = value
-        adapter?.onChange?.(value, key, el.current)
+        currentValues[key] = animated.formattedValue
         idle &&= animated.idle
       })
       target.setValues?.(currentValues, el.current)
@@ -47,23 +39,14 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
         rejectRef = reject
         let idle = true
         for (let key in to) {
-          const animation = animations.get(key)
-          let animated: Animated
-          let adapter: Adapter<ElementType, ValueType> | undefined
+          let animated = animations.get(key)
 
-          if (!animation) {
-            const [_value, _adapter] = target.getInitialValueAndAdapter(el.current, key)
-            const value = _adapter?.parseInitial ? _adapter?.parseInitial(_value, key, el.current) : _value
-            animated = new Animated(value, loop)
-            adapter = _adapter
-            animations.set(key, { animated, adapter })
-          } else {
-            animated = animation.animated
-            adapter = animation.adapter
+          if (!animated) {
+            const [value, adapter] = target.getInitialValueAndAdapter(el.current, key)
+            animated = new Animated({ value, adapter, key, el: el.current }, loop)
+            animations.set(key, animated)
           }
-
-          const _to = adapter?.parse ? adapter.parse(to[key], key, el.current) : (to[key] as ParsedValue)
-          animated.start(_to, typeof config === 'function' ? config(key) : config)
+          animated.start(to[key], typeof config === 'function' ? config(key) : config)
           idle &&= animated.idle
         }
         if (!idle) loop.start(update)

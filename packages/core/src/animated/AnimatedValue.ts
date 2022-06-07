@@ -13,7 +13,7 @@ export class AnimatedValue {
   public distance = 0
   public velocity = 0
 
-  constructor(public parent: Animated, private key: number | string) {
+  constructor(public parent: Animated<any>, private key: number | string) {
     this.na = typeof this.value === 'string'
   }
   get time() {
