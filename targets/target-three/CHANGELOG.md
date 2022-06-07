@@ -1,5 +1,13 @@
 # @animini/target-three
 
+## 0.2.4
+
+### Patch Changes
+
+- a0f7cdb: Adapter inside Animated
+- Updated dependencies [a0f7cdb]
+  - @animini/core@0.2.4
+
 ## 0.2.3
 
 ### Patch Changes

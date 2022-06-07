@@ -1,6 +1,6 @@
 {
   "name": "@animini/react-dom",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "animini hook for React dom",
   "keywords": [],
   "main": "dist/animini-react-dom.cjs.js",
@@ -16,8 +16,8 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@animini/core": "0.2.3",
-    "@animini/core-react": "0.2.3",
-    "@animini/target-dom": "0.2.3"
+    "@animini/core": "0.2.4",
+    "@animini/core-react": "0.2.4",
+    "@animini/target-dom": "0.2.4"
   }
 }

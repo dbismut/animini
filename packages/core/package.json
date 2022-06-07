@@ -1,6 +1,6 @@
 {
   "name": "@animini/core",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Core of animini",
   "keywords": [],
   "main": "dist/animini-core.cjs.js",
