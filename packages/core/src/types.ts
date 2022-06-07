@@ -3,14 +3,10 @@ import { FrameLoop } from './FrameLoop'
 
 export type ParsedValue = number | number[] | Record<string, number>
 
-export type AdapterFn<ElementType, R> = (
-  value: any,
-  key: string | number | symbol,
-  target: ElementType | undefined | null
-) => R
+export type AdapterFn<ElementType, R> = (value: any, key?: string | number | symbol, element?: ElementType | null) => R
 
 // TODO fix ValueType
-export type Adapter<ElementType, ValueType extends Payload> = {
+export type Adapter<ElementType> = {
   parse?: AdapterFn<ElementType, ParsedValue>
   parseInitial?: AdapterFn<ElementType, ParsedValue>
   format?(value: string | ParsedValue): any
@@ -34,7 +30,7 @@ export type Target<ElementType, ValueType extends Payload> = {
   getInitialValueAndAdapter<K extends keyof ValueType>(
     element: ElementType,
     key: K
-  ): [ValueType[K], Adapter<ElementType, ValueType> | undefined]
+  ): [ValueType[K], Adapter<ElementType> | undefined]
 }
 
 export type ConfigValue = {

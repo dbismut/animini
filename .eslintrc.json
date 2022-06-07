@@ -1,6 +1,7 @@
 {
   "extends": "react-app",
   "rules": {
+    "no-cond-assign": "off",
     "no-console": "warn"
   }
 }
