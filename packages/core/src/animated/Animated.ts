@@ -20,10 +20,12 @@ type Props<ElementType> = {
 }
 
 export class Animated<ElementType> {
-  public value: ParsedValue
+  public value: any
+  public parsedValue: ParsedValue
+  public to: any
   public time = {} as Time
-  private key?: string | number | symbol
-  private el?: ElementType
+  public key?: string | number | symbol
+  public el?: ElementType
   private adapter?: Adapter<ElementType>
   private _movingChildren = 0
   private children: AnimatedValue[]
@@ -32,25 +34,32 @@ export class Animated<ElementType> {
     this.el = el
     this.adapter = adapter
     this.key = key
-    this.value = adapter?.parseInitial ? adapter.parseInitial(value) : value
-    this.children = map(this.value, (_v, i) => {
+    this.value = value
+    this.parsedValue = adapter?.parseInitial ? adapter.parseInitial(value, this) : value
+    this.children = map(this.parsedValue, (_v, i) => {
       return new AnimatedValue(this, i)
     })
   }
 
-  parse(v: any) {
+  setup() {
     let fn
-    return (fn = this.adapter?.parse) ? fn(v, this.key, this.el) : (v as ParsedValue)
+    if ((fn = this.adapter?.setup)) fn(this)
   }
 
-  onChange() {
+  private parse(v: any) {
     let fn
-    if ((fn = this.adapter?.onChange)) fn(this.value, this.key, this.el)
+    return (fn = this.adapter?.parse) ? fn(v, this) : (v as ParsedValue)
   }
 
-  public get formattedValue() {
+  private formatValue() {
     let fn
-    return (fn = this.adapter?.format) ? fn(this.value) : this.value
+    this.value = (fn = this.adapter?.format) ? fn(this.parsedValue, this) : this.parsedValue
+  }
+
+  private onUpdate() {
+    let fn
+    this.formatValue()
+    if ((fn = this.adapter?.onUpdate)) fn(this)
   }
 
   get idle() {
@@ -58,9 +67,13 @@ export class Animated<ElementType> {
   }
 
   start(to: any, { immediate = false, easing = defaultLerp }: ConfigValue = {}) {
-    const _to = this.parse(to)
+    this.to = to
     this.time.elapsed = 0
     this._movingChildren = 0
+
+    this.setup()
+
+    const _to = this.parse(to)
 
     each(this.children, (child) => {
       child.start(_to, { immediate, easing })
@@ -79,6 +92,6 @@ export class Animated<ElementType> {
       }
     })
 
-    this.onChange()
+    this.onUpdate()
   }
 }

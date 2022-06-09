@@ -1,4 +1,4 @@
-import { color, generic, transform } from './adapters'
+import { color, generic, transform, string } from './adapters'
 import { DomAdapter, Styles } from './types'
 import { Target } from '@animini/core'
 
@@ -16,7 +16,8 @@ const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
   stroke: color,
   textDecorationColor: color,
   x: transform,
-  y: transform
+  y: transform,
+  clipPath: string
 }
 
 const NO_ADAPTER = ['opacity', 'scale']

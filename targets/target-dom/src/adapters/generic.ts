@@ -1,12 +1,12 @@
 import { parseUnitValue } from '@animini/core'
 import { DomAdapter } from '../types'
 
-const parse: DomAdapter['parse'] = (value, key, el) => {
+const parse: DomAdapter['parse'] = (value, animated) => {
   let [_value, unit] = parseUnitValue(value)
   if (isNaN(_value)) return value
   switch (unit) {
     case '%':
-      const parent = el?.offsetParent
+      const parent = animated.el?.offsetParent
       // @ts-expect-error
       const size = (key === 'top' ? parent?.offsetHeight : parent?.offsetWidth) || 0
       return (_value * size) / 100

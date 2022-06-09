@@ -1,16 +1,19 @@
+import { Animated } from './animated/Animated'
 import { AnimatedValue } from './animated/AnimatedValue'
 import { FrameLoop } from './FrameLoop'
 
+export type { Animated }
+
 export type ParsedValue = number | number[] | Record<string, number>
 
-export type AdapterFn<ElementType, R> = (value: any, key?: string | number | symbol, element?: ElementType | null) => R
+export type AdapterFn<ElementType, R> = (value: any, animated: Animated<ElementType>) => R
 
-// TODO fix ValueType
 export type Adapter<ElementType> = {
-  parse?: AdapterFn<ElementType, ParsedValue>
-  parseInitial?: AdapterFn<ElementType, ParsedValue>
-  format?(value: string | ParsedValue): any
-  onChange?: AdapterFn<ElementType, void>
+  setup?(animated: Animated<ElementType>): void
+  parse?(value: any, animated: Animated<ElementType>): ParsedValue
+  parseInitial?(value: any, animated: Animated<ElementType>): ParsedValue
+  format?(value: any, animated: Animated<ElementType>): any
+  onUpdate?(animated: Animated<ElementType>): void
 }
 
 export type Algorithm = {
