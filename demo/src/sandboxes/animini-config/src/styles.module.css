@@ -5,4 +5,5 @@
   background-color: #ec625c;
   touch-action: none;
   transform: translate(10%);
+  clip-path: inset(10px 20px 30px 40px);
 }

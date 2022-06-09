@@ -2,11 +2,11 @@ import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
 import { Config, Payload, Target } from './types'
 
-// TODO interpolator (medium)
-// TODO chaining ? (hard)
-// TODO from ? (easy)
+// TODO chaining (hard)
+// TODO from (easy)
 // TODO staggering (hard)
 // TODO extend target (easy)
+// TODO scroll (medium)
 
 export function buildAnimate<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
   return function animate(element: ElementType | { current: ElementType }, masterConfig?: Config) {

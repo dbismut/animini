@@ -35,6 +35,9 @@ export class Animated<ElementType> {
     this.adapter = adapter
     this.key = key
     this.value = value
+
+    this.setup()
+
     this.parsedValue = adapter?.parseInitial ? adapter.parseInitial(value, this) : value
     this.children = map(this.parsedValue, (_v, i) => {
       return new AnimatedValue(this, i)
@@ -70,8 +73,6 @@ export class Animated<ElementType> {
     this.to = to
     this.time.elapsed = 0
     this._movingChildren = 0
-
-    this.setup()
 
     const _to = this.parse(to)
 

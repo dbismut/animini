@@ -1,16 +1,21 @@
-import { interpolate, Animated } from '@animini/core'
+import { interpolate, Animated, parseNumbers } from '@animini/core'
 import { DomAdapter } from '../types'
 
 interface AnimatedWithInterpolator extends Animated<HTMLElement> {
-  i: any
+  i: ReturnType<typeof interpolate>
 }
 
 export const string: DomAdapter = {
   setup(a: AnimatedWithInterpolator) {
-    a.i = interpolate(a.value, a.to)
-    console.log(a.i(0.5))
+    a.i = interpolate(a.value)
   },
-  format(c: number[]) {
-    return 'hello'
+  parse(value) {
+    return parseNumbers(value)!
+  },
+  parseInitial(_value, a: AnimatedWithInterpolator) {
+    return a.i.values
+  },
+  format(value, a: AnimatedWithInterpolator) {
+    return a.i.compute(value)
   }
 }
