@@ -17,7 +17,11 @@ const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
   textDecorationColor: color,
   x: transform,
   y: transform,
-  clipPath: string
+  clipPath: string,
+  boxShadow: string,
+  padding: string,
+  margin: string,
+  inset: string
 }
 
 const NO_ADAPTER = ['opacity', 'scale']

@@ -25,11 +25,11 @@ export default function App() {
         default:
           easing = method(get('duration'), get('easeConfig'))
       }
-      api.start({ clipPath: 'rect(0px, 10px, 10px, 0px)' }, { easing })
-      // try {
-      //   await api.start({ x: '50%', position: 'fixed' }, { easing })
-      //   await api.start({ scale: 0.5 }, { easing })
-      // } catch {}
+      try {
+        await api.start({ clipPath: 'rect(0, 0px, 0px, 0px)', margin: '10px 1px' }, { easing })
+        await api.start({ x: '50%', position: 'fixed' }, { easing })
+        await api.start({ scale: 0.5 }, { easing })
+      } catch {}
     }),
     stop: button(() => api.stop())
   })
