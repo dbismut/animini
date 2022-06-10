@@ -1,6 +1,6 @@
 {
   "name": "@animini/core-react",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "React core for animini",
   "keywords": [],
   "main": "dist/animini-core-react.cjs.js",
@@ -16,6 +16,6 @@
     "react": ">=16.8.0"
   },
   "dependencies": {
-    "@animini/core": "0.2.4"
+    "@animini/core": "0.2.5"
   }
 }
