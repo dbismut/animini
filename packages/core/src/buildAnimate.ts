@@ -2,10 +2,11 @@ import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
 import { Config, Payload, Target } from './types'
 
-// TODO interpolator
-// TODO chaining ?
-// TODO from ?
-// TODO staggering
+// TODO chaining (hard)
+// TODO from (easy)
+// TODO staggering (hard)
+// TODO extend target (easy)
+// TODO scroll (medium)
 
 export function buildAnimate<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
   return function animate(element: ElementType | { current: ElementType }, masterConfig?: Config) {
@@ -22,7 +23,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
       let idle = true
       animations.forEach((animated, key) => {
         animated.update()
-        currentValues[key] = animated.formattedValue
+        currentValues[key] = animated.value
         idle &&= animated.idle
       })
       target.setValues?.(currentValues, el.current)

@@ -6,8 +6,8 @@ export const euler: ThreeAdapter = {
     const v = new Vector3()
     return v.setFromEuler(euler) as any as Record<string, number>
   },
-  onChange(value, key, element) {
+  onUpdate(animated) {
     // @ts-ignore
-    element![key].setFromVector3(value)
+    animated.el[animated.key].setFromVector3(animated.value)
   }
 }

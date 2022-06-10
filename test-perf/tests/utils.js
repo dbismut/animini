@@ -14,7 +14,7 @@ import { lerp as lerpLatest, spring as springLatest } from '@animini/core-latest
 export function animateLatest({ motion, limit, from, to, config, adapter }) {
   const loop = { time: { elapsed: 0, delta: 16 } }
   const _motion = { easing: motion === 'spring' ? springLatest(config) : lerpLatest(config) }
-  const animated = new AnimatedLatest(from, loop)
+  const animated = new Animated({ value: from }, loop)
   animated.start(to, _motion)
   let iterations = 0
   while (!animated.idle && iterations < limit) {
