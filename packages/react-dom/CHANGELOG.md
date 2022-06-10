@@ -1,5 +1,14 @@
 # @animini/react-dom
 
+## 0.2.5
+
+### Patch Changes
+
+- Updated dependencies [0885116]
+  - @animini/core@0.2.5
+  - @animini/target-dom@0.2.5
+  - @animini/core-react@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes

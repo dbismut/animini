@@ -1,5 +1,13 @@
 # @animini/target-dom
 
+## 0.2.5
+
+### Patch Changes
+
+- 0885116: Add string interpolation
+- Updated dependencies [0885116]
+  - @animini/core@0.2.5
+
 ## 0.2.4
 
 ### Patch Changes
