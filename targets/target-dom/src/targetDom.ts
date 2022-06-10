@@ -1,8 +1,7 @@
 import { color, generic, transform, string } from './adapters'
-import { DomAdapter, Styles } from './types'
+import { DomAdapter, Styles, Transform } from './types'
 import { Target } from '@animini/core'
-
-const TRANSFORM_KEYS = { scale: 1, x: 1, y: 1 }
+import { getSidesValues, getTransformValues, SIDES_KEYS, TRANSFORM_KEYS } from './utils'
 
 const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
   color,
@@ -20,8 +19,7 @@ const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
   clipPath: string,
   boxShadow: string,
   padding: string,
-  margin: string,
-  inset: string
+  margin: string
 }
 
 const NO_ADAPTER = ['opacity', 'scale']
@@ -44,34 +42,13 @@ export const dom: Target<HTMLElement, Styles> = {
     const style = getComputedStyle(element)
     let value
     const adapter = ADAPTERS[key as any] || (!NO_ADAPTER.includes(key as string) ? generic : undefined)
-    if (key in TRANSFORM_KEYS) {
-      value = getTranslateValues(style)[key as keyof Transform]
+    if (TRANSFORM_KEYS.includes(key as string)) {
+      value = getTransformValues(style.transform)[key as keyof Transform]
+    } else if (SIDES_KEYS.includes(key as string)) {
+      value = getSidesValues(style[key as any])
     } else {
       value = style[key as any]
     }
     return [value, adapter] as [Styles[typeof key], DomAdapter | undefined]
   }
-}
-
-type Transform = { scale: number; x: number; y: number; z: number }
-
-function getTranslateValues(style: CSSStyleDeclaration): Transform {
-  const matrix = style.transform
-
-  // No transform property. Simply return 0 values.
-  if (matrix === 'none' || typeof matrix === 'undefined') {
-    return { scale: 1, x: 0, y: 0, z: 0 }
-  }
-
-  // Can either be 2d or 3d transform
-  const matrixType = matrix.includes('3d') ? '3d' : '2d'
-  const matrixValues = matrix.match(/matrix.*\((.+)\)/)![1].split(', ')
-
-  if (matrixType === '2d') {
-    return { scale: ~~matrixValues[0], x: ~~matrixValues[4], y: ~~matrixValues[5], z: 0 }
-  }
-
-  // if (matrixType === '3d') {
-  return { scale: ~~matrixValues[0], x: ~~matrixValues[12], y: ~~matrixValues[13], z: ~~matrixValues[14] }
-  // }
 }

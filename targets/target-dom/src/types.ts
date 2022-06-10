@@ -7,4 +7,6 @@ export type Styles = Record<keyof CSSStyleDeclaration, number | string> & {
   scale: number
 }
 
+export type Transform = { scale: number; x: number; y: number; z: number }
+
 export type DomAdapter = Adapter<HTMLElement>
