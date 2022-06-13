@@ -4,6 +4,7 @@
     "/demo/src/sandboxes/animini-drag",
     "/demo/src/sandboxes/animini-inertia",
     "/demo/src/sandboxes/animini-config",
+    "/demo/src/sandboxes/animini-scroll",
     "/demo/src/sandboxes/animini-perf",
     "/demo/src/sandboxes/animini-three",
     "/demo/src/sandboxes/animini-three-perf"
