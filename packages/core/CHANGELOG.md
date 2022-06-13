@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.2.6
+
+### Patch Changes
+
+- c838bf8: Support for scrollTop / scrollLeft
+
 ## 0.2.5
 
 ### Patch Changes
