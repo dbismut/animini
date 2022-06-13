@@ -55,17 +55,17 @@ bench('spring int (10 itr.)', 600, 5000, (useSource) => animatedBench(useSource,
 bench('spring array (10 itr.)', 600, 5000, (useSource) =>
   animatedBench(useSource, { motion: 'spring', limit: 10, from: [0, 0, 0], to: [100, 200, 300] })
 )
-// bench('spring color (10 itr.)', 600, 5000, (useSource) =>
-//   animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
-// )
+bench('spring color (10 itr.)', 600, 5000, (useSource) =>
+  animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
+)
 bench('lerp int', 1500, 5000, (useSource) => animatedBench(useSource, { to: 10 }))
 bench('spring int', 600, 5000, (useSource) => animatedBench(useSource, { motion: 'spring', to: 10 }))
 bench('spring array', 1800, 5000, (useSource) =>
   animatedBench(useSource, { motion: 'spring', from: [0, 0, 0], to: [100, 200, 300] })
 )
-// bench('spring color', 1800, 5000, (useSource) =>
-//   animatedBench(useSource, { motion: 'spring', from: '#ff0000', to: '#000eac', adapter: 'color' })
-// )
+bench('spring color', 1800, 5000, (useSource) =>
+  animatedBench(useSource, { motion: 'spring', from: '#ff0000', to: '#000eac', adapter: 'color' })
+)
 
 function formatResults(results) {
   const r = {}

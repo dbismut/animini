@@ -23,6 +23,7 @@ async function bench(label, cb) {
         .add('source', () => void cb(true))
         .add('latest', () => void cb(false))
         .on('cycle', function (event) {
+          // eslint-disable-next-line no-console
           console.log(String(event.target))
         })
         .on('complete', function () {
@@ -47,9 +48,9 @@ bench('spring int (10 itr.)', (useSource) => animatedBench(useSource, { motion: 
 bench('spring array (10 itr.)', (useSource) =>
   animatedBench(useSource, { motion: 'spring', limit: 10, from: [0, 0, 0], to: [100, 200, 300] })
 )
-// bench('spring color (10 itr.)', (useSource) =>
-//   animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
-// )
+bench('spring color (10 itr.)', (useSource) =>
+  animatedBench(useSource, { motion: 'spring', limit: 10, from: '#ff0000', to: '#000eac', adapter: 'color' })
+)
 
 function formatResults(results) {
   const r = {}
