@@ -11,7 +11,7 @@ export const string: DomAdapter = {
     a.i = interpolate(a.value)
   },
   parse(value, a) {
-    if (SIDES_KEYS.includes(a.key as string)) {
+    if (SIDES_KEYS.includes(a.key!)) {
       value = getSidesValues(value)
     }
     return parseNumbers(value)!

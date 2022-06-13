@@ -1,5 +1,6 @@
 import { parseUnitValue } from '@animini/core'
 import { DomAdapter } from '../types'
+import { SCROLL_KEYS } from '../utils'
 
 const parse: DomAdapter['parse'] = (value, animated) => {
   let [_value, unit] = parseUnitValue(value)
@@ -20,8 +21,8 @@ const parse: DomAdapter['parse'] = (value, animated) => {
 
 export const generic: DomAdapter = {
   parse,
-  format(value: number) {
-    if (!isNaN(value as any)) return value + 'px'
+  format(value: number, animated) {
+    if (!isNaN(value as any) && !SCROLL_KEYS.includes(animated.key!)) return value + 'px'
     return value
   },
   parseInitial: parse
