@@ -1,7 +1,8 @@
 import { Transform } from './types'
 
 export const TRANSFORM_KEYS = ['scale', 'x', 'y']
-export const SIDES_KEYS = ['margin', 'padding']
+export const SIDES_KEYS = ['inset', 'margin', 'padding']
+export const SCROLL_KEYS = ['scrollLeft', 'scrollTop']
 
 export function getSidesValues(value: string) {
   const n = value.split(' ')

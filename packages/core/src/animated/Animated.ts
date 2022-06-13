@@ -14,7 +14,7 @@ type Time = {
 
 type Props<ElementType> = {
   value: any
-  key?: string | number | symbol
+  key?: string
   adapter?: Adapter<ElementType>
   el?: ElementType
 }
@@ -24,7 +24,7 @@ export class Animated<ElementType> {
   public parsedValue: ParsedValue
   public to: any
   public time = {} as Time
-  public key?: string | number | symbol
+  public key?: string
   public el?: ElementType
   private adapter?: Adapter<ElementType>
   private movingChildren = 0
