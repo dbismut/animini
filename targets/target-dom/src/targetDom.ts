@@ -33,8 +33,8 @@ export const dom: Target<HTMLElement, Styles> = {
       el.style[key] = rest[key]
     }
 
-    if (scrollTop !== undefined) el.scrollTop = scrollTop
-    if (scrollLeft !== undefined) el.scrollLeft = scrollTop
+    if (scrollTop !== undefined) el.scrollTop = scrollTop as number
+    if (scrollLeft !== undefined) el.scrollLeft = scrollTop as number
 
     if (x === undefined && y === undefined && scale === undefined) return
     if (!x && !y && (scale === void 0 || scale === 1)) el.style.removeProperty('transform')
