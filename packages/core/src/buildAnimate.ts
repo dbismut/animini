@@ -8,16 +8,39 @@ import { Config, Payload, Target } from './types'
 // TODO extend target (easy)
 // TODO scroll (medium)
 
-export function buildAnimate<ElementType, ValueType extends Payload>(target: Target<ElementType, ValueType>) {
-  return function animate(element: ElementType | { current: ElementType }, masterConfig?: Config) {
+type AnimationMap<Values, ElementType> = Map<keyof Values, Animated<ElementType>>
+const elementAnimationsMap = new Map<any, any>()
+
+type ElementOrElementRef<ElementType> = ElementType | { current: ElementType }
+type ElementOrTo<ElementType, Values> = Partial<Values> & { el: ElementOrElementRef<ElementType> }
+
+export function buildAnimate<ElementType, Values extends Payload>(target: Target<ElementType, Values>) {
+  return function animate(elementOrTo: ElementOrTo<ElementType, Values>, masterConfig?: Config) {
     const loop = target.loop || GlobalLoop
-    const el = typeof element === 'object' && 'current' in element ? element : { current: element }
-    const currentValues: any = {}
-    const animations = new Map<keyof ValueType, Animated<ElementType>>()
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
+    let element: ElementOrElementRef<ElementType>
+    let globalTo: Partial<Values> | undefined
+
+    if ('el' in elementOrTo) {
+      const { el, ...rest } = elementOrTo
+      element = el
+      globalTo = rest as any
+    } else {
+      element = elementOrTo
+    }
+
+    const el = typeof element === 'object' && 'current' in element ? element : { current: element }
+
+    let animations: AnimationMap<Values, ElementType> = elementAnimationsMap.get(element)
+    if (!animations) {
+      animations = new Map()
+      elementAnimationsMap.set(element, animations)
+    }
+
     const update = () => {
+      const currentValues: any = {}
       if (!el.current) return
 
       let idle = true
@@ -34,7 +57,7 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
       // eslint-disable-next-line react-hooks/exhaustive-deps
     }
 
-    const start = (to: Partial<ValueType>, config = masterConfig) => {
+    const start = (to: Partial<Values>, config = masterConfig) => {
       return new Promise((resolve, reject) => {
         resolveRef = resolve
         rejectRef = reject
@@ -64,11 +87,15 @@ export function buildAnimate<ElementType, ValueType extends Payload>(target: Tar
     const clean = () => {
       loop.stop(update)
       resolveRef?.()
+      elementAnimationsMap.delete(element)
     }
 
-    const get = (key: keyof ValueType) => currentValues[key]
+    const get = (key: keyof Values) => animations.get(key)?.value
 
     const api = { get, start, stop, clean }
+    if (globalTo) {
+      start(globalTo)
+    }
     return api
   }
 }
