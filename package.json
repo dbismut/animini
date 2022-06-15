@@ -32,7 +32,7 @@
     {
       "name": "react-dom",
       "import": "{ useAnimini }",
-      "limit": "3 KB",
+      "limit": "4 KB",
       "path": "packages/react-dom/dist/*.esm.js"
     },
     {
