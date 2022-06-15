@@ -11,4 +11,4 @@ export type Styles = Record<keyof CSSStyleDeclaration, number | string> & {
 
 export type Transform = { scale: number; x: number; y: number; z: number }
 
-export type DomAdapter = Adapter<HTMLElement>
+export type DomAdapter = Adapter<HTMLElement | Window>

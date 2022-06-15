@@ -1,6 +1,6 @@
 import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
-import { Config, Payload, Target } from './types'
+import { Config, ConfigWithEl, Payload, Target } from './types'
 
 // TODO chaining (hard)
 // TODO from (easy)
@@ -8,32 +8,41 @@ import { Config, Payload, Target } from './types'
 // TODO extend target (easy)
 // TODO scroll (medium)
 
-type AnimationMap<Values, ElementType> = Map<keyof Values, Animated<ElementType>>
+type AnimationMap<ElementType, Values> = Map<keyof Values, Animated<ElementType>>
 const elementAnimationsMap = new Map<any, any>()
 
 type ElementOrElementRef<ElementType> = ElementType | { current: ElementType }
-type ElementOrTo<ElementType, Values> = Partial<Values> & { el: ElementOrElementRef<ElementType> }
+
+type ToOrConfigWithEl<ElementType, Values> = Partial<Values> | ConfigWithEl<ElementType>
 
 export function buildAnimate<ElementType, Values extends Payload>(target: Target<ElementType, Values>) {
-  return function animate(elementOrTo: ElementOrTo<ElementType, Values>, masterConfig?: Config) {
+  return function animate(
+    masterConfigWithElOrTo: ToOrConfigWithEl<ElementType, Values>,
+    masterConfigWithEl?: ConfigWithEl<ElementType>
+  ) {
     const loop = target.loop || GlobalLoop
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
     let element: ElementOrElementRef<ElementType>
     let globalTo: Partial<Values> | undefined
+    let masterConfig: Config
 
-    if ('el' in elementOrTo) {
-      const { el, ...rest } = elementOrTo
+    if (masterConfigWithEl) {
+      const { el, ...rest } = masterConfigWithEl
       element = el
-      globalTo = rest as any
+      masterConfig = rest
+      globalTo = masterConfigWithElOrTo as any
     } else {
-      element = elementOrTo
+      const { el, ...rest } = masterConfigWithElOrTo
+      element = el!
+      masterConfig = rest
     }
 
-    const el = typeof element === 'object' && 'current' in element ? element : { current: element }
+    const tElement = target.getElement?.(element) || element
+    let el = typeof tElement === 'object' && 'current' in tElement ? tElement : { current: tElement }
 
-    let animations: AnimationMap<Values, ElementType> = elementAnimationsMap.get(element)
+    let animations: AnimationMap<ElementType, Values> = elementAnimationsMap.get(element)
     if (!animations) {
       animations = new Map()
       elementAnimationsMap.set(element, animations)
@@ -54,7 +63,6 @@ export function buildAnimate<ElementType, Values extends Payload>(target: Target
         loop.stop(update)
         resolveRef()
       }
-      // eslint-disable-next-line react-hooks/exhaustive-deps
     }
 
     const start = (to: Partial<Values>, config = masterConfig) => {
@@ -92,10 +100,12 @@ export function buildAnimate<ElementType, Values extends Payload>(target: Target
 
     const get = (key: keyof Values) => animations.get(key)?.value
 
+    // TODO discuss this 👇
+    // when `to` is passed to the function then promise-based functionality
+    // wouldn't work.
+    if (globalTo) start(globalTo)
+
     const api = { get, start, stop, clean }
-    if (globalTo) {
-      start(globalTo)
-    }
     return api
   }
 }

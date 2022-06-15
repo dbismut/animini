@@ -25,7 +25,11 @@ const ADAPTERS: Partial<Record<keyof Styles, DomAdapter>> = {
 
 const NO_ADAPTER = ['opacity', 'scale']
 
-export const dom: Target<HTMLElement, Styles> = {
+export const dom: Target<HTMLElement | Window, Styles> = {
+  getElement(element) {
+    if (typeof element !== string) return element
+    return document.querySelector(element)
+  },
   setValues(values, el) {
     const { x, y, scale, scrollTop, scrollLeft, ...rest } = values
     for (let key in rest) {
@@ -33,18 +37,31 @@ export const dom: Target<HTMLElement, Styles> = {
       el.style[key] = rest[key]
     }
 
-    if (scrollTop !== undefined) el.scrollTop = scrollTop as number
-    if (scrollLeft !== undefined) el.scrollLeft = scrollTop as number
+    if (scrollLeft !== void 0 || scrollTop !== void 0) {
+      const fallbackLeft = el === window ? el.scrollX : (el as HTMLElement).scrollLeft
+      const fallbackTop = el === window ? el.scrollY : (el as HTMLElement).scrollTop
+      el.scrollTo((scrollLeft as number) ?? fallbackLeft, (scrollTop as number) ?? fallbackTop)
+    }
 
-    if (x === undefined && y === undefined && scale === undefined) return
-    if (!x && !y && (scale === void 0 || scale === 1)) el.style.removeProperty('transform')
-    el.style.transform = `matrix(${scale !== void 0 ? scale : 1}, 0, 0, ${scale !== void 0 ? scale : 1}, ${x || 0}, ${
-      y || 0
-    })`
+    if (el !== window) {
+      if (x === undefined && y === undefined && scale === undefined) return
+      if (!x && !y && (scale === void 0 || scale === 1)) {
+        ;(el as HTMLElement).style.removeProperty('transform')
+      } else {
+        const s = scale !== void 0 ? scale : 1
+        ;(el as HTMLElement).style.transform = `matrix(${s}, 0, 0, ${s}, ${x || 0}, ${y || 0})`
+      }
+    }
   },
 
   getInitialValueAndAdapter(element, key) {
-    const style = getComputedStyle(element)
+    if (element === window) {
+      if (key === 'scrollTop') return [element.scrollY, generic]
+      else if (key === 'scrollLeft') return [element.scrollX, generic]
+      // TODO return type doesn't make any sense
+      return [0, undefined]
+    }
+    const style = getComputedStyle(element as HTMLElement)
     let value
     const adapter = ADAPTERS[key as any] || (!NO_ADAPTER.includes(key as string) ? generic : undefined)
     if (SCROLL_KEYS.includes(key as string)) {

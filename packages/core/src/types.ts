@@ -29,6 +29,7 @@ export type Algorithm = {
 export type Payload = Record<string, any>
 
 export type Target<ElementType, Values extends Payload> = {
+  getElement?(element: any): ElementType
   loop?: FrameLoop
   setValues?(rawValues: Values, element: ElementType): void
   getInitialValueAndAdapter<K extends keyof Values>(
@@ -43,3 +44,5 @@ export type ConfigValue = {
 }
 
 export type Config = ConfigValue | ((key: string) => ConfigValue)
+export type ConfigWithEl<ElementType> = Config & { el: ElementType }
+export type ConfigWithOptionalEl<ElementType> = Config & { el?: ElementType }
