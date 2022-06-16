@@ -7,7 +7,7 @@ export default function Box({ x, y, backgroundColor, scale, style }) {
   const ref = useRef()
 
   useEffect(() => {
-    animate({ x, y, backgroundColor, scale }, { el: ref.current, ...config })
+    animate({ el: ref.current, ...config }, { x, y, backgroundColor, scale })
   }, [x, y, backgroundColor, scale])
 
   return <div ref={ref} style={style} />

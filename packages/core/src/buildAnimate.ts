@@ -1,46 +1,27 @@
 import { Animated } from './animated/Animated'
 import { GlobalLoop } from './FrameLoop'
-import { Config, ConfigWithEl, Payload, Target } from './types'
+import { ConfigWithEl, Payload, Target } from './types'
 
-// TODO chaining (hard)
+// TODO timeline (hard)
 // TODO from (easy)
 // TODO staggering (hard)
 // TODO extend target (easy)
 // TODO scroll (medium)
+// TODO delay (medium)
 
 type AnimationMap<ElementType, Values> = Map<keyof Values, Animated<ElementType>>
 const elementAnimationsMap = new Map<any, any>()
 
-type ElementOrElementRef<ElementType> = ElementType | { current: ElementType }
-
-type ToOrConfigWithEl<ElementType, Values> = Partial<Values> | ConfigWithEl<ElementType>
-
 export function buildAnimate<ElementType, Values extends Payload>(target: Target<ElementType, Values>) {
-  return function animate(
-    masterConfigWithElOrTo: ToOrConfigWithEl<ElementType, Values>,
-    masterConfigWithEl?: ConfigWithEl<ElementType>
-  ) {
+  return function animate(masterConfigWithEl: ConfigWithEl<ElementType>, globalTo?: Partial<Values>) {
     const loop = target.loop || GlobalLoop
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
-    let element: ElementOrElementRef<ElementType>
-    let globalTo: Partial<Values> | undefined
-    let masterConfig: Config
-
-    if (masterConfigWithEl) {
-      const { el, ...rest } = masterConfigWithEl
-      element = el
-      masterConfig = rest
-      globalTo = masterConfigWithElOrTo as any
-    } else {
-      const { el, ...rest } = masterConfigWithElOrTo
-      element = el!
-      masterConfig = rest
-    }
+    const { el: element, ...masterConfig } = masterConfigWithEl
 
     const tElement = target.getElement?.(element) || element
-    let el = typeof tElement === 'object' && 'current' in tElement ? tElement : { current: tElement }
+    const el = typeof tElement === 'object' && 'current' in tElement ? tElement : { current: tElement }
 
     let animations: AnimationMap<ElementType, Values> = elementAnimationsMap.get(element)
     if (!animations) {

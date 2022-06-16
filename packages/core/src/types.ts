@@ -43,6 +43,7 @@ export type ConfigValue = {
   easing?: Algorithm
 }
 
+export type ElementRef<ElementType> = { current: ElementType }
 export type Config = ConfigValue | ((key: string) => ConfigValue)
-export type ConfigWithEl<ElementType> = Config & { el: ElementType }
+export type ConfigWithEl<ElementType> = Config & { el: ElementType | ElementRef<ElementType> }
 export type ConfigWithOptionalEl<ElementType> = Config & { el?: ElementType }
