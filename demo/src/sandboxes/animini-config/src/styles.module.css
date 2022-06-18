@@ -4,6 +4,6 @@
   border-radius: 4px;
   background-color: #ec625c;
   touch-action: none;
-  transform: translate(10%);
+  transform: translate(10%) rotate(45deg);
   clip-path: inset(10px 20px 30px 40px);
 }

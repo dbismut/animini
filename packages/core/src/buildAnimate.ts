@@ -15,6 +15,8 @@ const elementAnimationsMap = new Map<any, any>()
 export function buildAnimate<ElementType, Values extends Payload>(target: Target<ElementType, Values>) {
   return function animate(masterConfigWithEl: ConfigWithEl<ElementType>, globalTo?: Partial<Values>) {
     const loop = target.loop || GlobalLoop
+    const initial = {}
+
     let resolveRef: (value?: unknown) => void
     let rejectRef: (value?: unknown) => void
 
@@ -39,7 +41,7 @@ export function buildAnimate<ElementType, Values extends Payload>(target: Target
         currentValues[key] = animated.value
         idle &&= animated.idle
       })
-      target.setValues?.(currentValues, el.current)
+      target.setValues?.(currentValues, el.current, initial, idle)
       if (idle) {
         loop.stop(update)
         resolveRef()
@@ -55,7 +57,7 @@ export function buildAnimate<ElementType, Values extends Payload>(target: Target
           let animated = animations.get(key)
 
           if (!animated) {
-            const [value, adapter] = target.getInitialValueAndAdapter(el.current, key)
+            const [value, adapter] = target.getInitialValueAndAdapter(el.current, key, initial)
             animated = new Animated({ value, adapter, key, el: el.current }, loop)
             animations.set(key, animated)
           }

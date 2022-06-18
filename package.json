@@ -31,13 +31,13 @@
   "size-limit": [
     {
       "name": "react-dom",
-      "import": "{ useAnimini }",
+      "import": "{ useAnimate }",
       "limit": "4 KB",
       "path": "packages/react-dom/dist/*.esm.js"
     },
     {
       "name": "react-three",
-      "import": "{ useAnimini }",
+      "import": "{ useAnimate }",
       "limit": "3 KB",
       "path": "packages/react-three/dist/*.esm.js",
       "ignore": [

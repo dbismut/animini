@@ -4,7 +4,7 @@ import { dom } from '@animini/target-dom'
 
 export const useAniminiDom = buildReactHook(dom)
 
-export function useAnimini<
+export function useAnimate<
   Element extends HTMLElement | Window,
   C extends ConfigWithOptionalEl<Element> = ConfigWithOptionalEl<Element>
 >(masterConfig?: C) {

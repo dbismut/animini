@@ -24,7 +24,7 @@ function setGlobalLoopOnDemand() {
 
 export const useAniminiThree = buildReactHook(three)
 
-export function useAnimini<
+export function useAnimate<
   Element extends ElementType,
   C extends ConfigWithOptionalEl<Element> = ConfigWithOptionalEl<Element>
 >(masterConfig?: C) {

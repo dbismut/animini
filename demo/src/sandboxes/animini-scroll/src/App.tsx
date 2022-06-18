@@ -1,5 +1,5 @@
 import { useControls, button } from 'leva'
-import { useAnimini } from '@animini/react-dom'
+import { useAnimate } from '@animini/react-dom'
 
 import styles from './styles.module.css'
 
@@ -10,7 +10,7 @@ export default function App() {
     'scroll to top': button(() => api.start({ scrollTop: 0 }))
   })
 
-  const api = useAnimini({ el: window })
+  const api = useAnimate({ el: window })
 
   return (
     <div className="flex center">
