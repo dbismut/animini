@@ -27,9 +27,8 @@ export default function App() {
       }
       try {
         await api.start({ scale: 1.5, rotate: 75 }, { easing })
-        await api.start({ scale: 1, rotate: 0, x: 0 }, { easing })
-        // await api.start({ clipPath: 'rect(0, 0px, 0px, 0px)' }, { easing })
-        // await api.start({ x: '50%', position: 'fixed' }, { easing })
+        await api.start({ scale: 1, rotate: 0, x: '50%' }, { easing })
+        await api.start({ clipPath: 'rect(0, 0px, 0px, 0px)', x: 0 }, { easing })
       } catch {}
     }),
     stop: button(() => api.stop())

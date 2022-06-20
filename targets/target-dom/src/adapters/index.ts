@@ -1,4 +1,4 @@
-export { color } from './color'
-export { generic } from './generic'
-export { transform } from './transform'
-export { string } from './string'
+export * from './color'
+export * from './generic'
+export * from './transform'
+export * from './string'
