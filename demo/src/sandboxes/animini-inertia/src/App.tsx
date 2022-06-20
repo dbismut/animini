@@ -1,10 +1,10 @@
 import { useDrag } from '@use-gesture/react'
-import { useAnimini, inertia } from '@animini/react-dom'
+import { useAnimate, inertia } from '@animini/react-dom'
 import { useControls } from 'leva'
 import styles from './styles.module.css'
 
 export default function App() {
-  const [ref, api] = useAnimini<HTMLDivElement>()
+  const [ref, api] = useAnimate<HTMLDivElement>()
   const { limitXY } = useControls({
     limitXY: {
       value: { x: 200, y: 200 },

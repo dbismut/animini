@@ -4,6 +4,7 @@
   "main": "src/index.tsx",
   "dependencies": {
     "@leva-ui/plugin-spring": "*",
+    "@animini/dom": "*",
     "@animini/react-dom": "*",
     "@use-gesture/react": "*",
     "leva": "*",

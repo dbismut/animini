@@ -1,5 +1,5 @@
 import { useControls, button } from 'leva'
-import { useAnimini } from '@animini/react-dom'
+import { useAnimate } from '@animini/react-dom'
 
 import styles from './styles.module.css'
 
@@ -10,11 +10,11 @@ export default function App() {
     'scroll to top': button(() => api.start({ scrollTop: 0 }))
   })
 
-  const [ref, api] = useAnimini<HTMLDivElement>()
+  const api = useAnimate({ el: window })
 
   return (
-    <div className="flex fill center">
-      <div className={styles.scroller} ref={ref}>
+    <div className="flex center">
+      <div className={styles.scroller}>
         <div>
           <div>
             Introduction Any Fraoch Heather Ale can find lice on some sudsy dude, but it takes a real Full Sail IPA to

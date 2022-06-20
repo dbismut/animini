@@ -1,7 +1,7 @@
 .scroller {
   width: 100vw;
-  height: 100vh;
-  overflow: scroll;
+  /* height: 100vh; */
+  /* overflow: scroll; */
   line-height: 1.6;
   font-size: 2.2em;
   font-weight: 600;

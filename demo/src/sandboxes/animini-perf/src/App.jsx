@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useControls, button } from 'leva'
 import tinycolor from 'tinycolor2'
-import AniminiBox from './Boxes/AniminiBox'
-import AniminiVanillaBox from './Boxes/AniminiVanillaBox'
-import SpringBox from './Boxes/SpringBox'
-import MotionBox from './Boxes/MotionBox'
-import GsapBox from './Boxes/GsapBox'
-import FramerMotionBox from './Boxes/FramerMotionBox'
-import FatBox from './Boxes/FatBox'
-import AnimeBox from './Boxes/AnimeBox'
+import Animini from './Boxes/AniminiBox'
+import AniminiVanilla from './Boxes/AniminiVanillaBox'
+import ReactSpring from './Boxes/SpringBox'
+import Motion from './Boxes/MotionBox'
+import Gsap from './Boxes/GsapBox'
+import FramerMotion from './Boxes/FramerMotionBox'
+import FatJS from './Boxes/FatBox'
+import AnimeJS from './Boxes/AnimeBox'
 
 const COUNT = 4000
 
@@ -42,7 +42,7 @@ export default function Perf() {
   const { count, Model: Box } = useControls({
     count: { value: 1000, min: 100, max: 4000 },
     Model: {
-      options: { AniminiBox, AniminiVanillaBox, AnimeBox, SpringBox, MotionBox, FramerMotionBox, GsapBox, FatBox }
+      options: { Animini, AniminiVanilla, AnimeJS, ReactSpring, Motion, FramerMotion, Gsap, FatJS }
     },
     Shuffle: button(() => {
       const ts = performance.now()
