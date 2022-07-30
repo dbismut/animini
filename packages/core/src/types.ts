@@ -51,13 +51,7 @@ export type ConfigWithOptionalEl<ElementType> = Config & { el?: ElementType }
 
 export type ApiType<Values> = {
   get: (key: keyof Values) => any
-  start: (
-    to: Partial<Values>,
-    config?: {
-      immediate?: boolean | undefined
-      easing?: Algorithm | undefined
-    }
-  ) => Promise<unknown>
+  start: (to: Partial<Values>, config?: Config) => Promise<unknown>
   stop: () => void
   clean: () => void
 }
