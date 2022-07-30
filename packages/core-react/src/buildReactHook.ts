@@ -13,7 +13,7 @@ export function buildReactHook<ElementType, Values extends Payload>(target: Targ
   ): HookReturnType<ElementType, Values, C> {
     const el = useRef<ElementType>(null)
 
-    const [[api, _el]] = useState(() => {
+    const [[_el, api]] = useState(() => {
       let _el
       let _config = masterConfig
       if (_config && 'el' in _config) {
@@ -22,7 +22,7 @@ export function buildReactHook<ElementType, Values extends Payload>(target: Targ
         // @ts-ignore
         _config = { ...masterConfig, el }
       }
-      return [animate(_config as any), _el] as [ApiType<Values>, ElementType | undefined]
+      return [_el, animate(_config as any)] as [ElementType | undefined, ApiType<Values>]
     })
 
     useEffect(() => {
