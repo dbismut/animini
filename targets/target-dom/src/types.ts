@@ -19,9 +19,9 @@ export type Transform = {
   scale: number
   scaleX: number
   scaleY: number
-  skewX: number
-  skewY: number
-  skew: number
+  // skewX: number
+  // skewY: number
+  // skew: number
   rotate: number
   x: number
   y: number

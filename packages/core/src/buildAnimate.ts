@@ -12,8 +12,12 @@ import { ConfigWithEl, Payload, Target } from './types'
 type AnimationMap<ElementType, Values> = Map<keyof Values, Animated<ElementType>>
 const elementAnimationsMap = new Map<any, any>()
 
-export function buildAnimate<ElementType, Values extends Payload>(target: Target<ElementType, Values>) {
-  return function animate(masterConfigWithEl: ConfigWithEl<ElementType>, globalTo?: Partial<Values>) {
+export function buildAnimate<ElementType, BuildValues extends Payload>(buildTarget: Target<ElementType, BuildValues>) {
+  return function animate<AnimateElementType extends ElementType, Values extends BuildValues = BuildValues>(
+    masterConfigWithEl: ConfigWithEl<AnimateElementType>,
+    globalTo?: Partial<Values>
+  ) {
+    const target = buildTarget as Target<AnimateElementType, Values>
     const loop = target.loop || GlobalLoop
     const initial = {}
 
@@ -25,7 +29,7 @@ export function buildAnimate<ElementType, Values extends Payload>(target: Target
     const tElement = target.getElement?.(element) || element
     const el = typeof tElement === 'object' && 'current' in tElement ? tElement : { current: tElement }
 
-    let animations: AnimationMap<ElementType, Values> = elementAnimationsMap.get(element)
+    let animations: AnimationMap<AnimateElementType, Values> = elementAnimationsMap.get(element)
     if (!animations) {
       animations = new Map()
       elementAnimationsMap.set(element, animations)

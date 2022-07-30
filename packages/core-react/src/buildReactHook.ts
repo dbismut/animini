@@ -5,12 +5,14 @@ type HookReturnType<ElementType, Values, C extends ConfigWithOptionalEl<ElementT
   ? ApiType<Values>
   : [React.RefObject<ElementType>, ApiType<Values>]
 
-export function buildReactHook<ElementType, Values extends Payload>(target: Target<ElementType, Values>) {
+export function buildReactHook<ElementType, BuildValues extends Payload>(target: Target<ElementType, BuildValues>) {
   const animate = buildAnimate(target)
 
-  return function useAnimate<ElementType, C extends ConfigWithOptionalEl<ElementType>>(
-    masterConfig?: C
-  ): HookReturnType<ElementType, Values, C> {
+  return function useAnimate<
+    ElementType,
+    C extends ConfigWithOptionalEl<ElementType>,
+    Values extends BuildValues = BuildValues
+  >(masterConfig?: C): HookReturnType<ElementType, Values, C> {
     const el = useRef<ElementType>(null)
 
     const [[_el, api]] = useState(() => {
