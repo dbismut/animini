@@ -10,7 +10,7 @@ export type Styles = Record<keyof CSSStyleDeclaration, number | string> & {
   skewX: number
   skewY: number
   skew: number
-  rotation: number
+  rotate: number
   scrollTop: number | string
   scrollLeft: number | string
 }

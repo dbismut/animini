@@ -1,2 +1,2 @@
-export { useAnimate } from './useAniminiDom'
+export { useAnimate } from './useAnimateDom'
 export * from '@animini/core/algorithms'

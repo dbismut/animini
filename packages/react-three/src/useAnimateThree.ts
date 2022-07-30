@@ -22,7 +22,7 @@ function setGlobalLoopOnDemand() {
   }
 }
 
-export const useAniminiThree = buildReactHook(three)
+export const useAnimateThree = buildReactHook(three)
 
 export function useAnimate<
   Element extends ElementType,
@@ -32,5 +32,5 @@ export function useAnimate<
     return setGlobalLoopOnDemand()
   }, [])
 
-  return useAniminiThree<Element, C>(masterConfig)
+  return useAnimateThree<Element, C>(masterConfig)
 }
