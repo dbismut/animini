@@ -7,7 +7,7 @@ const parse: DomAdapter['parse'] = (value, animated) => {
   if (isNaN(_value)) return value
   switch (unit) {
     case '%':
-      const parent = animated.el?.offsetParent
+      const parent = (animated.el as HTMLElement)?.offsetParent
       // @ts-expect-error
       const size = (key === 'top' ? parent?.offsetHeight : parent?.offsetWidth) || 0
       return (_value * size) / 100

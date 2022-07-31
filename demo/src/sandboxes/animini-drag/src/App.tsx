@@ -1,7 +1,7 @@
 import { useDrag } from '@use-gesture/react'
 import { useControls } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
-import { useAnimini, spring, lerp } from '@animini/react-dom'
+import { useAnimate, spring, lerp } from '@animini/react-dom'
 import styles from './styles.module.css'
 
 export default function App() {
@@ -12,7 +12,7 @@ export default function App() {
     springConfig: levaSpring({ render: (get) => get('easeMethod') === spring })
   })
 
-  const [ref, api] = useAnimini<HTMLDivElement>()
+  const [ref, api] = useAnimate<HTMLDivElement>()
   const easing = easeMethod(easeMethod === lerp ? { factor } : springConfig)
 
   useDrag(

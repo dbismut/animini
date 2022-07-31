@@ -1,15 +1,15 @@
 import React, { useState, useEffect, useLayoutEffect } from 'react'
 import * as THREE from 'three'
 import { Canvas } from '@react-three/fiber'
-import { useAnimini, spring } from '@animini/react-three'
+import { useAnimate, spring } from '@animini/react-three'
 import { useControls } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
 
 const colors = ['#A2CCB6', '#FCEEB5', '#EE786E', '#e0feff']
 
 function Box({ position, scale, rotation, color }) {
-  const [mesh, setMesh] = useAnimini()
-  const [material, setMaterial] = useAnimini()
+  const [mesh, setMesh] = useAnimate()
+  const [material, setMaterial] = useAnimate()
   const { springConfig } = useControls({ springConfig: levaSpring() })
 
   useLayoutEffect(() => {

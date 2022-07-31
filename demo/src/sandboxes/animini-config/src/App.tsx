@@ -1,7 +1,7 @@
 import { useControls, button } from 'leva'
 import { spring as levaSpring } from '@leva-ui/plugin-spring'
 import { bezier } from '@leva-ui/plugin-bezier'
-import { useAnimini, spring, lerp, ease } from '@animini/react-dom'
+import { useAnimate, spring, lerp, ease } from '@animini/react-dom'
 
 import styles from './styles.module.css'
 
@@ -26,15 +26,15 @@ export default function App() {
           easing = method(get('duration'), get('easeConfig'))
       }
       try {
-        await api.start({ clipPath: 'rect(0, 0px, 0px, 0px)' }, { easing })
-        await api.start({ x: '50%', position: 'fixed' }, { easing })
-        await api.start({ scale: 0.5 }, { easing })
+        await api.start({ scale: 1.5, rotate: 75 }, { easing })
+        await api.start({ scale: 1, rotate: 0, x: '50%' }, { easing })
+        await api.start({ clipPath: 'rect(0, 0px, 0px, 0px)', x: 0 }, { easing })
       } catch {}
     }),
     stop: button(() => api.stop())
   })
 
-  const [ref, api] = useAnimini<HTMLDivElement>()
+  const [ref, api] = useAnimate<HTMLDivElement>()
 
   return (
     <div className="flex fill center">

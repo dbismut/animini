@@ -28,13 +28,15 @@ export type Algorithm = {
 
 export type Payload = Record<string, any>
 
-export type Target<ElementType, ValueType extends Payload> = {
+export type Target<ElementType, Values extends Payload> = {
+  getElement?(element: any): ElementType
   loop?: FrameLoop
-  setValues?(rawValues: ValueType, element: ElementType): void
-  getInitialValueAndAdapter<K extends keyof ValueType>(
+  setValues?(rawValues: Values, element: ElementType, initial?: any, idle?: boolean): void
+  getInitialValueAndAdapter<K extends keyof Values>(
     element: ElementType,
-    key: K
-  ): [ValueType[K], Adapter<ElementType> | undefined]
+    key: K,
+    initial?: any
+  ): [Values[K], Adapter<ElementType> | undefined]
 }
 
 export type ConfigValue = {
@@ -42,4 +44,14 @@ export type ConfigValue = {
   easing?: Algorithm
 }
 
+export type ElementRef<ElementType> = { current: ElementType }
 export type Config = ConfigValue | ((key: string) => ConfigValue)
+export type ConfigWithEl<ElementType> = Config & { el: ElementType | ElementRef<ElementType> }
+export type ConfigWithOptionalEl<ElementType> = Config & { el?: ElementType }
+
+export type ApiType<Values> = {
+  get: (key: keyof Values) => any
+  start: (to: Partial<Values>, config?: Config) => Promise<unknown>
+  stop: () => void
+  clean: () => void
+}
