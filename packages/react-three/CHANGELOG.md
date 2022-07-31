@@ -1,5 +1,18 @@
 # @animini/three
 
+## 0.3.0
+
+### Minor Changes
+
+- 2d867a9: Package refactor, introducing vanilla api
+
+### Patch Changes
+
+- Updated dependencies [2d867a9]
+  - @animini/core@0.3.0
+  - @animini/core-react@0.3.0
+  - @animini/target-three@0.3.0
+
 ## 0.2.6
 
 ### Patch Changes

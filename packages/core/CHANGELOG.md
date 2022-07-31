@@ -1,5 +1,11 @@
 # @animini/core
 
+## 0.3.0
+
+### Minor Changes
+
+- 2d867a9: Package refactor, introducing vanilla api
+
 ## 0.2.6
 
 ### Patch Changes
